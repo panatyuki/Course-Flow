@@ -22,7 +22,10 @@ module.exports = {
   ],
   'parserOptions': {
     'ecmaVersion': 'latest',
-    'sourceType': 'module'
+    'sourceType': 'module',
+    'ecmaFeatures': {
+      'jsx': true
+    }
   },
   'plugins': [
     'react'
@@ -44,6 +47,8 @@ module.exports = {
       'error',
       'always'
     ],
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    'object-curly-spacing': ['error', 'always'],
+    'react/prop-types': 'off'
   }
 };
