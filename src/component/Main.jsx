@@ -68,22 +68,21 @@ function Main() {
         <h2>Our Graduates</h2>
         <div >
           <Carousel slideSize="70%" height={200} slideGap="xl" controlsOffset="xs" controlSize={21} loop dragFree>
-            <Carousel.Slide className={classes.containerCardGraduates}>
+            <div className={classes.containerCardGraduates}>
               {
-                mockDataGraduates.map((item) => (
-                  <div key={item.picture} >
-                    <div key={item} className={classes.cardGraduates}>
-                      <img src={item.picture} alt={item.name} className={classes.pictureGraduatesPosition} />
-                      <img src={quotemarksLeft} alt='quotemarksLeft' className={classes.quotemarkLeftPosition} />
-                      <img src={quotemarksRight} alt='quotemarksRight' className={classes.quotemarkRightPosition} />
-                      <div className={classes.textCardGraduatesContainer}>
-                        <h3 style={{ color: 'var(--Primary, #2F5FAC)' }}>{item.name}</h3>
-                        <p className='cf-body-2' style={{ color: 'var(--gray-700, #646D89)' }}>{item.description}</p>
-                      </div>
+                mockDataGraduates.map((item) => (     
+                  <Carousel.Slide key={item} className={classes.cardGraduates}>
+                    <img src={item.picture} alt={item.name} className={classes.pictureGraduatesPosition} />
+                    <img src={quotemarksLeft} alt='quotemarksLeft' className={classes.quotemarkLeftPosition} />
+                    <img src={quotemarksRight} alt='quotemarksRight' className={classes.quotemarkRightPosition} />
+                    <div className={classes.textCardGraduatesContainer}>
+                      <h3 style={{ color: 'var(--Primary, #2F5FAC)' }}>{item.name}</h3>
+                      <p className='cf-body-2' style={{ color: 'var(--gray-700, #646D89)' }}>{item.description}</p>
                     </div>
-                  </div>))
+                  </Carousel.Slide>
+                ))
               }
-            </Carousel.Slide>
+            </div>
           </Carousel>
         </div>
         <img src={bigEllipseRight} alt='bigEllipseRight' className={classes.bigEllipseRightPosition} />
