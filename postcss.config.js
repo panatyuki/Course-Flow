@@ -10,5 +10,9 @@ export default {
         'mantine-breakpoint-xl': '88em',
       },
     },
+    'postcss-modules': {
+      generateScopedName: '[name]__[local]___[hash:base64:5]',
+      localsConvention: 'camelCase',
+    },
   },
 };

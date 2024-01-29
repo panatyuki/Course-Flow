@@ -1,8 +1,16 @@
+import Header from '../component/Header';
+import Main from '../component/Main';
+import Footer from '../component/Footer';
+
+
 function HomePage() {
   return (
     <div>
-      <h1>Hello World</h1>
+      <Header />
+      <Main />
+      <Footer />
     </div>
   );
 }
+
 export default HomePage;

@@ -3,3 +3,34 @@
   height: 100vh;
   background-color: var(--mantine-color-gray-light);
 }
+
+h1 {
+  font-size: 66px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 125%;
+  letter-spacing: -1.32%;
+}
+
+h2 {
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 125%;
+  letter-spacing: -0.72px;
+}
+
+h3 {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 125%;
+  letter-spacing: -0.48px;
+}
+
+.cf_body-1 {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
