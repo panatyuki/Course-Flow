@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import classes from '../style/Footer.module.css';
 import courseFlowLogo from '../images/CourseFlow.png';
-import fbLogo from '../images/fb.png';
+import facebookLogo from '../images/facebookLogo.png';
+import instagramLogo from '../images/instagramLogo.png';
+import twitterLogo from '../images/twitterLogo.png';
 
 
 function Footer() {
@@ -20,6 +22,11 @@ function Footer() {
         <div className={classes.textBoxCenter}>
           <p>ALL Courses</p>
           <p>Bundle Package</p>
+        </div>
+        <div>
+          <img src={facebookLogo} alt='facebookLogo' />
+          <img src={instagramLogo} alt='instagramLogo' />
+          <img src={twitterLogo} alt='twitterLogo' />
         </div>
       </div>
     </>
