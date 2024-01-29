@@ -43,7 +43,7 @@ function Footer() {
       </div>
       <div className={classes.footer}>
         <img src={courseFlowLogo} alt='courseFlowLogo' className={classes.logoLink} onClick={() => {navigate('/');}} />
-        <Group >
+        <Group className={classes.links}>
           {items}
         </Group>
         <div className={classes.logoBox}>
