@@ -1,18 +1,42 @@
-.top-footer {
+.sub-footer {
   display: flex;
-  flex-direction: column;
-  width: 1080px;
+  width: 1920px;
   height: 500px;
-  padding: 125px 161px;
-  gap: 44px;
+  padding: 90px 190px;
+  gap: 550px;
   background: var(--utility-linear2, linear-gradient(271deg, #5697FF 7.78%, #2558DD 73.86%));
   position: relative;
   color: white;
+  position: relative;
+}
+
+.left-sub-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.right-sub-footer-tech-logo  {
+  position: absolute;
+  right: 150px;
+  top: 50px
+}
+
+.right-sub-footer-ellipse  {
+  position: absolute;
+  right: 850px;
+  bottom: 70px
+}
+
+.right-sub-footer-polygon  {
+  position: absolute;
+  right: 60px;
+  top: 120px;
 }
 
 .footer {
   display: flex;
-  width: 1080px;
+  width: 1920px;
   height: 240px;
   padding: 0px 160px;
   justify-content: space-between;
@@ -22,16 +46,21 @@
 
 .button {
   display: flex;
-  width: 243px;
+  width: 250px;
   justify-content: center;
   align-items: center;
-  padding: 18px 32px;
+  padding: 5px 32px;
   gap: 10px;
   border: 1px solid var(--orange-500, #F47E20);
   border-radius: 12px;
   background: white;
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
   color: var(--orange-500, #F47E20);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
 }
 
 .button:hover {
@@ -40,8 +69,17 @@
   color: white;
 }
 
-.text-box-center {
+.links {
   display: flex;
-  gap: 32px;
-  color: white;
+  gap: 72px;
+  color: var(--gray-500, #C8CCDB);
+}
+
+.logo-box {
+  display: flex;
+  gap: 24px;
+}
+
+.logo-link {
+  cursor: pointer;
 }
