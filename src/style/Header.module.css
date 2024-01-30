@@ -1,7 +1,7 @@
 .header {
-    border: 3px solid red;
+    /* border: 3px solid red; */
     color: red;
-    width: 1440px;
+    width: 100vw;
     height: 88px;
     display: flex;
     flex-direction: row;

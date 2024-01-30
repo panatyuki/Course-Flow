@@ -105,12 +105,12 @@
                     /* บน */
                     
 .mainTop {
-    border: 5px solid blueviolet;
+    /* border: 5px solid blueviolet; */
     background: var(--blue-100, #E5ECF8);
     height: 700px;
-    width: 1440px;
+    width: 100vw;
     padding-top: 165px;
-    padding-left: 160px;
+    padding-left: 10%;
 
     position: relative;
 }
@@ -130,7 +130,7 @@
 }
 
 .computer {
-    right: 161px;
+    right: 180px;
     top: 151px;
 }
 
@@ -141,21 +141,21 @@
 
 .cross {
     top: 161px;
-    left: 806px;
+    left: 820px;
 }
 
 .circleBlue {
     top: 543px;
-    left: 589px;
+    left: 680px;
 }
 
 .polygon {
     top: 573px;
-    left: 1222px;
+    left: 1200px;
 }
 
 .circleGreen {
-    right: 51px;
+    right: 90px;
     top: 413px;
 }
 
@@ -195,19 +195,20 @@
                     /* กลาง */
 
 .mainMiddle {
-    border: 5px solid saddlebrown;
+    /* border: 5px solid saddlebrown; */
     height: 1111px;
-    width: 1440px;
+    width: 100vw;
 
-    padding-left: 159px;
-    padding-top: 161px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     position: relative;
 }
 
 .container {
     /* border: 3px solid red; */
-    width: 1120px;
+    width: 80vw;
     height: 780px;
     display: flex;
     flex-direction: column;
@@ -219,6 +220,7 @@
     /* border: 3px solid blue; */
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     gap: 119px;
     
 }
@@ -304,19 +306,10 @@
 
 .crossPurple {
     top: 399px;
-    left: 1352px;
+    right: 80px;
 }
 
 .ellipseBot {
     bottom: 0px;
     right: 122px;
 }
-
-                    /* ล่าง */
-
-.mainBottom {
-    border: 5px solid yellowgreen;
-    height: 700px;
-    width: 1440px;
-}
-

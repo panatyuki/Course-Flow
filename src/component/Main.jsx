@@ -32,7 +32,6 @@ import crossPurple from '../images/imagesMainMiddle/cross.svg';
 import ellipseBot from '../images/imagesMainMiddle/ellipseBot.svg';
 
 
-
 const mockDataProfessional = [
   { picture: janeCooper , name: 'Jane Cooper', position: 'UX/UI Designer' },
   { picture: estherHoward , name: 'Esther Howard', position: 'Program Manager' },
@@ -147,10 +146,6 @@ function Main() {
           <img className={classes.circleGrey} src={circleGrey} />
           <img className={classes.crossPurple} src={crossPurple} />
           <img className={classes.ellipseBot} src={ellipseBot} />
-        </div>
-
-        <div className={classes.mainBottom}>
-
         </div>
       
       </div>
