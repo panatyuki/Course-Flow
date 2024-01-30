@@ -43,21 +43,35 @@ const mockDataGraduates = [
     description: 
   `Start with something simple and small, then expand over time. If people call it a ‘toy’ you’re definitely onto something.
   If you’re waiting for encouragement from others, you’re doing it wrong. By the time people think an idea is good, it’s probably too late.` },
-  { picture: saifulIslam , name: 'Janie Star', 
+  { picture: saifulIslam , name: 'Jimmy Foxx', 
     description: 
   `Start with something simple and small, then expand over time. If people call it a ‘toy’ you’re definitely onto something.
   If you’re waiting for encouragement from others, you’re doing it wrong. By the time people think an idea is good, it’s probably too late.` },
-  { picture: jameCameron , name: 'Jame Cameron', 
-    description: 
-  `Start with something simple and small, then expand over time. If people call it a ‘toy’ you’re definitely onto something.
-  If you’re waiting for encouragement from others, you’re doing it wrong. By the time people think an idea is good, it’s probably too late.` },
-  { picture: jameCameron , name: 'Jame Cameron', 
-    description: 
-  `Start with something simple and small, then expand over time. If people call it a ‘toy’ you’re definitely onto something.
-  If you’re waiting for encouragement from others, you’re doing it wrong. By the time people think an idea is good, it’s probably too late.` },
+
 ];
 
+function GraduateCard({ graduate }) {
+  return (
+    <div className={classes.cardGraduates}>
+      <img src={graduate.picture} alt={graduate.name} className={classes.pictureGraduatesPosition} />
+      <img src={quotemarksLeft} alt='quotemarksLeft' className={classes.quotemarkLeftPosition} />
+      <img src={quotemarksRight} alt='quotemarksRight' className={classes.quotemarkRightPosition} />
+      <div className={classes.textCardGraduatesContainer}>
+        <h3 style={{ color: 'var(--Primary, #2F5FAC)' }}>{graduate.name}</h3>
+        <p className='cf-body-2' style={{ color: 'var(--gray-700, #646D89)' }}>{graduate.description}</p>
+      </div>
+    </div>
+  );
+}
+
+
 function Main() {
+  const graduatesCarouselSlides = mockDataGraduates.map((grad, index) => {
+    return (
+      <Carousel.Slide key={index} style={{ margin: '0 30px' }}>
+        <GraduateCard graduate={grad} />
+      </Carousel.Slide>);
+  });
   return (
     <>
       <div>
@@ -151,23 +165,9 @@ function Main() {
       </div>
       <div className={classes.containerGraduates}>
         <h2>Our Graduates</h2>
-        <div >
-          <Carousel slideSize="70%" height={200} slideGap="xl" controlsOffset="xs" controlSize={21} loop dragFree>
-            <div className={classes.containerCardGraduates}>
-              {
-                mockDataGraduates.map((item) => (     
-                  <Carousel.Slide key={item} className={classes.cardGraduates}>
-                    <img src={item.picture} alt={item.name} className={classes.pictureGraduatesPosition} />
-                    <img src={quotemarksLeft} alt='quotemarksLeft' className={classes.quotemarkLeftPosition} />
-                    <img src={quotemarksRight} alt='quotemarksRight' className={classes.quotemarkRightPosition} />
-                    <div className={classes.textCardGraduatesContainer}>
-                      <h3 style={{ color: 'var(--Primary, #2F5FAC)' }}>{item.name}</h3>
-                      <p className='cf-body-2' style={{ color: 'var(--gray-700, #646D89)' }}>{item.description}</p>
-                    </div>
-                  </Carousel.Slide>
-                ))
-              }
-            </div>
+        <div className={classes.graduatesCarousel}>
+          <Carousel slideSize="70%" height={200} slideGap="xl" controlsOffset="xs" controlSize={21} loop dragFree initialSlide={1}>
+            {graduatesCarouselSlides}
           </Carousel>
         </div>
         <img src={bigEllipseRight} alt='bigEllipseRight' className={classes.bigEllipseRightPosition} />
