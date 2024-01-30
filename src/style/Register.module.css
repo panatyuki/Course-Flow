@@ -1,0 +1,37 @@
+.container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.big-vector-position {
+  position: absolute;
+  right: 0px;
+  top: -88px;
+}
+
+.medium-ellipse-position {
+  position: absolute;
+  left: 87px;
+  top: 81px;
+}
+
+.small-ellipse-position {
+  position: absolute;
+  right: 59px;
+  bottom: 312px;
+}
+
+.plus-position {
+  position: absolute;
+  left: 187px;
+  bottom: 630px;
+}
+
+.circle-position {
+  position: absolute;
+  left: 0px;
+  bottom: 97px;
+}
