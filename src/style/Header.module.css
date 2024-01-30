@@ -11,6 +11,7 @@
 
 .courseFlowLogo {
     /* border: 3px solid blue; */
+    cursor: pointer;
     display: flex;
     align-items: center;
     width: 140px;
@@ -35,10 +36,10 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 150%; /* 24px */
+    line-height: 150%;
 }
 
-button {
+.logInButton {
     /* border: 3px solid red; */
     cursor: pointer;
     display: flex;
@@ -46,17 +47,14 @@ button {
     justify-content: center;
     align-items: center;
     gap: 10px;
-
     border: none;
     border-radius: 12px;
     background: var(--blue-500, #2F5FAC);
-
     color: #FFF;
     text-align: center;
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 150%; /* 24px */
+    line-height: 150%;
   }
-  
