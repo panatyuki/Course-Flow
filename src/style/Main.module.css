@@ -206,6 +206,9 @@
     /* border: 5px solid saddlebrown; */
     height: 1111px;
     width: 100vw;
+    /* Jimmy PR8: Merged padding settings from the new branch. */
+    padding-left: 159px;
+    padding-top: 161px;
     display: flex;
     justify-content: center;
     align-items: center;

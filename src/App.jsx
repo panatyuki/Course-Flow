@@ -5,6 +5,7 @@ import CourseDetailPage from './pages/CourseDetailPage';
 import LoginPage from './pages/LoginPage';
 
 
+
 export default function App() {
   return (
     <>
