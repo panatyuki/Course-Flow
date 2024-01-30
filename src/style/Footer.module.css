@@ -1,6 +1,6 @@
 .sub-footer {
   display: flex;
-  width: 1920px;
+  width: 100vw;
   height: 500px;
   padding: 90px 190px;
   gap: 550px;
@@ -36,7 +36,7 @@
 
 .footer {
   display: flex;
-  width: 1920px;
+  width: 100vw;
   height: 240px;
   padding: 0px 160px;
   justify-content: space-between;
