@@ -102,8 +102,8 @@
   left: 150px;
 }
 
-.mainTop {
-  background: var(--blue-100, #E5ECF8);
+.main-top {
+  background: #E5ECF8;
   height: 700px;
   width: 100vw;
   padding-top: 165px;
@@ -111,13 +111,13 @@
   position: relative;
 }
 
-.backgroundBlue,
+.background-blue,
 .computer,
-.ellipseLeft,
+.ellipse-left,
 .cross,
-.circleBlue,
+.circle-blue,
 .polygon,
-.circleGreen {
+.circle-green {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -128,7 +128,7 @@
   top: 151px;
 }
 
-.ellipseLeft {
+.ellipse-left {
   left: 0px;
   top: 76px;
 }
@@ -138,7 +138,7 @@
   left: 820px;
 }
 
-.circleBlue {
+.circle-blue {
   top: 543px;
   left: 680px;
 }
@@ -148,7 +148,7 @@
   left: 1200px;
 }
 
-.circleGreen {
+.circle-green {
   right: 90px;
   top: 413px;
 }
@@ -156,29 +156,18 @@
 .box1 {
   width: 643px;
   height: 166px;
-  color: var(--utility-black, #000);
-  font-family: Inter;
-  font-size: 66px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 125%;
-  letter-spacing: -1.32px;
+  color: #000;
   margin-bottom: 24px;
 }
 
 .box2 {
   width: 643px;
   height: 60px;
-  color: var(--gray-700, #646D89);
-  font-family: Inter;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
+  color: #646D89;
   margin-bottom: 60px;
 }
 
-.exploreButton {
+.explore-button {
   cursor: pointer;
   display: flex;
   padding: 18px 32px;
@@ -187,27 +176,21 @@
   gap: 10px;
   border: none;
   border-radius: 12px;
-  background: var(--blue-500, #2F5FAC);
+  background: #2F5FAC;
   color: #FFF;
   text-align: center;
-  font-family: Inter;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 150%;
 }
 
-.mainMiddle {
-    /* border: 5px solid saddlebrown; */
-    height: 1111px;
-    width: 100vw;
-    /* Jimmy PR8: Merged padding settings from the new branch. */
-    padding-left: 159px;
-    padding-top: 161px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+.main-middle {
+  height: 1111px;
+  width: 100vw;
+  /* Jimmy PR8: Merged padding settings from the new branch. */
+  padding-left: 159px;
+  padding-top: 161px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .container {
@@ -225,77 +208,60 @@
   gap: 119px;
 }
 
-.textContainer {
+.text-container {
   display: flex;
   flex-direction: column;
 }
 
-.textBox {
+.text-box {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.textHead {
+.text-head {
   width: 547px;
   height: 90px;
-  color: var(--utility-black, #000);
-  font-family: Inter;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 125%;
-  letter-spacing: -0.72px;
+  color: #000;
   margin-bottom: 40px;
 }
 
-.textSubhead {
+.text-subhead {
   width: 487px;
   height: 30px;
-  color: var(--utility-black, #000);
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 125%;
-  letter-spacing: -0.48px;
+  color: #000;
   margin-bottom: 10px;
 }
 
 .text {
   width: 487px;
   height: 48px;
-  color: var(--gray-700, #646D89);
-  font-family: Inter;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 150%;
+  color: #646D89;
 }
 
-.ellipseTop,
-.circleGrey,
-.crossPurple,
-.ellipseBot {
+.ellipse-top,
+.circle-grey,
+.cross-purple,
+.ellipse-bot {
   position: absolute;
 }
 
-.ellipseTop {
+.ellipse-top {
   top: 0px;
   left: 140px;
 }
 
-.circleGrey {
+.circle-grey {
   top: 94px;
   left: 508px;
 }
 
-.crossPurple {
+.cross-purple {
   top: 399px;
   right: 80px;
 }
 
-.ellipseBot {
+.ellipse-bot {
   bottom: 0px;
   right: 122px;
 }

@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { Anchor, Group } from '@mantine/core';
 import classes from '../style/Footer.module.css';
-import teachLogo from '../images/imageTeach.svg';
-import polygon from '../images/polygon.svg';
-import ellipse from '../images/ellipse.svg';
-import courseFlowLogo from '../images/courseFlow.svg';
-import facebookLogo from '../images/facebookLogo.svg';
-import instagramLogo from '../images/instagramLogo.svg';
-import twitterLogo from '../images/twitterLogo.svg';
+import teachLogo from '../images/imagesFooter/imageTeach.svg';
+import polygon from '../images/imagesFooter/polygon.svg';
+import ellipse from '../images/imagesFooter/ellipse.svg';
+import courseFlowLogo from '../images/imagesFooter/courseFlow.svg';
+import facebookLogo from '../images/imagesFooter/facebookLogo.svg';
+import instagramLogo from '../images/imagesFooter/instagramLogo.svg';
+import twitterLogo from '../images/imagesFooter/twitterLogo.svg';
 
 const links = [
   { link: '/', label: 'ALL Courses' },

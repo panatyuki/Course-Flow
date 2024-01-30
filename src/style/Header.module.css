@@ -1,7 +1,5 @@
 .header {
-    /* border: 3px solid red; */
     background-color: white;
-    color: red;
     width: 100vw;
     height: 88px;
     display: flex;
@@ -13,8 +11,7 @@
     box-shadow: 2px 2px 12px 0px rgba(64, 50, 133, 0.12);
 }
 
-.courseFlowLogo {
-    /* border: 3px solid blue; */
+.course-flow-logo {
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -22,8 +19,7 @@
     height: 16px;
 }
 
-.headerRight {
-    /* border: 3px solid orange; */
+.header-right {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -31,20 +27,14 @@
     gap: 32px;
 }
 
-.ourCourses {
-    /* border: 3px solid orange; */
+.our-courses {
     display: flex;
-    color: var(--dark-blue-500, #191C77);
+    color: #191C77;
     text-align: center;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 150%;
+    cursor: pointer;
 }
 
-.logInButton {
-    /* border: 3px solid red; */
+.log-in-button {
     cursor: pointer;
     display: flex;
     padding: 18px 32px;
@@ -53,12 +43,7 @@
     gap: 10px;
     border: none;
     border-radius: 12px;
-    background: var(--blue-500, #2F5FAC);
+    background: #2F5FAC;
     color: #FFF;
     text-align: center;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 150%;
   }

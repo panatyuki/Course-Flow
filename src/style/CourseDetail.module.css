@@ -1,93 +1,104 @@
 /* Jimmy PR8: Removed a wildcard selector */
+.container-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 53px;
+  width: 100vw;
+}
+
+.container-course-detail {
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+}
+
 .container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px
 }
 
-.dataContainer{
-    display: flex;
-    flex-direction: column;
-    width: 740px;
+.data-container{
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  gap: 25px;
 }
 
-.buttonBack {
-    padding:5px;
-    display: flex;
-    justify-content: start;
-    background-color:white;
-    color:blue;
-font-family: Inter;
-font-size: 16px;
-font-weight: 700;
-line-height: 150%;
+.button-back {
+  padding:5px;
+  gap: 8px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  border: white;
+  background-color:white;
+  color:#2F5FAC;
+  cursor: pointer;
 }
 
-.stickyBox {
-    top: 0;
-    position: sticky;
-    display:flex;
-    flex-direction: column;
-    border-radius: 8px;
-    box-shadow: 4px 4px 24px 0px rgba(0,0,0,0.08);
-    width: 360px;
-    padding: 32px 24px;
+.sticky-box {
+  top: 0;
+  position: sticky;
+  display:flex;
+  flex-direction: column;
+  border-radius: 8px;
+  box-shadow: 4px 4px 24px 0px rgba(0,0,0,0.08);
+  width: 360px;
+  padding: 32px 24px;
+  gap : 40px;
 }
 
-.courseText {
-    padding-bottom:20px;
-    color:orange ;
+.container-text-sticky-box {
+  border-bottom: 1px solid #D6D9E4;
 }
 
-.serviceDesignText{
-    padding-bottom:5px;
-font-family: Inter;
-font-size: 24px;
-font-style: normal;
-font-weight: 500;
-line-height: 125%;
-letter-spacing: -0.48px;
+.container-button-sticky-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.detailText{
-    padding-bottom:20px;
-    color: gray;
+.button-get-in-desire-course{
+  display: flex;
+  width: 100%;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 32px;
+  gap: 10px;
+  border: 1px solid #F47E20;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
+  color: #F47E20;
+  cursor: pointer;
 }
 
-.price{
-    padding-bottom:25px;
-    color:gray;
-    font-size: 24px;
+.button-get-in-desire-course:hover{
+  border: white;
+  background: #F47E20;
+  color: white;
 }
 
-.underline{
-    color:gray;
-    width: 300px;
+.button-subscribe-this-course{
+  display: flex;
+  width: 100%;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid  white;
+  padding: 5px 32px;
+  gap: 10px;
+  border-radius: 12px;
+  box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  color: white;
+  background: #2F5FAC;
 }
 
-.buttonGetInDesireCourse{
-    margin-top: 40px;
-    border: 1px solid;
-    border-radius: 12px;
-    color: orange;
-    border-color: orange;
-    background: white;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: Inter;
-    line-height: 150%;
-    margin-bottom: 16px;
-}
-
-.buttonSubscribeThisCourse{
-    background: var(--blue-500,#2F5FAC);
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: Inter;
-    line-height: 150%;
-}
-=======
 .module-sample-accordion {
   display: flex;
   flex-direction: column;
@@ -109,7 +120,7 @@ letter-spacing: -0.48px;
   height: 792px;
   gap: 60px;
   margin-top: 165px;
-  background: var(--gray-100, #F6F7FC);
+  background: #F6F7FC;
 }
 
 .container-card-other-interesting-course {
@@ -142,7 +153,7 @@ letter-spacing: -0.48px;
   align-items: center;
   padding: 16px;
   gap: 24px;
-  border-top: 1px solid var(--gray-300, #E4E6ED);
+  border-top: 1px solid #E4E6ED;
 }
 
 .detail-footer-course-card {

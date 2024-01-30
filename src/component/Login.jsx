@@ -10,27 +10,42 @@ function Login() {
   const navigate = useNavigate();
     
   return (
-    <div className={classes.container}>
-      <div className={classes.loginBox}>
-        <span className={classes.loginHead}>Welcome back!</span>
-        <span className={classes.loginTopic}>Email</span>
-        <input type="email" placeholder='Enter Email' className={classes.loginInput}></input>
-        <span className={classes.LoginTopic}>Password</span>
-        <input type="password" placeholder='Enter Password' className={classes.loginInput}></input>
-        <button className={classes.loginButton}>Log in</button>
-        <div>
-          <span className={classes.askForAccount}>Don’t have an account?</span>
-          <span onClick={() => {
-            navigate('/register');
-          }} className={classes.register}> Register</span>
+    <div className={classes.containerLoginPage}>
+      <div className={classes.container}>
+        <div className={classes.loginBox}>
+          <span className={classes.loginHead}>
+            <h2 style={{ lineHeight: '0' }}>Welcome back!</h2>
+          </span>
+          <span className={classes.loginTopic}>
+            <p className='cf-body-2'>Email</p>
+          </span>
+          <input type="email" placeholder='Enter Email' className={classes.loginInput}></input>
+          <span className={classes.LoginTopic}>
+            <p className='cf-body-2'>Password</p>        
+          </span>
+          <input type="password" placeholder='Enter Password' className={classes.loginInput}></input>
+          <button className={classes.loginButton}>
+            <p className='cf-body-2' style={{ fontWeight: '700' }}>Log in</p>  
+          </button>
+          <div className={classes.textBox}>
+            <p className='cf-body-2'>
+              Don’t have an account?
+            </p>
+            <p className='cf-body-2' style={{ fontWeight: '700', cursor: 'pointer', color: '#2F5FAC' }} onClick={() => {
+              navigate('/register');
+            }}> 
+            Register
+            </p>
+          </div>
         </div>
+        <img className={classes.blueRight} src={blueRight} />
+        <img className={classes.circleGrey} src={circleGrey} />
+        <img className={classes.circleOrange} src={circleOrange} />
+        <img className={classes.crossGreen} src={crossGreen} />
+        <img className={classes.orangeLeft} src={orangeLeft} />
       </div>
-      <img className={classes.blueRight} src={blueRight} />
-      <img className={classes.circleGrey} src={circleGrey} />
-      <img className={classes.circleOrange} src={circleOrange} />
-      <img className={classes.crossGreen} src={crossGreen} />
-      <img className={classes.orangeLeft} src={orangeLeft} />
     </div>
+    
   );
 }
 

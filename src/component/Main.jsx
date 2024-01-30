@@ -1,16 +1,16 @@
 import { Carousel } from '@mantine/carousel';
 import classes from '../style/Main.module.css';
-import janeCooper from '../images/janeCooper.svg';
-import estherHoward from '../images/estherHoward.svg';
-import brooklynSimmons from '../images/brooklynSimmons.svg';
-import polygonOrange from '../images/polygonOrange.svg';
-import saifulIslam from '../images/saifulIslam.svg';
-import jameCameron from '../images/jameCameron.svg';
-import quotemarksLeft from '../images/quotemarksLeft.svg';
-import quotemarksRight from '../images/quotemarksRight.svg';
-import bigEllipseRight from '../images/bigEllipseRight.svg';
-import smallEllipseRight from '../images/smallEllipseRight.svg';
-import plus from '../images/plus.svg';
+import janeCooper from '../images/imagesMainMiddle/janeCooper.svg';
+import estherHoward from '../images/imagesMainMiddle/estherHoward.svg';
+import brooklynSimmons from '../images/imagesMainMiddle/brooklynSimmons.svg';
+import polygonOrange from '../images/imagesMainMiddle/polygonOrange.svg';
+import saifulIslam from '../images/imagesMainMiddle/saifulIslam.svg';
+import jameCameron from '../images/imagesMainMiddle/jameCameron.svg';
+import quotemarksLeft from '../images/imagesMainMiddle/quotemarksLeft.svg';
+import quotemarksRight from '../images/imagesMainMiddle/quotemarksRight.svg';
+import bigEllipseRight from '../images/imagesMainMiddle/bigEllipseRight.svg';
+import smallEllipseRight from '../images/imagesMainMiddle/smallEllipseRight.svg';
+import plus from '../images/imagesMainMiddle/plus.svg';
 import backgroundBlue from '../images/imagesMainTop/backgroundBlue.svg';
 import computer from '../images/imagesMainTop/computer.svg';
 import ellipseLeft from '../images/imagesMainTop/ellipseLeft.svg';
@@ -76,9 +76,15 @@ function Main() {
     <>
       <div>
         <div className={classes.mainTop}>
-          <div className={classes.box1}>Best Virtual Classroom Software</div>
-          <div className={classes.box2}>Welcome to Schooler! The one-stop online class management system that caters to all your educational needs!</div>
-          <button className={classes.exploreButton}>Explore Courses</button>
+          <div className={classes.box1}>
+            <h1>Best Virtual Classroom Software</h1>
+          </div>
+          <div className={classes.box2}>
+            <p className='cf-body-1'>Welcome to Schooler! The one-stop online class management system that caters to all your educational needs!</p>
+          </div>
+          <button className={classes.exploreButton}>
+            <p className='cf-body-2' style={{ fontWeight: '700' }} >Explore Courses</p>
+          </button>
           <img className={classes.backgroundBlue} src={backgroundBlue} />
           <img className={classes.computer} src={computer} />
           <img className={classes.ellipseLeft} src={ellipseLeft} />
@@ -92,14 +98,20 @@ function Main() {
             <div className={classes.row1}>
               <img className={classes.picRow1} src={picRow1}/>
               <div className={classes.textContainer}>
-                <div className={classes.textHead}>Learning experience has been enhanced with new technologies</div>
+                <div className={classes.textHead}>
+                  <h2>Learning experience has been enhanced with new technologies</h2>
+                </div>
                 <div className={classes.textBox}>
                   <div>
                     <img src={secure} />
                   </div>
                   <div>
-                    <div className={classes.textSubhead}>Secure & Easy</div>
-                    <div className={classes.text}>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</div>
+                    <div className={classes.textSubhead}>
+                      <h3 style={{ lineHeight: '0' }}>Secure & Easy</h3>
+                    </div>
+                    <div className={classes.text}>
+                      <p className='cf-body-2'>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
+                    </div>
                   </div>
                 </div>
                 <div className={classes.textBox}>
@@ -107,22 +119,32 @@ function Main() {
                     <img src={support} />
                   </div>
                   <div>
-                    <div className={classes.textSubhead}>Supports All Students</div>
-                    <div className={classes.text}>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</div>
+                    <div className={classes.textSubhead}>
+                      <h3 style={{ lineHeight: '0' }}>Supports All Students</h3>           
+                    </div>
+                    <div className={classes.text}>
+                      <p className='cf-body-2' >Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className={classes.row2}>
               <div className={classes.textContainer}>
-                <div className={classes.textHead}>Interactions between the tutor and the learners</div>
+                <div className={classes.textHead}>
+                  <h2>Interactions between the tutor and the learners</h2>
+                </div>
                 <div className={classes.textBox}>
                   <div>
                     <img src={collab} />
                   </div>
                   <div>
-                    <div className={classes.textSubhead}>Purely Collaborative</div>
-                    <div className={classes.text}>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</div>
+                    <div className={classes.textSubhead}>
+                      <h3 style={{ lineHeight: '0' }}>Purely Collaborative</h3> 
+                    </div>
+                    <div className={classes.text}>
+                      <p className='cf-body-2'>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
+                    </div>
                   </div>
                 </div>
                 <div className={classes.textBox}>
@@ -130,8 +152,12 @@ function Main() {
                     <img src={support} />
                   </div>
                   <div>
-                    <div className={classes.textSubhead}>Supports All Students</div>
-                    <div className={classes.text}>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</div>
+                    <div className={classes.textSubhead}>
+                      <h3 style={{ lineHeight: '0' }}>Supports All Students</h3>                   
+                    </div>
+                    <div className={classes.text}>
+                      <p className='cf-body-2'>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -155,7 +181,7 @@ function Main() {
                   <img src={items.picture} alt={items.name} />
                   <div>
                     <h3 style={{ lineHeight: '1' }}>{items.name}</h3>
-                    <p className='cf-body-2' style={{ lineHeight: '0' ,color: 'var(--blue-400, #5483D0)' }}>{items.position}</p>
+                    <p className='cf-body-2' style={{ lineHeight: '0' ,color: '#5483D0' }}>{items.position}</p>
                   </div>  
                 </div>
               );
