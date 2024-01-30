@@ -1,16 +1,21 @@
 .header {
-    border: 3px solid red;
+    /* border: 3px solid red; */
+    background-color: white;
     color: red;
-    width: 1440px;
+    width: 100vw;
     height: 88px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 36px 160px 36px 160px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 2px 2px 12px 0px rgba(64, 50, 133, 0.12);
 }
 
 .courseFlowLogo {
     /* border: 3px solid blue; */
+    cursor: pointer;
     display: flex;
     align-items: center;
     width: 140px;
@@ -35,10 +40,10 @@
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 150%; /* 24px */
+    line-height: 150%;
 }
 
-button {
+.logInButton {
     /* border: 3px solid red; */
     cursor: pointer;
     display: flex;
@@ -46,17 +51,14 @@ button {
     justify-content: center;
     align-items: center;
     gap: 10px;
-
     border: none;
     border-radius: 12px;
     background: var(--blue-500, #2F5FAC);
-
     color: #FFF;
     text-align: center;
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 150%; /* 24px */
+    line-height: 150%;
   }
-  
