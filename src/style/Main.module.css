@@ -102,4 +102,221 @@
   left: 150px;
 }
 
+                    /* บน */
+                    
+.mainTop {
+    border: 5px solid blueviolet;
+    background: var(--blue-100, #E5ECF8);
+    height: 700px;
+    width: 1440px;
+    padding-top: 165px;
+    padding-left: 160px;
+
+    position: relative;
+}
+
+.backgroundBlue,
+.computer,
+.ellipseLeft,
+.cross,
+.circleBlue,
+.polygon,
+.circleGreen {
+    position: absolute;
+
+    /* border: 3px solid red; */
+    right: 0px;
+    top: 0px;
+}
+
+.computer {
+    right: 161px;
+    top: 151px;
+}
+
+.ellipseLeft {
+    left: 0px;
+    top: 76px;
+}
+
+.cross {
+    top: 161px;
+    left: 806px;
+}
+
+.circleBlue {
+    top: 543px;
+    left: 589px;
+}
+
+.polygon {
+    top: 573px;
+    left: 1222px;
+}
+
+.circleGreen {
+    right: 51px;
+    top: 413px;
+}
+
+.box1 {
+    /* border: 3px solid red; */
+    width: 643px;
+    height: 166px;
+
+    color: var(--utility-black, #000);
+
+    font-family: Inter;
+    font-size: 66px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 125%; /* 82.5px */
+    letter-spacing: -1.32px;
+
+    margin-bottom: 24px;
+}
+
+.box2 {
+    /* border: 3px solid blue; */
+    width: 643px;
+    height: 60px;
+
+    color: var(--gray-700, #646D89);
+
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 30px */
+
+    margin-bottom: 60px;
+}
+
+                    /* กลาง */
+
+.mainMiddle {
+    border: 5px solid saddlebrown;
+    height: 1111px;
+    width: 1440px;
+
+    padding-left: 159px;
+    padding-top: 161px;
+
+    position: relative;
+}
+
+.container {
+    /* border: 3px solid red; */
+    width: 1120px;
+    height: 780px;
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+}
+
+.row1,
+.row2 {
+    /* border: 3px solid blue; */
+    display: flex;
+    flex-direction: row;
+    gap: 119px;
+    
+}
+
+.textContainer {
+    /* border: 2px solid chartreuse; */
+    display: flex;
+    flex-direction: column;
+}
+
+.textBox {
+    /* border: 2px solid pink; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.textHead {
+    /* border: 2px solid blue; */
+    width: 547px;
+    height: 90px;
+
+    color: var(--utility-black, #000);
+
+    font-family: Inter;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 125%; /* 45px */
+    letter-spacing: -0.72px;
+
+    margin-bottom: 40px;
+}
+
+.textSubhead {
+    /* border: 1px solid black; */
+    width: 487px;
+    height: 30px
+    ;
+    color: var(--utility-black, #000);
+
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 125%; /* 30px */
+    letter-spacing: -0.48px;
+    
+    margin-bottom: 10px;
+}
+
+.text {
+    /* border: 1px solid black; */
+    width: 487px;
+    height: 48px;
+
+    color: var(--gray-700, #646D89);
+
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+}
+
+.ellipseTop,
+.circleGrey,
+.crossPurple,
+.ellipseBot {
+    position: absolute;
+}
+
+.ellipseTop {
+    top: 0px;
+    left: 140px;
+}
+
+.circleGrey {
+    top: 94px;
+    left: 508px;
+}
+
+.crossPurple {
+    top: 399px;
+    left: 1352px;
+}
+
+.ellipseBot {
+    bottom: 0px;
+    right: 122px;
+}
+
+                    /* ล่าง */
+
+.mainBottom {
+    border: 5px solid yellowgreen;
+    height: 700px;
+    width: 1440px;
+}
 
