@@ -12,6 +12,27 @@ import bigEllipseRight from '../images/bigEllipseRight.svg';
 import smallEllipseRight from '../images/smallEllipseRight.svg';
 import plus from '../images/plus.svg';
 
+
+import backgroundBlue from '../images/imagesMainTop/backgroundBlue.svg';
+import computer from '../images/imagesMainTop/computer.svg';
+import ellipseLeft from '../images/imagesMainTop/ellipseLeft.svg';
+import cross from '../images/imagesMainTop/cross.svg';
+import circleBlue from '../images/imagesMainTop/circleBlue.svg';
+import polygon from '../images/imagesMainTop/polygon.svg';
+import circleGreen from '../images/imagesMainTop/circleGreen.svg';
+
+import picRow1 from '../images/imagesMainMiddle/picRow1.svg';
+import picRow2 from '../images/imagesMainMiddle/picRow2.svg';
+import secure from '../images/imagesMainMiddle/secure.svg';
+import support from '../images/imagesMainMiddle/support.svg';
+import collab from '../images/imagesMainMiddle/collab.svg';
+import ellipseTop from '../images/imagesMainMiddle/ellipseTop.svg';
+import circleGrey from '../images/imagesMainMiddle/circle.svg';
+import crossPurple from '../images/imagesMainMiddle/cross.svg';
+import ellipseBot from '../images/imagesMainMiddle/ellipseBot.svg';
+
+
+
 const mockDataProfessional = [
   { picture: janeCooper , name: 'Jane Cooper', position: 'UX/UI Designer' },
   { picture: estherHoward , name: 'Esther Howard', position: 'Program Manager' },
@@ -45,6 +66,96 @@ const mockDataGraduates = [
 function Main() {
   return (
     <>
+
+      <div>
+        <div className={classes.mainTop}>
+          <div className={classes.box1}>Best Virtual Classroom Software</div>
+          <div className={classes.box2}>Welcome to Schooler! The one-stop online class management system that caters to all your educational needs!</div>
+          <button>Explore Courses</button>
+
+          <img className={classes.backgroundBlue} src={backgroundBlue} />
+          <img className={classes.computer} src={computer} />
+          <img className={classes.ellipseLeft} src={ellipseLeft} />
+          <img className={classes.cross} src={cross} />
+          <img className={classes.circleBlue} src={circleBlue} />
+          <img className={classes.polygon} src={polygon} />
+          <img className={classes.circleGreen} src={circleGreen} />
+        </div>
+
+        <div className={classes.mainMiddle}>
+          <div className={classes.container}>
+
+            <div className={classes.row1}>
+              <img className={classes.picRow1} src={picRow1}/>
+              <div className={classes.textContainer}>
+                <div className={classes.textHead}>Learning experience has been enhanced with new technologies</div>
+              
+                <div className={classes.textBox}>
+                  <div>
+                    <img src={secure} />
+                  </div>
+                  <div>
+                    <div className={classes.textSubhead}>Secure & Easy</div>
+                    <div className={classes.text}>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</div>
+                  </div>
+                </div>
+
+                <div className={classes.textBox}>
+                  <div>
+                    <img src={support} />
+                  </div>
+                  <div>
+                    <div className={classes.textSubhead}>Supports All Students</div>
+                    <div className={classes.text}>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</div>
+                  </div>
+                </div>
+            
+              </div>
+            </div>
+
+            <div className={classes.row2}>
+              <div className={classes.textContainer}>
+                <div className={classes.textHead}>Interactions between the tutor and the learners</div>
+              
+                <div className={classes.textBox}>
+                  <div>
+                    <img src={collab} />
+                  </div>
+                  <div>
+                    <div className={classes.textSubhead}>Purely Collaborative</div>
+                    <div className={classes.text}>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</div>
+                  </div>
+                </div>
+
+                <div className={classes.textBox}>
+                  <div>
+                    <img src={support} />
+                  </div>
+                  <div>
+                    <div className={classes.textSubhead}>Supports All Students</div>
+                    <div className={classes.text}>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</div>
+                  </div>
+                </div>
+            
+              </div>
+              <img className={classes.picRow2} src={picRow2}/>
+            </div>
+
+          </div>
+
+          <img className={classes.ellipseTop} src={ellipseTop} />
+          <img className={classes.circleGrey} src={circleGrey} />
+          <img className={classes.crossPurple} src={crossPurple} />
+          <img className={classes.ellipseBot} src={ellipseBot} />
+        </div>
+
+        <div className={classes.mainBottom}>
+
+        </div>
+      
+      </div>
+
+
       <div className={classes.containerProfessionalInstructors}>
         <img src={polygonOrange} alt='polygonOrange' className={classes.polygonPosition} />
         <h2>Our Professional Instructors</h2>
@@ -90,6 +201,7 @@ function Main() {
         <img src={plus} alt='plus' className={classes.plusPosition} />
       </div>
     </> 
+
   );
 }
 
