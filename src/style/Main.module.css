@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 1920px;
+  width: 100vw;
   height: 823px;
   gap: 60px;
   position: relative;
@@ -34,7 +34,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 1920px;
+  width: 100vw;
   height: 823px;
   padding-top: 109px;
   gap: 60px;
@@ -87,7 +87,7 @@
 .big-ellipse-right-position {
   position: absolute;
   top: 20px;
-  right: 30px;
+  right: 5px;
 }
 
 .small-ellipse-right-position {
