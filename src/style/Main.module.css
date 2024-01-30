@@ -108,7 +108,7 @@
     border: 5px solid blueviolet;
     background: var(--blue-100, #E5ECF8);
     height: 700px;
-    width: 1440px;
+    width: 100vw;
     padding-top: 165px;
     padding-left: 160px;
 
@@ -197,7 +197,7 @@
 .mainMiddle {
     border: 5px solid saddlebrown;
     height: 1111px;
-    width: 1440px;
+    width: 100vw;
 
     padding-left: 159px;
     padding-top: 161px;
