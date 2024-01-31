@@ -26,7 +26,7 @@ const CourseInfo = () => {
           return(
             <div className={classes.setEachCourseCards} key={items.name}>
               <div className={classes.setPositionImage}>
-                <img style={{ borderRadius: '8px 8px 0px 0px' }}  src={items.img} alt={items.name} />
+                <img style={{ borderRadius: '8px 8px 0px 0px' }} src={items.img} alt={items.name} />
               </div>
               <div className={classes.containerCourse}>
                 <p>Course</p>
