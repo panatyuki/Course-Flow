@@ -14,18 +14,15 @@ function Header() {
     );
   };
 
+  //
   return (
     <div className={classes.header}>
       <div className={classes.courseFlowLogo}>
-        <img src={imageHeader.courseFlow} alt='courseFlowLogo' onClick={() => {navigate('/');}}/>
+        <img src={imageHeader.courseFlow} alt='courseFlowLogo' onClick={() => {navigate('/our-course');}}/>
       </div>
       <div className={classes.headerRight}>
-        <p className={classes.ourCourses} onClick={() => {
-          navigate('/our-course');
-        }}>
-          <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>     
-        </p>
-        <button onClick={() => {
+        <span className={classes.ourCourses}>
+          <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>
         </span>
         {!session ? <button onClick={() => {
           navigate('/login');

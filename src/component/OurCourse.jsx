@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import classes from '../style/OurCourse.module.css';
 import { useDebounceCallback } from '@mantine/hooks';
 
@@ -34,7 +33,7 @@ const CourseInfo = () => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate('/course-detail');
+    navigate('/course-detail/');
   };
 
   return (
@@ -102,8 +101,6 @@ const CourseInfo = () => {
   );
 };
 
-CourseInfo.propTypes = {
-  description: PropTypes.string,
-};
+
 
 export default CourseInfo;
