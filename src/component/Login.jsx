@@ -6,14 +6,15 @@ import crossGreen from '../images/imagesLogin/crossGreen.svg';
 import orangeLeft from '../images/imagesLogin/orangeLeft.svg';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
-
+import { useAuth } from '../contexts/AuthContext';
 function Login() {
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { supabase, session } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email && !password) {
       setError('Please Enter your email and password');
@@ -22,9 +23,22 @@ function Login() {
     } else if (!password) {
       setError ('Please Enter your password');
     }
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (session) {
+      console.log(session);
+      navigate('/');
+    }
+    else {
+      console.error(error);
+    }
   };
 
-  const navigate = useNavigate();
+  
     
   return (
     <div className={classes.containerLoginPage}>
