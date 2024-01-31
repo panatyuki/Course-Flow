@@ -1,15 +1,15 @@
 import Header from '../component/Header';
-import Main from '../component/Main';
+import CourseDetail from '../component/CourseDetail';
 import Footer from '../component/Footer';
 
-function HomePage() {
+function CourseDetailPage() {
   return (
     <>
       <Header />
-      <Main />
+      <CourseDetail />
       <Footer />
     </>
   );
 }
 
-export default HomePage;
+export default CourseDetailPage;

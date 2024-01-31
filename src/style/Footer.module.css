@@ -1,10 +1,10 @@
 .sub-footer {
   display: flex;
-  width: 1920px;
+  width: 100vw;
   height: 500px;
   padding: 90px 190px;
   gap: 550px;
-  background: var(--utility-linear2, linear-gradient(271deg, #5697FF 7.78%, #2558DD 73.86%));
+  background: linear-gradient(271deg, #5697FF 7.78%, #2558DD 73.86%);
   position: relative;
   color: white;
   position: relative;
@@ -36,12 +36,12 @@
 
 .footer {
   display: flex;
-  width: 1920px;
+  width: 100vw;
   height: 240px;
   padding: 0px 160px;
   justify-content: space-between;
   align-items: center;
-  background: var(--blue-700, #183056);
+  background: #183056;
 }
 
 .button {
@@ -51,28 +51,29 @@
   align-items: center;
   padding: 5px 32px;
   gap: 10px;
-  border: 1px solid var(--orange-500, #F47E20);
+  border: 1px solid #F47E20;
   border-radius: 12px;
   background: white;
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
-  color: var(--orange-500, #F47E20);
+  color: #F47E20;
   font-family: Inter;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 150%;
+  cursor: pointer;
 }
 
 .button:hover {
   border: white;
-  background: var(--orange-500, #F47E20);
+  background: #F47E20;
   color: white;
 }
 
 .links {
   display: flex;
   gap: 72px;
-  color: var(--gray-500, #C8CCDB);
+  color: #C8CCDB;
 }
 
 .logo-box {
