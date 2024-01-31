@@ -1,0 +1,115 @@
+.container-search-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #F47E20;
+    padding: 36px 160px 36px 160px;
+}
+
+.magnifying-glass {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8%;
+    background-color: aqua;
+}
+
+.search-title {
+    color: #000000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    
+}
+
+.search-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 36px 160px 36px 160px;
+    border: var(--Gray-300, #CCD0D7);
+}
+
+.search-input-box {
+    display: "flex";
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-color: #000000;
+    border-radius: 8px;
+    width: 357px;
+    height: 48px;
+    padding: 12px, 16px, 12px, 16px;
+}
+
+.set-position-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    width: auto;
+    height: auto;
+}
+
+.container-course-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100vw;
+    margin-bottom: 200px;
+    
+}
+
+.course-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    max-width: 1200px;
+    gap: 24px;
+    
+}
+
+.set-each-course-cards {
+    box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    background: var(--utility-white, #FFF);
+}
+
+.container-course {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    padding-left: 20px;
+    color: #F47E20;
+}
+
+.course-title {
+    padding-left: 20px;
+}
+
+.course-detail {
+    padding-left: 20px;
+    color: #646D89;
+    font-size: 16px;
+    border-bottom: 1px solid #E4E6ED;
+    width: 360px;
+}
+
+.lesson-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding-left: 20px;
+    gap: 20px;
+}
