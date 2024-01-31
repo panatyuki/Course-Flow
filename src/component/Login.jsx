@@ -5,28 +5,62 @@ import circleOrange from '../images/imagesLogin/circleOrange.svg';
 import crossGreen from '../images/imagesLogin/crossGreen.svg';
 import orangeLeft from '../images/imagesLogin/orangeLeft.svg';
 import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
 function Login() {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email && !password) {
+      setError('Please Enter your email and password');
+    } else if (!email) {
+      setError('Please Enter your email');
+    } else if (!password) {
+      setError ('Please Enter your password');
+    }
+  };
+
   const navigate = useNavigate();
     
   return (
     <div className={classes.containerLoginPage}>
       <div className={classes.container}>
         <div className={classes.loginBox}>
-          <span className={classes.loginHead}>
-            <h2 style={{ lineHeight: '0' }}>Welcome back!</h2>
-          </span>
-          <span className={classes.loginTopic}>
-            <p className='cf-body-2'>Email</p>
-          </span>
-          <input type="email" placeholder='Enter Email' className={classes.loginInput}></input>
-          <span className={classes.LoginTopic}>
-            <p className='cf-body-2'>Password</p>        
-          </span>
-          <input type="password" placeholder='Enter Password' className={classes.loginInput}></input>
-          <button className={classes.loginButton}>
-            <p className='cf-body-2' style={{ fontWeight: '700' }}>Log in</p>  
-          </button>
+          <form onSubmit={handleSubmit}>
+            <span className={classes.loginHead}>
+              <h2 style={{ lineHeight: '0' }}>Welcome back!</h2>
+            </span>
+            <label className={classes.loginTopic} htmlFor='email'>
+              <span className='cf-body-2'>Email</span>
+            </label>
+            <input
+              className={classes.loginInput}
+              type='email'
+              id='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder='Enter Email'
+            />
+            <span className={classes.loginTopic}>
+              <span className='cf-body-2' htmlFor='password'>Password</span>        
+            </span>
+            <input
+              className={classes.loginInput}
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder='Enter Password'
+            />
+            {error && <div style={{ color: 'red' }}>{error}</div>}
+            <button className={classes.loginButton} type='submit'>
+              <p className='cf-body-2' style={{ fontWeight: '700' }}>Log in</p>  
+            </button>
+          </form>
           <div className={classes.textBox}>
             <p className='cf-body-2'>
               Don’t have an account?
@@ -45,7 +79,6 @@ function Login() {
         <img className={classes.orangeLeft} src={orangeLeft} />
       </div>
     </div>
-    
   );
 }
 
