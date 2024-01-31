@@ -1,22 +1,32 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createClient } from '@supabase/supabase-js';
 
+const supabase = createClient('https://vvzqftccddhgehcywozf.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2enFmdGNjZGRoZ2VoY3l3b3pmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDY1NDkzNTIsImV4cCI6MjAyMjEyNTM1Mn0.G3EOy8VQgSV-u-lCrZnbt1yapL6U9keJqcf-tW-zKd4');
 // Create the context
 const AuthContext = createContext();
 
 // Create a Provider Component
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [session, setSession] = useState(null);
 
-  const login = (userData) => {
-    setUser(userData); 
-  };
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
 
-  const logout = () => {
-    setUser(null); // 
-  };
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ session, login, logout, supabase }}>
       {children}
     </AuthContext.Provider>
   );

@@ -21,6 +21,7 @@
     "@mantine/form": "^7.5.0",
     "@mantine/hooks": "^7.5.0",
     "@mantine/modals": "^7.5.0",
+    "@supabase/supabase-js": "^2.39.3",
     "antd": "^5.13.3",
     "dayjs": "^1.11.10",
     "embla-carousel-react": "^7.1.0",
