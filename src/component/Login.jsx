@@ -1,12 +1,9 @@
 import classes from '../style/Login.module.css';
-import blueRight from '../images/imagesLogin/blueRight.svg';
-import circleGrey from '../images/imagesLogin/circleGrey.svg';
-import circleOrange from '../images/imagesLogin/circleOrange.svg';
-import crossGreen from '../images/imagesLogin/crossGreen.svg';
-import orangeLeft from '../images/imagesLogin/orangeLeft.svg';
 import { useNavigate } from 'react-router-dom';
+import { imageRegisterAndLogin } from '../data/imageBackground';
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -38,8 +35,6 @@ function Login() {
     }
   };
 
-  
-    
   return (
     <div className={classes.containerLoginPage}>
       <div className={classes.container}>
@@ -86,11 +81,11 @@ function Login() {
             </p>
           </div>
         </div>
-        <img className={classes.blueRight} src={blueRight} />
-        <img className={classes.circleGrey} src={circleGrey} />
-        <img className={classes.circleOrange} src={circleOrange} />
-        <img className={classes.crossGreen} src={crossGreen} />
-        <img className={classes.orangeLeft} src={orangeLeft} />
+        <img className={classes.blueRight} src={imageRegisterAndLogin.blueRight} />
+        <img className={classes.circleGrey} src={imageRegisterAndLogin.circleGreyRL} />
+        <img className={classes.circleOrange} src={imageRegisterAndLogin.circleOrange} />
+        <img className={classes.crossGreen} src={imageRegisterAndLogin.crossGreen} />
+        <img className={classes.orangeLeft} src={imageRegisterAndLogin.orangeLeft} />
       </div>
     </div>
   );

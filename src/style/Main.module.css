@@ -39,21 +39,24 @@
   padding-top: 109px;
   gap: 60px;
   position: relative;
+  overflow-x: hidden;
 }
 
 .container-card-graduates {
   display: flex;
-  gap: 80px
+  gap: 80px;
+}
+
+.container-card {
+  display: flex;
 }
 
 .card-graduates {
   display: flex;
-  flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   width: 900px;
   height: 310px;
-  gap: 32px;
   position: relative;
 }
 
@@ -64,7 +67,7 @@
   height: 310px;
   padding: 35px 25px 66px 90px;
   border-radius: 8px;
-  background-color: var(--blue-100, #E5ECF8);
+  background-color: #E5ECF8;
 }
 
 .picture-graduates-position {
@@ -217,6 +220,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.icon-box{
+  padding-top: 5px;
 }
 
 .text-head {

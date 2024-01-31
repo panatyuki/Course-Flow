@@ -1,20 +1,31 @@
 import classes from '../style/Header.module.css';
-import courseFlow from '../images/imagesHeader/courseFlow.svg';
 import { useNavigate } from 'react-router-dom';
+import { imageHeader } from '../data/imageBackground';
 import { useAuth } from '../contexts/AuthContext';
 
 function Header() {
   const navigate = useNavigate();
   const { session } = useAuth();
 
+  const profileDropdown = () => {
+    return (
+      <div className={classes.profile}>
+      </div>
+    );
+  };
+
   return (
     <div className={classes.header}>
       <div className={classes.courseFlowLogo}>
-        <img src={courseFlow} alt='courseFlowLogo' onClick={() => {navigate('/');}}/>
+        <img src={imageHeader.courseFlow} alt='courseFlowLogo' onClick={() => {navigate('/');}}/>
       </div>
       <div className={classes.headerRight}>
-        <span className={classes.ourCourses}>
+        <p className={classes.ourCourses} onClick={() => {
+          navigate('/our-course');
+        }}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>     
+        </p>
+        <button onClick={() => {
         </span>
         {!session ? <button onClick={() => {
           navigate('/login');

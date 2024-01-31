@@ -4,11 +4,7 @@ import { useForm } from '@mantine/form';
 import { PasswordInput, TextInput, } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import classes from '../style/Register.module.css';
-import bigVector from '../images/imagesRegister/bigVector.svg';
-import circle from '../images/imagesRegister/circle.svg';
-import mediumEllipse from '../images/imagesRegister/mediumEllipse.svg';
-import plus from '../images/imagesRegister/plus.svg';
-import smallEllipse from '../images/imagesRegister/smallEllipse.svg';
+import { imageRegisterAndLogin } from '../data/imageBackground';
 
 function Register() {
   const [name, setName] = useState('');
@@ -70,11 +66,11 @@ function Register() {
             <p className='cf-body-2' style={{ fontWeight: '700', color: '#2F5FAC', cursor: 'pointer' }} onClick={() => { navigate('/login');}}> Login </p>
           </div>
         </form>
-        <img className={classes.bigVectorPosition} src={bigVector} alt='bigVector' />
-        <img className={classes.mediumEllipsePosition} src={mediumEllipse} alt='mediumEllipse' />
-        <img className={classes.smallEllipsePosition} src={smallEllipse} alt='smallEllipse' />
-        <img className={classes.plusPosition} src={plus} alt='plus' />
-        <img className={classes.circlePosition} src={circle} alt='circle' />
+        <img className={classes.bigVectorPosition} src={imageRegisterAndLogin.blueRight} alt='bigVector' />
+        <img className={classes.mediumEllipsePosition} src={imageRegisterAndLogin.circleGreyRL} alt='mediumEllipse' />
+        <img className={classes.smallEllipsePosition} src={imageRegisterAndLogin.circleOrange} alt='smallEllipse' />
+        <img className={classes.plusPosition} src={imageRegisterAndLogin.crossGreen} alt='plus' />
+        <img className={classes.circlePosition} src={imageRegisterAndLogin.orangeLeft} alt='circle' />
       </div>
     </div>
   );
