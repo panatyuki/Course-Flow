@@ -1,9 +1,11 @@
 import classes from '../style/Header.module.css';
 import { useNavigate } from 'react-router-dom';
 import { imageHeader } from '../data/imageBackground';
+import { useAuth } from '../contexts/AuthContext';
 
 function Header() {
   const navigate = useNavigate();
+  const { session } = useAuth();
 
   const profileDropdown = () => {
     return (
@@ -24,10 +26,12 @@ function Header() {
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>     
         </p>
         <button onClick={() => {
+        </span>
+        {!session ? <button onClick={() => {
           navigate('/login');
         }} className={classes.logInButton}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Log in</p>
-        </button>
+        </button> : <p className='cf-body-2'>Hello {session.user.email}</p>}
       </div>
     </div>
   );

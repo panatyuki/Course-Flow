@@ -1,21 +1,15 @@
 import React from 'react';
-import classes from '../style/OurCourse.module.css';
 import CourseInfo from '../component/OurCourse';
+import Header from '../component/Header';
+import Footer from '../component/Footer';
 
 function OurCourse() {
   return (
-    <div>
-      <div className={classes.searchTitle}>
-        <h2>Our Courses</h2>
-      </div>
-
-      <div className={classes.searchBox}>
-        
-      </div>
-      
+    <>
+      <Header />
       <CourseInfo />
-
-    </div>
+      <Footer />
+    </>
   );
 }
 
