@@ -4,9 +4,9 @@ import CourseInfo from '../component/OurCourse';
 
 // import Ant Design มาใช้ทำแถบ Input
 // ใส่ไปแค่ที่ตรงนี้ที่เดียว
-import { Input } from 'antd';
 
-import magnifyingGlass from '../images/imagesSearchOurCourses/magnifyingGlass.svg';
+
+
 
 function OurCourse() {
   return (
@@ -16,7 +16,7 @@ function OurCourse() {
       </div>
 
       <div className={classes.searchBox}>
-        <Input className={classes.searchInputBox} type='text' placeholder='Search...' prefix={<img src={magnifyingGlass} alt="Magnifying Glass" />} />
+        
       </div>
       
       <CourseInfo />

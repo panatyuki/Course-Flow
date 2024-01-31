@@ -10,18 +10,22 @@ import instagramLogo from '../images/imagesFooter/instagramLogo.svg';
 import twitterLogo from '../images/imagesFooter/twitterLogo.svg';
 
 const links = [
-  { link: '/', label: 'ALL Courses' },
+  { link: '/our-course', label: 'ALL Courses' },
   { link: '/', label: 'Bundle Package' },
 ];
 
+
 function Footer() {
   const navigate = useNavigate();
+
   const items = links.map((link) => (
     <Anchor
       c="dimmed"
       key={link.label}
       lh={1}
-      onClick={() => navigate(`'${links.link}'`)}
+      onClick={() => {
+        navigate('/our-course');
+      }}
       size='xl'
     >
       {link.label}
@@ -33,7 +37,9 @@ function Footer() {
       <div className={classes.subFooter}>
         <div className={classes.leftSubFooter}>
           <h2>Want to start learning?</h2>
-          <button className={classes.button}>
+          <button className={classes.button} onClick={() => {
+            navigate('/our-course');
+          }}>
             <p>Check out our courses</p>
           </button>
         </div>

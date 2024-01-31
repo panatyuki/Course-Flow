@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Carousel } from '@mantine/carousel';
 import classes from '../style/Main.module.css';
 import janeCooper from '../images/imagesMainMiddle/janeCooper.svg';
@@ -47,7 +48,18 @@ const mockDataGraduates = [
     description: 
   `Start with something simple and small, then expand over time. If people call it a ‘toy’ you’re definitely onto something.
   If you’re waiting for encouragement from others, you’re doing it wrong. By the time people think an idea is good, it’s probably too late.` },
-
+  { picture: saifulIslam , name: 'Saiful Islam', 
+    description: 
+  `Start with something simple and small, then expand over time. If people call it a ‘toy’ you’re definitely onto something.
+  If you’re waiting for encouragement from others, you’re doing it wrong. By the time people think an idea is good, it’s probably too late.` },
+  { picture: jameCameron , name: 'Jame Cameron', 
+    description: 
+  `Start with something simple and small, then expand over time. If people call it a ‘toy’ you’re definitely onto something.
+  If you’re waiting for encouragement from others, you’re doing it wrong. By the time people think an idea is good, it’s probably too late.` },
+  { picture: saifulIslam , name: 'Jimmy Foxx', 
+    description: 
+  `Start with something simple and small, then expand over time. If people call it a ‘toy’ you’re definitely onto something.
+  If you’re waiting for encouragement from others, you’re doing it wrong. By the time people think an idea is good, it’s probably too late.` },
 ];
 
 function GraduateCard({ graduate }) {
@@ -66,110 +78,114 @@ function GraduateCard({ graduate }) {
 
 
 function Main() {
+  const navigate = useNavigate();
+
   const graduatesCarouselSlides = mockDataGraduates.map((grad, index) => {
     return (
-      <Carousel.Slide key={index} style={{ margin: '0 30px' }}>
+      <Carousel.Slide key={index}>
         <GraduateCard graduate={grad} />
       </Carousel.Slide>);
   });
+
   return (
     <>
-      <div>
-        <div className={classes.mainTop}>
-          <div className={classes.box1}>
-            <h1>Best Virtual Classroom Software</h1>
-          </div>
-          <div className={classes.box2}>
-            <p className='cf-body-1'>Welcome to Schooler! The one-stop online class management system that caters to all your educational needs!</p>
-          </div>
-          <button className={classes.exploreButton}>
-            <p className='cf-body-2' style={{ fontWeight: '700' }} >Explore Courses</p>
-          </button>
-          <img className={classes.backgroundBlue} src={backgroundBlue} />
-          <img className={classes.computer} src={computer} />
-          <img className={classes.ellipseLeft} src={ellipseLeft} />
-          <img className={classes.cross} src={cross} />
-          <img className={classes.circleBlue} src={circleBlue} />
-          <img className={classes.polygon} src={polygon} />
-          <img className={classes.circleGreen} src={circleGreen} />
+      <div className={classes.mainTop}>
+        <div className={classes.box1}>
+          <h1>Best Virtual Classroom Software</h1>
         </div>
-        <div className={classes.mainMiddle}>
-          <div className={classes.container}>
-            <div className={classes.row1}>
-              <img className={classes.picRow1} src={picRow1}/>
-              <div className={classes.textContainer}>
-                <div className={classes.textHead}>
-                  <h2>Learning experience has been enhanced with new technologies</h2>
-                </div>
-                <div className={classes.textBox}>
-                  <div>
-                    <img src={secure} />
-                  </div>
-                  <div>
-                    <div className={classes.textSubhead}>
-                      <h3 style={{ lineHeight: '0' }}>Secure & Easy</h3>
-                    </div>
-                    <div className={classes.text}>
-                      <p className='cf-body-2'>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className={classes.textBox}>
-                  <div>
-                    <img src={support} />
-                  </div>
-                  <div>
-                    <div className={classes.textSubhead}>
-                      <h3 style={{ lineHeight: '0' }}>Supports All Students</h3>           
-                    </div>
-                    <div className={classes.text}>
-                      <p className='cf-body-2' >Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={classes.row2}>
-              <div className={classes.textContainer}>
-                <div className={classes.textHead}>
-                  <h2>Interactions between the tutor and the learners</h2>
-                </div>
-                <div className={classes.textBox}>
-                  <div>
-                    <img src={collab} />
-                  </div>
-                  <div>
-                    <div className={classes.textSubhead}>
-                      <h3 style={{ lineHeight: '0' }}>Purely Collaborative</h3> 
-                    </div>
-                    <div className={classes.text}>
-                      <p className='cf-body-2'>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className={classes.textBox}>
-                  <div>
-                    <img src={support} />
-                  </div>
-                  <div>
-                    <div className={classes.textSubhead}>
-                      <h3 style={{ lineHeight: '0' }}>Supports All Students</h3>                   
-                    </div>
-                    <div className={classes.text}>
-                      <p className='cf-body-2'>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <img className={classes.picRow2} src={picRow2}/>
-            </div>
-          </div>
-          <img className={classes.ellipseTop} src={ellipseTop} />
-          <img className={classes.circleGrey} src={circleGrey} />
-          <img className={classes.crossPurple} src={crossPurple} />
-          <img className={classes.ellipseBot} src={ellipseBot} />
+        <div className={classes.box2}>
+          <p className='cf-body-1'>Welcome to Schooler! The one-stop online class management system that caters to all your educational needs!</p>
         </div>
+        <button className={classes.exploreButton} onClick={() => {
+          navigate('/our-course');
+        }}>
+          <p className='cf-body-2' style={{ fontWeight: '700' }} >Explore Courses</p>
+        </button>
+        <img className={classes.backgroundBlue} src={backgroundBlue} />
+        <img className={classes.computer} src={computer} />
+        <img className={classes.ellipseLeft} src={ellipseLeft} />
+        <img className={classes.cross} src={cross} />
+        <img className={classes.circleBlue} src={circleBlue} />
+        <img className={classes.polygon} src={polygon} />
+        <img className={classes.circleGreen} src={circleGreen} />
       </div>
+      <div className={classes.mainMiddle}>
+        <div className={classes.container}>
+          <div className={classes.row1}>
+            <img className={classes.picRow1} src={picRow1}/>
+            <div className={classes.textContainer}>
+              <div className={classes.textHead}>
+                <h2>Learning experience has been enhanced with new technologies</h2>
+              </div>
+              <div className={classes.textBox}>
+                <div className={classes.iconBox}>
+                  <img src={secure} />
+                </div>
+                <div>
+                  <div className={classes.textSubhead}>
+                    <h3 style={{ lineHeight: '0' }}>Secure & Easy</h3>
+                  </div>
+                  <div className={classes.text}>
+                    <p className='cf-body-2'>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
+                  </div>
+                </div>
+              </div>
+              <div className={classes.textBox}>
+                <div className={classes.iconBox}>
+                  <img src={support} />
+                </div>
+                <div>
+                  <div className={classes.textSubhead}>
+                    <h3 style={{ lineHeight: '0' }}>Supports All Students</h3>           
+                  </div>
+                  <div className={classes.text}>
+                    <p className='cf-body-2' >Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={classes.row2}>
+            <div className={classes.textContainer}>
+              <div className={classes.textHead}>
+                <h2>Interactions between the tutor and the learners</h2>
+              </div>
+              <div className={classes.textBox}>
+                <div className={classes.iconBox}>
+                  <img src={collab} />
+                </div>
+                <div>
+                  <div className={classes.textSubhead}>
+                    <h3 style={{ lineHeight: '0' }}>Purely Collaborative</h3> 
+                  </div>
+                  <div className={classes.text}>
+                    <p className='cf-body-2'>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
+                  </div>
+                </div>
+              </div>
+              <div className={classes.textBox}>
+                <div className={classes.iconBox}>
+                  <img src={support} />
+                </div>
+                <div>
+                  <div className={classes.textSubhead}>
+                    <h3 style={{ lineHeight: '0' }}>Supports All Students</h3>                   
+                  </div>
+                  <div className={classes.text}>
+                    <p className='cf-body-2'>Duis aute irure dolor in reprehenderit in voluptate velit es se cillum dolore eu fugiat nulla pariatur. Excepteur sint.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <img className={classes.picRow2} src={picRow2}/>
+          </div>
+        </div>
+        <img className={classes.ellipseTop} src={ellipseTop} />
+        <img className={classes.circleGrey} src={circleGrey} />
+        <img className={classes.crossPurple} src={crossPurple} />
+        <img className={classes.ellipseBot} src={ellipseBot} />
+      </div>
+      
       <div className={classes.containerProfessionalInstructors}>
         <img src={polygonOrange} alt='polygonOrange' className={classes.polygonPosition} />
         <h2>Our Professional Instructors</h2>
@@ -189,10 +205,11 @@ function Main() {
           }
         </div>
       </div>
+
       <div className={classes.containerGraduates}>
         <h2>Our Graduates</h2>
         <div className={classes.graduatesCarousel}>
-          <Carousel slideSize="70%" height={200} slideGap="xl" controlsOffset="xs" controlSize={21} loop dragFree initialSlide={1}>
+          <Carousel slideSize="15%" height={400} align="center" slideGap="xl"  withControls={false} >
             {graduatesCarouselSlides}
           </Carousel>
         </div>
