@@ -5,8 +5,7 @@ import { Accordion } from '@mantine/core';
 import imgCourse1 from '../images/imagesCourseDetail/imgCourse1.png';
 import imgCourse2 from '../images/imagesCourseDetail/imgCourse2.png';
 import imgCourse3 from '../images/imagesCourseDetail/imgCourse3.png';
-import lessonIcon from '../images/imagesCourseDetail/lessonIcon.svg';
-import hoursIcon from '../images/imagesCourseDetail/hoursIcon.svg';
+import CourseCard from './courseCard';
 
 function CourseDetail (){
   const MockModuleAccordion = [
@@ -100,19 +99,6 @@ function CourseDetail (){
     { img:  imgCourse3 , name: 'UX/UI Design Beginner', description: 'Lorem ipsum dolor sit amet, conse ctetur adipiscing elit.', lesson: '6', hours: '6' },
   ];
 
-  const getRandomIndex = (length, count) => {
-    const indices = [];
-    while (indices.length < count) {
-      const randomIndex = Math.floor(Math.random() * length);
-      if (!indices.includes(randomIndex)) {
-        indices.push(randomIndex);
-      }
-    }
-    return indices;
-  };
-
-  const [randomIndices, setRandomIndices] = useState([]);
-
   useEffect(() => {
     const indices = getRandomIndex(mockDataCourse.length, 3);
     setRandomIndices(indices);
@@ -132,6 +118,24 @@ function CourseDetail (){
     );
   });
 
+  const getRandomIndex = (length, count) => {
+    const indices = [];
+    while (indices.length < count) {
+      const randomIndex = Math.floor(Math.random() * length);
+      if (!indices.includes(randomIndex)) {
+        indices.push(randomIndex);
+      }
+    }
+    return indices;
+  };
+
+  const [randomIndices, setRandomIndices] = useState([]);
+
+  const courseCard = randomIndices.map(( course, index ) => {
+    return (
+      <CourseCard key={index} detailCourse={mockDataCourse[course]} />
+    );
+  });
 
   return (
     <>  
@@ -212,26 +216,7 @@ function CourseDetail (){
       <div className={classes.containerOtherInterestingCourse}>
         <h2>Other Interesting Course</h2>
         <div className={classes.containerCardOtherInterestingCourse}>
-          {randomIndices.map((index) => (
-            <div key={index} className={classes.courseCard}>
-              <img src={mockDataCourse[index].img} alt={mockDataCourse[index].name} className={classes.imgCourseCard} />
-              <div className={classes.textCourseCard}>
-                <p className='cf-body-3' style={{ color: '#F47E20' , fontWeight: '400' }}>Course</p>
-                <h3 style={{ lineHeight: '0' }}>{mockDataCourse[index].name}</h3>
-                <p className='cf-body-2' style={{ color: '#646D89' }} >{mockDataCourse[index].description}</p>
-              </div>   
-              <div className={classes.footerCourseCard}> 
-                <div className={classes.detailFooterCourseCard}>
-                  <img src={lessonIcon} alt='lessonIcon' />
-                  <span className='cf-body-2'>{mockDataCourse[index].lesson} Lesson</span>
-                </div>
-                <div className={classes.detailFooterCourseCard}>
-                  <img src={hoursIcon} alt='hoursIcon' />
-                  <span className='cf-body-2'>{mockDataCourse[index].hours} Hours</span>
-                </div>
-              </div>   
-            </div>
-          ))}
+          {courseCard}
         </div>
       </div>
     </>
