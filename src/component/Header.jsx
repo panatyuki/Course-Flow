@@ -8,13 +8,17 @@ function Header() {
   return (
     <div className={classes.header}>
       <div className={classes.courseFlowLogo}>
-        <img src={courseFlow} alt='courseFlowLogo' />
+        <img src={courseFlow} alt='courseFlowLogo' onClick={() => {navigate('/');}}/>
       </div>
       <div className={classes.headerRight}>
-        <span className={classes.ourCourses}>Our Courses</span>
+        <span className={classes.ourCourses}>
+          <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>     
+        </span>
         <button onClick={() => {
           navigate('/login');
-        }} className={classes.logInButton}>Log in</button>
+        }} className={classes.logInButton}>
+          <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Log in</p>
+        </button>
       </div>
     </div>
   );

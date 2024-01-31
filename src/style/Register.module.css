@@ -1,0 +1,76 @@
+.container-register-page {
+  width: 100vw;
+  height: 100vh;
+  background:#FCFCFE;
+}
+
+.container {
+  width: 100%;
+  padding-top: 157px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.register-box {
+  width: 453px;
+  height: 446px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px
+}
+
+
+.input {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px 12px 12px;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid#D6D9E4;
+}
+
+.register-button {
+  border-radius: 12px;
+  border: 0px;
+  background: #2F5FAC;
+  box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
+  color: white;
+  cursor: pointer;
+}
+
+.text-box {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.big-vector-position {
+  position: absolute;
+  right: 0px;
+  top: -88px;
+}
+
+.medium-ellipse-position {
+  position: absolute;
+  left: 87px;
+  top: 81px;
+}
+
+.small-ellipse-position {
+  position: absolute;
+  right: 59px;
+  top: 589px;
+}
+
+.plus-position {
+  position: absolute;
+  left: 187px;
+  top: 283px
+}
+
+.circle-position {
+  position: absolute;
+  left: 0px;
+  top: 420px;
+}
