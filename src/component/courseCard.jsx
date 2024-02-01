@@ -5,11 +5,11 @@ import hoursIcon from '../images/imagesCourseCard/hoursIcon.svg';
 function CourseCard( { detailCourse }) {
   return (
     <div key={detailCourse.id} className={classes.courseCard}>
-      <img src={detailCourse.img} alt={detailCourse.name} className={classes.imgCourseCard} />
+      <img src={detailCourse.coverImageUrl} alt={detailCourse.name} className={classes.imgCourseCard} />
       <div className={classes.textCourseCard}>
-        <p className='cf-body-3' style={{ color: '#F47E20' , fontWeight: '400' }}>Course</p>
-        <h3 style={{ lineHeight: '0' }}>{detailCourse.name}</h3>
-        <p className='cf-body-2' style={{ color: '#646D89' }} >{detailCourse.description}</p>
+        <p className='cf-body-3' style={{ color: '#F47E20' , fontWeight: '400', lineHeight: '0' }}>Course</p>
+        <h3 style={{ lineHeight: '1' }}>{detailCourse.name}</h3>
+        <p className='cf-body-2' style={{ color: '#646D89', lineHeight: '1' }} >{detailCourse.summary}</p>
       </div>   
       <div className={classes.footerCourseCard}> 
         <div className={classes.detailFooterCourseCard}>
@@ -18,7 +18,7 @@ function CourseCard( { detailCourse }) {
         </div>
         <div className={classes.detailFooterCourseCard}>
           <img src={hoursIcon} alt='hoursIcon' />
-          <span className='cf-body-2'>{detailCourse.hours} Hours</span>
+          <span className='cf-body-2'>{detailCourse.totalLearningTime} Hours</span>
         </div>
       </div>   
     </div>

@@ -23,10 +23,8 @@ function Header() {
         <p className={classes.ourCourses} onClick={() => {
           navigate('/our-course');
         }}>
-          <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>     
+          <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>
         </p>
-        <button onClick={() => {
-        </span>
         {!session ? <button onClick={() => {
           navigate('/login');
         }} className={classes.logInButton}>

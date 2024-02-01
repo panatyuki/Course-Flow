@@ -1,13 +1,26 @@
 import classes from '../style/CourseDetail.module.css';
-import arrowBack from '../images/imagesCourseDetail/arrow_back.svg';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Accordion } from '@mantine/core';
-import imgCourse1 from '../images/imagesCourseDetail/imgCourse1.png';
-import imgCourse2 from '../images/imagesCourseDetail/imgCourse2.png';
-import imgCourse3 from '../images/imagesCourseDetail/imgCourse3.png';
 import CourseCard from './courseCard';
+import { imageCourseDetail } from '../data/imageBackground';
+import { useNavigate } from 'react-router-dom';
 
 function CourseDetail (){
+  const [courseData, setCourseData] = useState([]);
+  const [randomCourseSubset, setRandomCourseSubset] = useState([]);
+
+  const navigate = useNavigate();
+
+  const getCourseData = async() => {
+    const response = await axios.get(import.meta.env.VITE_API_SERVER+'/course');
+    setCourseData(response.data);
+  };
+
+  useEffect (() => {
+    getCourseData();
+  });
+
   const MockModuleAccordion = [
     { topicNumber: '01' , topic: 'Introduction', description: <ul>
       <li>Welcome to the Course</li>
@@ -89,21 +102,6 @@ function CourseDetail (){
     </ul>
     }
   ];
-  
-  const mockDataCourse = [
-    { img:  imgCourse1 , name: 'Service Design Essentials', description: 'Lorem ipsum dolor sit amet, conse ctetur adipiscing elit.', lesson: '6', hours: '6' },
-    { img:  imgCourse2 , name: 'Software Developer', description: 'Lorem ipsum dolor sit amet, conse ctetur adipiscing elit.', lesson: '6', hours: '6' },
-    { img:  imgCourse3 , name: 'UX/UI Design Beginner', description: 'Lorem ipsum dolor sit amet, conse ctetur adipiscing elit.', lesson: '6', hours: '6' },
-    { img:  imgCourse1 , name: 'Service Design Essentials', description: 'Lorem ipsum dolor sit amet, conse ctetur adipiscing elit.', lesson: '6', hours: '6' },
-    { img:  imgCourse2 , name: 'Software Developer', description: 'Lorem ipsum dolor sit amet, conse ctetur adipiscing elit.', lesson: '6', hours: '6' },
-    { img:  imgCourse3 , name: 'UX/UI Design Beginner', description: 'Lorem ipsum dolor sit amet, conse ctetur adipiscing elit.', lesson: '6', hours: '6' },
-  ];
-
-  useEffect(() => {
-    const indices = getRandomIndex(mockDataCourse.length, 3);
-    setRandomIndices(indices);
-    console.log(randomIndices);
-  }, []); 
 
   const accordion = MockModuleAccordion.map((item) => {
     return (  
@@ -118,31 +116,15 @@ function CourseDetail (){
     );
   });
 
-  const getRandomIndex = (length, count) => {
-    const indices = [];
-    while (indices.length < count) {
-      const randomIndex = Math.floor(Math.random() * length);
-      if (!indices.includes(randomIndex)) {
-        indices.push(randomIndex);
-      }
-    }
-    return indices;
-  };
-
-  const [randomIndices, setRandomIndices] = useState([]);
-
-  const courseCard = randomIndices.map(( course, index ) => {
-    return (
-      <CourseCard key={index} detailCourse={mockDataCourse[course]} />
-    );
-  });
 
   return (
     <>  
       <div className={classes.containerPage}>
         <div className={classes.containerCourseDetail}>
-          <button className={classes.buttonBack}>
-            <img src={arrowBack} /> <p className='cf-body-2' style={{ fontWeight: '700' }}>Back</p>
+          <button className={classes.buttonBack} onClick={() => {
+            navigate('/our-course');
+          }}>
+            <img src={imageCourseDetail.arrowBack} /> <p className='cf-body-2' style={{ fontWeight: '700' }}>Back</p>
           </button>
           <div className={classes.container}>
             <div className={classes.dataContainer}>
@@ -216,7 +198,7 @@ function CourseDetail (){
       <div className={classes.containerOtherInterestingCourse}>
         <h2>Other Interesting Course</h2>
         <div className={classes.containerCardOtherInterestingCourse}>
-          {courseCard}
+
         </div>
       </div>
     </>
