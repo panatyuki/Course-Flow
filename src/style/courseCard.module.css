@@ -4,7 +4,6 @@
   border-radius: 8px;
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
   width: 357px;
-  height: 490px;
   gap: 24px;
   cursor: pointer;
 }
@@ -16,6 +15,7 @@
 
 .text-course-card {
   padding-left: 16px;
+  height: 150px;
 }
 
 .footer-course-card {

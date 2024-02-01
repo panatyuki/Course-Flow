@@ -21,9 +21,11 @@ function Header() {
         <img src={imageHeader.courseFlow} alt='courseFlowLogo' onClick={() => {navigate('/our-course');}}/>
       </div>
       <div className={classes.headerRight}>
-        <span className={classes.ourCourses}>
+        <p className={classes.ourCourses} onClick={() => {
+          navigate('/our-course');
+        }}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>
-        </span>
+        </p>
         {!session ? <button onClick={() => {
           navigate('/login');
         }} className={classes.logInButton}>

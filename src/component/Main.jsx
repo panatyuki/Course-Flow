@@ -8,7 +8,7 @@ function GraduateCard({ graduate }) {
   return (
     <div className={classes.cardGraduates}>
       <img src={graduate.picture} alt={graduate.name} className={classes.pictureGraduatesPosition} />
-      <img src={imageMain.quotemarkLeftPosition} alt='quotemarksLeft' className={classes.quotemarkLeftPosition} />
+      <img src={imageMain.quotemarksLeft} alt='quotemarksLeft' className={classes.quotemarkLeftPosition} />
       <img src={imageMain.quotemarksRight} alt='quotemarksRight' className={classes.quotemarkRightPosition} />
       <div className={classes.textCardGraduatesContainer}>
         <h3 style={{ color: 'var(--Primary, #2F5FAC)' }}>{graduate.name}</h3>
@@ -152,7 +152,7 @@ function Main() {
       <div className={classes.containerGraduates}>
         <h2>Our Graduates</h2>
         <div className={classes.graduatesCarousel}>
-          <Carousel slideSize="15%" height={400} align="center" slideGap="xl"  withControls={false} >
+          <Carousel slideSize="15%" height={500} align="center" slideGap="xl"  withControls={false} >
             {graduatesCarouselSlides}
           </Carousel>
         </div>
