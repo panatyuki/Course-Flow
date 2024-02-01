@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 function CourseDetail (){
   const [courseData, setCourseData] = useState([]);
-  const [randomCourseSubset, setRandomCourseSubset] = useState([]);
+  const [randomCourse, setRandomCourse] = useState([]);
 
   const navigate = useNavigate();
 
@@ -19,7 +19,13 @@ function CourseDetail (){
 
   useEffect (() => {
     getCourseData();
-  });
+  }, []);
+
+  useEffect (() => {
+    const randomCourseShow = getRandomCourse(courseData, 3); 
+    setRandomCourse(randomCourseShow);
+    console.log(randomCourseShow);
+  }, [courseData]);
 
   const MockModuleAccordion = [
     { topicNumber: '01' , topic: 'Introduction', description: <ul>
@@ -116,6 +122,16 @@ function CourseDetail (){
     );
   });
 
+  const getRandomCourse = (data, count) => {
+    const shuffledCourseData = [...data].sort(() => Math.random() - 0.5);
+    return shuffledCourseData.slice(0, count);
+  };
+
+  const randomDataElements = randomCourse.map((item) => (
+    <div key={item.id} onClick={() => { navigate(`/course/${item.id}`);}}>
+      <CourseCard detailCourse={item} />
+    </div>
+  ));
 
   return (
     <>  
@@ -198,7 +214,7 @@ function CourseDetail (){
       <div className={classes.containerOtherInterestingCourse}>
         <h2>Other Interesting Course</h2>
         <div className={classes.containerCardOtherInterestingCourse}>
-
+          {randomDataElements}
         </div>
       </div>
     </>

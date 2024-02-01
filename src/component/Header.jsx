@@ -2,23 +2,30 @@ import classes from '../style/Header.module.css';
 import { useNavigate } from 'react-router-dom';
 import { imageHeader } from '../data/imageBackground';
 import { useAuth } from '../contexts/AuthContext';
+import { useState } from 'react';
 
 function Header() {
+  const [openDropdown, setOpenDropdown] = useState(false);
+
   const navigate = useNavigate();
-  const { session } = useAuth();
+  const { session, supabase } = useAuth();
 
-  const profileDropdown = () => {
-    return (
-      <div className={classes.profile}>
-      </div>
-    );
+  const handleLogout = async() => {
+    const { error } = await supabase.auth.signOut();
+
+    if (session) {
+      console.log(session);
+      navigate('/');
+    }
+    else {
+      console.error(error);
+    }
   };
-
-  //
+  
   return (
     <div className={classes.header}>
       <div className={classes.courseFlowLogo}>
-        <img src={imageHeader.courseFlow} alt='courseFlowLogo' onClick={() => {navigate('/our-course');}}/>
+        <img src={imageHeader.courseFlow} alt='courseFlowLogo' onClick={() => {navigate('/');}}/>
       </div>
       <div className={classes.headerRight}>
         <p className={classes.ourCourses} onClick={() => {
@@ -30,7 +37,43 @@ function Header() {
           navigate('/login');
         }} className={classes.logInButton}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Log in</p>
-        </button> : <p className='cf-body-2'>Hello {session.user.email}</p>}
+        </button> : (
+          <div className={classes.profile}>
+            <img src={imageHeader.profile} alt='profile' width='40' height='40' />
+            <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {session.user.email}</p>
+            <img src={imageHeader.arrowDropdown} alt='arrowDropdown' className={classes.arrowDropdown} onClick={() => 
+              setOpenDropdown((prev) => !(prev))
+            } />
+            {
+              openDropdown && (
+                <div className={classes.dropdownContainer}>
+                  <div className={classes.sectionUp}>
+                    <div className={classes.dropdownTextSectionUpContainer}>
+                      <img src={imageHeader.profileIcon} alt='profileIcon' />
+                      <span className='cf-body-3' style={{ color: '#646D89' }}>Profile</span>
+                    </div>
+                    <div className={classes.dropdownTextSectionUpContainer}>
+                      <img src={imageHeader.myCourseIcon} alt='myCourseIcon' />
+                      <span className='cf-body-3' style={{ color: '#646D89' }}>My Course</span>
+                    </div>
+                    <div className={classes.dropdownTextSectionUpContainer}>
+                      <img src={imageHeader.myHomeworkIcon} alt='myHomeworkIcon' />
+                      <span className='cf-body-3' style={{ color: '#646D89' }}>My Homework</span>
+                    </div>
+                    <div className={classes.dropdownTextSectionUpContainer}>
+                      <img src={imageHeader.myDesireCourseIcon} alt='myDesireCourseIcon' />
+                      <span className='cf-body-3' style={{ color: '#646D89' }}>My Desire COurses</span>
+                    </div>
+                  </div>
+                  <div className={classes.dropdownTextSectionDownContainer} onClick={() => (handleLogout())}>
+                    <img src={imageHeader.logoutIcon} alt='logoutIcon' />
+                    <span className='cf-body-3' style={{ color: '#646D89' }}>Log out</span>
+                  </div>
+                </div> 
+              )
+            }   
+          </div>
+        )}
       </div>
     </div>
   );

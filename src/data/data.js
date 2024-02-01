@@ -37,5 +37,7 @@ const graduatesData = [
   If you’re waiting for encouragement from others, you’re doing it wrong. By the time people think an idea is good, it’s probably too late.` },
 ];
 
+
+
 export { instructorData, graduatesData };
 
