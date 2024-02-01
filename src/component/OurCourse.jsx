@@ -14,6 +14,7 @@ const CourseInfo = () => {
   const  debouncedGetCourse = useDebounceCallback (async () => {
     let response = await axios.get(import.meta.env.VITE_API_SERVER+`/course?keywords=${searchText}`);
     setData(response.data);
+    
   },1000);
 
   const getCourse = () => {
@@ -23,17 +24,18 @@ const CourseInfo = () => {
   useEffect(() => {
     getCourse();
     console.log(data.length);
+    console.log(data);
   }, [searchText]);
 
   const navigate = useNavigate();
 
-  const handleCardClick = () => {
-    navigate('/course-detail/');
-  };
+  // const handleCardClick = () => {
+  //   navigate(`/course-detail/${data.id}`);
+  // };
 
   const courseCard = data.map(( course, index ) => {
     return (
-      <div key={index} onClick={() => {handleCardClick();}} >
+      <div key={index} onClick={() => {navigate(`/course-detail/${data[index].id}`);}} >
         <CourseCard  detailCourse={course} />
       </div>   
     );
