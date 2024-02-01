@@ -25,13 +25,31 @@ function CourseDetail (){
   };
 
   useEffect (() => {
-    const randomCourseShow = getRandomCourse(courseData, 3); 
-    setRandomCourse(randomCourseShow);
-    console.log(randomCourseShow);
-  }, [courseData]);
     getCourseData();
     getCourseDataById();
-  },[]);
+  }, []);
+
+  useEffect (() => {
+    const randomCourseShow = getRandomCourse(courseData, 3); 
+    setRandomCourse(randomCourseShow);
+  }, [courseData]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [courseDataResponse, courseResponse] = await Promise.all([
+          axios.get(import.meta.env.VITE_API_SERVER + '/course'),
+          axios.get(import.meta.env.VITE_API_SERVER + `/course/${params.courseId}`)
+        ]);
+  
+        setCourseData(courseDataResponse.data);
+        setCourse(courseResponse.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [params.courseId]);
 
   const MockModuleAccordion = [
     { topicNumber: '01' , topic: 'Introduction', description: <ul>
@@ -134,8 +152,13 @@ function CourseDetail (){
     return shuffledCourseData.slice(0, count);
   };
 
+
   const randomDataElements = randomCourse.map((item) => (
-    <div key={item.id} onClick={() => { navigate(`/course/${item.id}`);}}>
+    <div key={item.id} onClick={() => {
+      navigate(`/course-detail/${item.id}`);
+      window.location.reload();
+      window.scrollTo(0, 0);
+    }}>
       <CourseCard detailCourse={item} />
     </div>
   ));

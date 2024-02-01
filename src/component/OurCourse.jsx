@@ -37,11 +37,6 @@ const CourseInfo = () => {
 
   // function navigate สำหรับไว้เปลี่ยนหน้า Webpage
   const navigate = useNavigate();
-  // Navigate สำหรับไปหน้า course-detail
-  const handleCardClick = () => {
-    navigate('/course-detail/');
-  };
-
 
   // map Data การ์ดคอร์สเรียนออกมา
   const courseCard = data.map(( course, index ) => {
