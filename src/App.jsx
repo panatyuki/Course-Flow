@@ -5,6 +5,7 @@ import OurCourse from './pages/OurCourse';
 import CourseDetailPage from './pages/CourseDetailPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import ProfilePage from './pages/ProfilePage';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path='/register' element={<RegisterPage />} />
         <Route path="/course-detail" element={<CourseDetailPage/>} />
         <Route path="/course-detail/:courseId" element={<CourseDetailPage/>} />
+        <Route path='/profile' element={<ProfilePage />} />
       </Routes>
     </>
   );

@@ -2,7 +2,7 @@ import classes from '../style/CourseDetail.module.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Accordion } from '@mantine/core';
-import CourseCard from './courseCard';
+import CourseCard from './CourseCard';
 import { imageCourseDetail } from '../data/imageBackground';
 import { useNavigate,useParams } from 'react-router-dom';
 

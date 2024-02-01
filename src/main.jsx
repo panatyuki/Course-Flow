@@ -6,6 +6,7 @@ import App from './App.jsx';
 import { AuthProvider } from './contexts/AuthContext.jsx';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
+import '@mantine/dates/styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
