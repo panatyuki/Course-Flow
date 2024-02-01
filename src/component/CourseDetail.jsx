@@ -178,6 +178,8 @@ function CourseDetail (){
         <div className={classes.containerCourseDetail}>
           <button className={classes.buttonBack} onClick={() => {
             navigate('/our-course');
+            window.location.reload();
+            window.scrollTo(0, 0);
           }}>
             <img src={imageCourseDetail.arrowBack} /> <p className='cf-body-2' style={{ fontWeight: '700' }}>Back</p>
           </button>

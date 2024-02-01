@@ -63,7 +63,11 @@ function Register() {
           </button>
           <div className={classes.textBox}>
             <p className='cf-body-2'>Already have an account?</p>
-            <p className='cf-body-2' style={{ fontWeight: '700', color: '#2F5FAC', cursor: 'pointer' }} onClick={() => { navigate('/login');}}> Login </p>
+            <p className='cf-body-2' style={{ fontWeight: '700', color: '#2F5FAC', cursor: 'pointer' }} onClick={() => { 
+              navigate('/login');
+              window.location.reload();
+              window.scrollTo(0, 0);
+            }}> Login </p>
           </div>
         </form>
         <img className={classes.bigVectorPosition} src={imageRegisterAndLogin.blueRight} alt='bigVector' />

@@ -19,6 +19,8 @@ function Footer() {
       lh={1}
       onClick={() => {
         navigate('/our-course');
+        window.location.reload();
+        window.scrollTo(0, 0);
       }}
       size='xl'
     >
@@ -33,6 +35,8 @@ function Footer() {
           <h2>Want to start learning?</h2>
           <button className={classes.button} onClick={() => {
             navigate('/our-course');
+            window.location.reload();
+            window.scrollTo(0, 0);
           }}>
             <p>Check out our courses</p>
           </button>
@@ -42,7 +46,10 @@ function Footer() {
         <img src={imageFooter.teachLogo} alt='teachLogo' width={592} height={448} className={classes.rightSubFooterTechLogo} />
       </div>
       <div className={classes.footer}>
-        <img src={imageFooter.courseFlowLogo} alt='courseFlowLogo' className={classes.logoLink} onClick={() => {navigate('/');}} />
+        <img src={imageFooter.courseFlowLogo} alt='courseFlowLogo' className={classes.logoLink} onClick={() => {
+          navigate('/');
+          window.location.reload();
+          window.scrollTo(0, 0);}} />
         <Group className={classes.links}>
           {items}
         </Group>
