@@ -10,7 +10,7 @@ const CourseInfo = () => {
   
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
-
+  
   // function สำหรับดึงข้อมูลจาก Server
   const fetchData = async (url = '/course') => {
     try {
@@ -42,10 +42,11 @@ const CourseInfo = () => {
     navigate('/course-detail/');
   };
 
+
   // map Data การ์ดคอร์สเรียนออกมา
   const courseCard = data.map(( course, index ) => {
     return (
-      <div key={index} onClick={() => {handleCardClick();}} >
+      <div key={index} onClick={() => {navigate(`/course-detail/${data[index].id}`);}} >
         <CourseCard  detailCourse={course} />
       </div>   
     );
