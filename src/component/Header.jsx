@@ -14,10 +14,11 @@ function Header() {
     );
   };
 
+  //
   return (
     <div className={classes.header}>
       <div className={classes.courseFlowLogo}>
-        <img src={imageHeader.courseFlow} alt='courseFlowLogo' onClick={() => {navigate('/');}}/>
+        <img src={imageHeader.courseFlow} alt='courseFlowLogo' onClick={() => {navigate('/our-course');}}/>
       </div>
       <div className={classes.headerRight}>
         <p className={classes.ourCourses} onClick={() => {

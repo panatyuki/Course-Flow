@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import classes from '../style/OurCourse.module.css';
 import { useDebounceCallback } from '@mantine/hooks';
 import CourseCard from './courseCard';
@@ -29,7 +28,7 @@ const CourseInfo = () => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate('/course-detail');
+    navigate('/course-detail/');
   };
 
   const courseCard = data.map(( course, index ) => {
@@ -71,8 +70,6 @@ const CourseInfo = () => {
   );
 };
 
-CourseInfo.propTypes = {
-  description: PropTypes.string,
-};
+
 
 export default CourseInfo;
