@@ -46,4 +46,51 @@
     background: #2F5FAC;
     color: #FFF;
     text-align: center;
-  }
+}
+
+.profile {
+    display: inline-flex;
+    gap:  15px;
+    align-items: center;
+}
+
+.arrow-dropdown {
+    cursor: pointer;
+}
+
+.dropdown-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: absolute;
+    width: 198px;
+    border-radius: 8px;
+    background: #FFF;
+    top: 75px;
+    right: 20px;
+    padding-top: 8px;
+}
+
+.dropdown-text-section-up-container {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 0px 8px 14px;
+    cursor: pointer;
+}
+
+.dropdown-text-section-down-container {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 8px 0px 8px 14px;
+    cursor: pointer;
+}
+
+.dropdown-text-section-up-container:hover{
+    background: #FCFCFE;
+}
+
+.section-up {
+    border-bottom: 1px solid #E4E6ED;
+}

@@ -28,8 +28,6 @@ function Main() {
       </Carousel.Slide>);
   });
 
-  console.log(imageMain.polygonOrange);
-
   return (
     <>
       <div className={classes.mainTop}>

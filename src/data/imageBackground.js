@@ -1,5 +1,12 @@
 //background header
 import courseFlow from '../images/imagesBackground/courseFlow.svg';
+import arrowDropdown from '../images/imagesBackground/arrowDropdown.svg';
+import profile from '../images/imagesBackground/profile.svg';
+import profileIcon from '../images/imagesBackground/profileIcon.svg';
+import myCourseIcon from '../images/imagesBackground/myCourseIcon.svg';
+import myHomeworkIcon from '../images/imagesBackground/myHomeworkIcon.svg';
+import myDesireCourseIcon from '../images/imagesBackground/myDesireCourseIcon.svg';
+import logoutIcon from '../images/imagesBackground/logoutIcon.svg';
 
 //background main
 import polygonOrange from '../images/imagesBackground/polygonOrange.svg';
@@ -50,7 +57,8 @@ import rightBlueCircle from '../images/imagesBackground/rightBlueCircle.svg';
 import arrowBack from '../images/imagesBackground/arrow_back.svg';
 
 const imageHeader = {
-  courseFlow,
+  courseFlow, arrowDropdown, profile, profileIcon, myCourseIcon,
+  myHomeworkIcon, myDesireCourseIcon, logoutIcon
 };
 
 const imageMain = {
