@@ -10,29 +10,40 @@ const CourseInfo = () => {
   
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
-
-  const  debouncedGetCourse = useDebounceCallback (async () => {
-    let response = await axios.get(import.meta.env.VITE_API_SERVER+`/course?keywords=${searchText}`);
-    setData(response.data);
-    
-  },1000);
-
-  const getCourse = () => {
-    debouncedGetCourse();
+  
+  // function สำหรับดึงข้อมูลจาก Server
+  const fetchData = async (url = '/course') => {
+    try {
+      let response = await axios.get(import.meta.env.VITE_API_SERVER + url);
+      setData(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
+  // Callback function useDebounceCallback สำหรับ delay ผลการค้นหาข้อมูลเวลาใส่ข้อมูลลง input
+  // Set delay = 500
+  const debouncedSearch = useDebounceCallback(async () => {
+    fetchData(`/course?keywords=${searchText}`);
+  }, 500);
+
   useEffect(() => {
-    getCourse();
-    console.log(data.length);
-    console.log(data);
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    debouncedSearch();
   }, [searchText]);
 
+  // function navigate สำหรับไว้เปลี่ยนหน้า Webpage
   const navigate = useNavigate();
+  // Navigate สำหรับไปหน้า course-detail
+  const handleCardClick = () => {
+    navigate('/course-detail/');
+  };
 
-  // const handleCardClick = () => {
-  //   navigate(`/course-detail/${data.id}`);
-  // };
 
+  // map Data การ์ดคอร์สเรียนออกมา
   const courseCard = data.map(( course, index ) => {
     return (
       <div key={index} onClick={() => {navigate(`/course-detail/${data[index].id}`);}} >
@@ -42,7 +53,7 @@ const CourseInfo = () => {
   });
 
   return (
-    <>
+    <div className={classes.ourCourse}>
       <div className={classes.containerInput}>  
         <img className={classes.setBlueCircle} src={imageOurCourse.blueCircle} alt='object' />
         <img className={classes.setLeftBlueCircle} src={imageOurCourse.leftBlueCircle} alt='object' />
@@ -68,7 +79,7 @@ const CourseInfo = () => {
           {courseCard}       
         </div>             
       </div>
-    </>
+    </div>
   );
 };
 
