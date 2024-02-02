@@ -6,12 +6,11 @@
 
 .container {
   width: 100%;
-  padding-top: 157px;
+  padding-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-
 }
 
 .register-box {
@@ -21,7 +20,6 @@
   flex-direction: column;
   gap: 40px
 }
-
 
 .input {
   display: flex;
@@ -44,36 +42,6 @@
 .text-box {
   display: inline-flex;
   gap: 8px;
-}
-
-.big-vector-position {
-  position: absolute;
-  right: 0px;
-  top: -88px;
-}
-
-.medium-ellipse-position {
-  position: absolute;
-  left: 87px;
-  top: 81px;
-}
-
-.small-ellipse-position {
-  position: absolute;
-  right: 59px;
-  top: 589px;
-}
-
-.plus-position {
-  position: absolute;
-  left: 187px;
-  top: 283px
-}
-
-.circle-position {
-  position: absolute;
-  left: 0px;
-  top: 420px;
 }
 
 .input-date-container {

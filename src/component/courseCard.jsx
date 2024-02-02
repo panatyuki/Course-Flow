@@ -14,7 +14,7 @@ function CourseCard( { detailCourse }) {
       <div className={classes.footerCourseCard}> 
         <div className={classes.detailFooterCourseCard}>
           <img src={lessonIcon} alt='lessonIcon' />
-          <span className='cf-body-2'>{detailCourse.lesson} Lesson</span>
+          <span className='cf-body-2'>{detailCourse.totalLessons} Lesson</span>
         </div>
         <div className={classes.detailFooterCourseCard}>
           <img src={hoursIcon} alt='hoursIcon' />

@@ -70,12 +70,6 @@
   color: white;
 }
 
-.links {
-  display: flex;
-  gap: 72px;
-  color: #C8CCDB;
-}
-
 .logo-box {
   display: flex;
   gap: 24px;

@@ -50,7 +50,7 @@ function Footer() {
           navigate('/');
           window.location.reload();
           window.scrollTo(0, 0);}} />
-        <Group className={classes.links}>
+        <Group gap="xl">
           {items}
         </Group>
         <div className={classes.logoBox}>
