@@ -148,7 +148,10 @@ function CourseDetail (){
 
 
   const getRandomCourse = (data, count) => {
-    const shuffledCourseData = [...data].sort(() => Math.random() - 0.5);
+    const courseData = [...data];
+    const filteredCourseData = courseData.filter((item) => item.id !== course.id);
+    
+    const shuffledCourseData = filteredCourseData.sort(() => Math.random() - 0.5);
     return shuffledCourseData.slice(0, count);
   };
 

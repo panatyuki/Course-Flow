@@ -1,8 +1,8 @@
 import classes from '../style/Login.module.css';
 import { useNavigate } from 'react-router-dom';
-import { imageRegisterAndLogin } from '../data/imageBackground';
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import BackgroundLoginAndRegister from './BackgroundLogiAndRegister';
 
 function Login() {
   const navigate = useNavigate();
@@ -38,6 +38,7 @@ function Login() {
   return (
     <div className={classes.containerLoginPage}>
       <div className={classes.container}>
+        <BackgroundLoginAndRegister />
         <div className={classes.loginBox}>
           <form onSubmit={handleSubmit}>
             <span className={classes.loginHead}>
@@ -83,11 +84,6 @@ function Login() {
             </p>
           </div>
         </div>
-        <img className={classes.blueRight} src={imageRegisterAndLogin.blueRight} />
-        <img className={classes.circleGrey} src={imageRegisterAndLogin.circleGreyRL} />
-        <img className={classes.circleOrange} src={imageRegisterAndLogin.circleOrange} />
-        <img className={classes.crossGreen} src={imageRegisterAndLogin.crossGreen} />
-        <img className={classes.orangeLeft} src={imageRegisterAndLogin.orangeLeft} />
       </div>
     </div>
   );

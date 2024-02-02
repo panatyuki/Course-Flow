@@ -56,33 +56,3 @@
     display: inline-flex;
     gap: 8px;
 }
-
-.blue-right {
-    position: absolute;
-    right: 0px;
-    top: -88px;
-}
-
-.circle-grey {
-    position: absolute;
-    left: 87px;
-    top: 81px;
-}
-
-.circle-orange {
-    position: absolute;
-    right: 59px;
-    bottom: 312px;
-}
-
-.cross-green {
-    position: absolute;
-    left: 187px;
-    bottom: 630px;
-}
-
-.orange-left {
-    position: absolute;
-    left: 0px;
-    bottom: 97px;
-}

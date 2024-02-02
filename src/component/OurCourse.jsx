@@ -4,7 +4,6 @@ import axios from 'axios';
 import classes from '../style/OurCourse.module.css';
 import { useDebounceCallback } from '@mantine/hooks';
 import CourseCard from './CourseCard';
-import { imageOurCourse } from '../data/imageBackground';
 import Background from './Background';
 
 const CourseInfo = () => {
@@ -29,6 +28,7 @@ const CourseInfo = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(data);
   }, []);
 
   useEffect(() => {

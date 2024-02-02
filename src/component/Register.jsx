@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { PasswordInput, TextInput, } from '@mantine/core';
 import classes from '../style/Register.module.css';
-import { imageRegisterAndLogin } from '../data/imageBackground';
 import axios from 'axios';
 import { DateInput } from '@mantine/dates';
 import { useAuth } from '../contexts/AuthContext';
+import BackgroundLoginAndRegister from './BackgroundLogiAndRegister';
 
 function Register() {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ function Register() {
       password: '',
     },
     validate: {
-      name: (value) => (value === '' ? 'Enter your name' : /^[a-zA-Z'-]+$/.test(value) ? null :'Cannot use other special characters or numbers'),
+      name: (value) => (value === '' ? 'Enter your name' : /^[a-zA-Z' -]+$/.test(value) ? null :'Cannot use other special characters or numbers'),
       dateOfBirth: (value) => {
         const currentDate = new Date();
         const sixYearsAgo = new Date(currentDate.getFullYear() - 6, currentDate.getMonth(), currentDate.getDate());
@@ -60,8 +60,9 @@ function Register() {
 
     <div className={classes.containerRegisterPage}>
       <div className={classes.container}>
+        <BackgroundLoginAndRegister />
         <form className={classes.registerBox} onSubmit={form.onSubmit(register)}>
-          <h2 style={{ color: '#ffffff' }}>Register to start learning!</h2>
+          <h2 style={{ color: '#22269E' }}>Register to start learning!</h2>
           <TextInput size='lg' radius="md" label="Name" placeholder="Enter Name and Lastname" {...form.getInputProps('name')}  />
           <DateInput
             size='lg' radius="md"
@@ -84,11 +85,7 @@ function Register() {
             }}> Login </p>
           </div>
         </form>
-        <img className={classes.bigVectorPosition} src={imageRegisterAndLogin.blueRight} alt='bigVector' />
-        <img className={classes.mediumEllipsePosition} src={imageRegisterAndLogin.circleGreyRL} alt='mediumEllipse' />
-        <img className={classes.smallEllipsePosition} src={imageRegisterAndLogin.circleOrange} alt='smallEllipse' />
-        <img className={classes.plusPosition} src={imageRegisterAndLogin.crossGreen} alt='plus' />
-        <img className={classes.circlePosition} src={imageRegisterAndLogin.orangeLeft} alt='circle' />
+        
       </div>
     </div>
 
