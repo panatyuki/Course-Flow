@@ -14,36 +14,26 @@ function Header() {
     const { error } = await supabase.auth.signOut();
 
     if (session) {
-      console.log(session);
       navigate('/');
-      window.location.reload();
-      window.scrollTo(0, 0);
     }
     else {
       console.error(error);
     }
   };
-  
+    
   return (
     <div className={classes.header}>
       <div className={classes.courseFlowLogo}>
         <img src={imageHeader.courseFlow} alt='courseFlowLogo' onClick={() => {
           navigate('/');
-          window.location.reload();
-          window.scrollTo(0, 0);}}/>
+        }}/>
       </div>
       <div className={classes.headerRight}>
-        <p className={classes.ourCourses} onClick={() => {
-          navigate('/our-course');
-          window.location.reload();
-          window.scrollTo(0, 0);
-        }}>
+        <div className={classes.ourCourses} onClick={() => navigate('/our-course')}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>
-        </p>
+        </div>
         {!session ? <button onClick={() => {
           navigate('/login');
-          window.location.reload();
-          window.scrollTo(0, 0);
         }} className={classes.logInButton}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Log in</p>
         </button> : (
@@ -71,7 +61,7 @@ function Header() {
                     </div>
                     <div className={classes.dropdownTextSectionUpContainer}>
                       <img src={imageHeader.myDesireCourseIcon} alt='myDesireCourseIcon' />
-                      <span className='cf-body-3' style={{ color: '#646D89' }}>My Desire COurses</span>
+                      <span className='cf-body-3' style={{ color: '#646D89' }}>My Desire Courses</span>
                     </div>
                   </div>
                   <div className={classes.dropdownTextSectionDownContainer} onClick={() => (handleLogout())}>

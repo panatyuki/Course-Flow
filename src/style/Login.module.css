@@ -1,15 +1,15 @@
 .container {
     width: 100vw;
     height: 936px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; 
     position: relative;
 }
 
 .login-box {
+    margin: 0 auto;
     width: 453px;
     height: 446px;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
 }
@@ -42,7 +42,6 @@
 .login-button {
     width: 453px;
     height: 60px;
-    cursor: pointer;
     border-radius: 12px;
     border: 0px;
     background: #2F5FAC;
@@ -50,6 +49,10 @@
     margin-bottom: 40px;
     color: white;
     box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
+}
+
+.login-button p {
+    font-weight: 700;
 }
 
 .text-box {

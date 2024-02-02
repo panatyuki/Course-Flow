@@ -31,8 +31,10 @@
     display: flex;
     color: #191C77;
     text-align: center;
-    cursor: pointer;
+    cursor: pointer; /* Add this line */
 }
+
+
 
 .log-in-button {
     cursor: pointer;
