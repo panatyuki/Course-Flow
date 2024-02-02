@@ -39,6 +39,8 @@ function Main() {
         </div>
         <button className={classes.exploreButton} onClick={() => {
           navigate('/our-course');
+          window.location.reload();
+          window.scrollTo(0, 0);
         }}>
           <p className='cf-body-2' style={{ fontWeight: '700' }} >Explore Courses</p>
         </button>

@@ -41,7 +41,10 @@ const CourseInfo = () => {
   // map Data การ์ดคอร์สเรียนออกมา
   const courseCard = data.map(( course, index ) => {
     return (
-      <div key={index} onClick={() => {navigate(`/course-detail/${data[index].id}`);}} >
+      <div key={index} onClick={() => {
+        navigate(`/course-detail/${data[index].id}`);
+        window.location.reload();
+        window.scrollTo(0, 0);}} >
         <CourseCard  detailCourse={course} />
       </div>   
     );

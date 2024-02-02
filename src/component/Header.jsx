@@ -16,6 +16,8 @@ function Header() {
     if (session) {
       console.log(session);
       navigate('/');
+      window.location.reload();
+      window.scrollTo(0, 0);
     }
     else {
       console.error(error);
@@ -25,16 +27,23 @@ function Header() {
   return (
     <div className={classes.header}>
       <div className={classes.courseFlowLogo}>
-        <img src={imageHeader.courseFlow} alt='courseFlowLogo' onClick={() => {navigate('/');}}/>
+        <img src={imageHeader.courseFlow} alt='courseFlowLogo' onClick={() => {
+          navigate('/');
+          window.location.reload();
+          window.scrollTo(0, 0);}}/>
       </div>
       <div className={classes.headerRight}>
         <p className={classes.ourCourses} onClick={() => {
           navigate('/our-course');
+          window.location.reload();
+          window.scrollTo(0, 0);
         }}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>
         </p>
         {!session ? <button onClick={() => {
           navigate('/login');
+          window.location.reload();
+          window.scrollTo(0, 0);
         }} className={classes.logInButton}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Log in</p>
         </button> : (
