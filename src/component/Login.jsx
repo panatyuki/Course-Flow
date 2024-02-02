@@ -11,7 +11,7 @@ function Login() {
   const [error, setError] = useState('');
   const { supabase } = useAuth();
 
-  const handleLoginClick = async () => {
+  const handleLogIn = async () => {
     if (!email && !password) {
       setError('Please Enter your email and password');
       return;
@@ -58,10 +58,15 @@ function Login() {
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleLogIn();
+            }
+          }}
           placeholder='Enter Password'
         />
         {error && <div style={{ color: 'red' }}>{error}</div>}
-        <button className={classes.loginButton} onClick={handleLoginClick}>
+        <button className={classes.loginButton} onClick={handleLogIn}>
           <p className='cf-body-2'>Log in</p>
         </button>
         <div className={classes.textBox}>
