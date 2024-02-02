@@ -6,9 +6,12 @@ import classes from '../style/Register.module.css';
 import { imageRegisterAndLogin } from '../data/imageBackground';
 import axios from 'axios';
 import { DateInput } from '@mantine/dates';
+import { useAuth } from '../contexts/AuthContext';
 
 function Register() {
   const navigate = useNavigate();
+  const { login } = useAuth();
+
 
   const form = useForm({
     initialValues: {
@@ -36,10 +39,17 @@ function Register() {
     },
   });
 
-  const register = async(value) => {
-    const result = await axios.post(import.meta.env.VITE_API_SERVER+'/user/create', value);
-    console.log(result);
-    navigate('/');
+  const register = async (value) => {
+
+    try {
+      const result = await axios.post(import.meta.env.VITE_API_SERVER+'/user/create', value);
+      await login(value.email, value.password);
+      navigate('/loading');
+    }
+    catch (error) {
+      console.error(error);
+    }
+
   };
 
   useEffect(() => {
@@ -47,6 +57,7 @@ function Register() {
   }, []);
 
   return (
+
     <div className={classes.containerRegisterPage}>
       <div className={classes.container}>
         <form className={classes.registerBox} onSubmit={form.onSubmit(register)}>
@@ -80,6 +91,7 @@ function Register() {
         <img className={classes.circlePosition} src={imageRegisterAndLogin.orangeLeft} alt='circle' />
       </div>
     </div>
+
   );
 }
 

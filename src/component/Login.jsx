@@ -29,8 +29,6 @@ function Login() {
     if (session) {
       console.log(session);
       navigate('/');
-      window.location.reload();
-      window.scrollTo(0, 0);
     }
     else {
       console.error(error);
