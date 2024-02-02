@@ -46,15 +46,16 @@ import circleGreyRL from '../images/imagesBackground/circleGrey.svg';
 import circleOrange from '../images/imagesBackground/circleOrange.svg';
 import crossGreen from '../images/imagesBackground/crossGreen.svg';
 import orangeLeft from '../images/imagesBackground/orangeLeft.svg';
+import dateOfBirth from '../images/imagesBackground/dateOfBirth.svg';
 
-//background our course
+//background course detail
+import arrowBack from '../images/imagesBackground/arrow_back.svg';
+
+//background page
 import blueCircle from '../images/imagesBackground/blueCircle.svg';
 import leftBlueCircle from '../images/imagesBackground/leftBlueCircle.svg';
 import triangle from '../images/imagesBackground/triangle.svg';
 import rightBlueCircle from '../images/imagesBackground/rightBlueCircle.svg';
-
-//background course detail
-import arrowBack from '../images/imagesBackground/arrow_back.svg';
 
 const imageHeader = {
   courseFlow, arrowDropdown, profile, profileIcon, myCourseIcon,
@@ -74,7 +75,7 @@ const imageFooter = {
 };
 
 const imageRegisterAndLogin = {
-  blueRight, circleGreyRL, circleOrange, crossGreen, orangeLeft,
+  blueRight, circleGreyRL, circleOrange, crossGreen, orangeLeft, dateOfBirth,
 };
 
 const imageOurCourse = {
@@ -85,4 +86,8 @@ const imageCourseDetail = {
   arrowBack,
 };
 
-export { imageHeader, imageMain, imageFooter, imageRegisterAndLogin, imageOurCourse, imageCourseDetail };
+const imageBackgrounds = {
+  blueCircle, leftBlueCircle, triangle, rightBlueCircle, plus,
+};
+
+export { imageHeader, imageMain, imageFooter, imageRegisterAndLogin, imageOurCourse, imageCourseDetail, imageBackgrounds };

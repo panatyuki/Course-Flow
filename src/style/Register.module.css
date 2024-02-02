@@ -11,6 +11,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+
 }
 
 .register-box {
@@ -73,4 +74,35 @@
   position: absolute;
   left: 0px;
   top: 420px;
+}
+
+.input-date-container {
+  position: relative;
+  width: 500px;
+  height: 40px;
+  border: #2F5FAC;
+}
+
+.input-date {
+  border-radius: 6px;
+  border: 1px solid #D6D9E4;
+  width: 455px;
+  height: 50px;
+  padding-left: 20px;
+}
+
+.date-image {
+position: absolute;
+top: 12px;
+right: 60px;
+cursor: pointer;
+}
+
+.date {
+  position: absolute;
+  border-radius: 5px;
+  border: 1px solid #D6D9E4;
+  background-color: white;
+  right: 52px;
+  z-index: 5;
 }

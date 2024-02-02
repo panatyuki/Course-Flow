@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import classes from '../style/OurCourse.module.css';
 import { useDebounceCallback } from '@mantine/hooks';
-import CourseCard from './courseCard';
+import CourseCard from './CourseCard';
 import { imageOurCourse } from '../data/imageBackground';
+import Background from './Background';
 
 const CourseInfo = () => {
-  
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
   
@@ -52,12 +52,8 @@ const CourseInfo = () => {
 
   return (
     <div className={classes.ourCourse}>
+      <Background />
       <div className={classes.containerInput}>  
-        <img className={classes.setBlueCircle} src={imageOurCourse.blueCircle} alt='object' />
-        <img className={classes.setLeftBlueCircle} src={imageOurCourse.leftBlueCircle} alt='object' />
-        <img className={classes.setCross} src={imageOurCourse.plus} alt='object' />
-        <img className={classes.setTriangle} src={imageOurCourse.triangle} alt='object' />
-        <img className={classes.setRightBlueCircle} src={imageOurCourse.rightBlueCircle} alt='object' />
         <div className={classes.searchTitle}>
           <h2>Our Courses</h2>
         </div>
@@ -77,7 +73,7 @@ const CourseInfo = () => {
           {courseCard}       
         </div>             
       </div>
-    </div>
+    </div> 
   );
 };
 

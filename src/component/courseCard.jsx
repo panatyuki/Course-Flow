@@ -1,4 +1,4 @@
-import classes from '../style/courseCard.module.css';
+import classes from '../style/CourseCard.module.css';
 import lessonIcon from '../images/imagesCourseCard/lessonIcon.svg';
 import hoursIcon from '../images/imagesCourseCard/hoursIcon.svg';
 
