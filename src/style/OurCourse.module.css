@@ -29,8 +29,7 @@
 }
 
 .search-input-box {
-    display: "flex";
-    flex-direction: row;
+    display: flex;
     justify-content: center;
     align-items: center;
     border-color: #000000;
@@ -58,7 +57,7 @@
     background-color: #FFFFFF;
     border-radius: 8px;
     max-width: 1200px;
-    gap: 24px;
+    gap: 50px;
     padding-top: 20px;
     padding-bottom: 20px;
 }
