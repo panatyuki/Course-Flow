@@ -23,8 +23,16 @@ export const AuthProvider = ({ children }) => {
     return () => subscription.unsubscribe();
   }, []);
 
+  const login = async (email, password) => {
+    const { session, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    return { session, error };
+  };
+
   return (
-    <AuthContext.Provider value={{ session, supabase }}>
+    <AuthContext.Provider value={{ session, supabase, login }}>
       {children}
     </AuthContext.Provider>
   );
