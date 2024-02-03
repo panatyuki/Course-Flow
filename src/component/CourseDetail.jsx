@@ -9,7 +9,7 @@ import { useNavigate,useParams } from 'react-router-dom';
 function CourseDetail (){
   const [courseData, setCourseData] = useState([]);
   const [randomCourse, setRandomCourse] = useState([]);
-  const [course,setCourse] = useState({});
+  const [course, setCourse] = useState({});
 
   const navigate = useNavigate();
   const params = useParams();
@@ -51,96 +51,22 @@ function CourseDetail (){
     fetchData();
   }, [params.courseId]);
 
-  const MockModuleAccordion = [
-    { topicNumber: '01' , topic: 'Introduction', description: <ul>
-      <li>Welcome to the Course</li>
-      <li>Course Overview</li>
-      <li>Getting to Know You</li>
-      <li>What is Service Design ?</li>
-      <li>Service Design vs. UX vs. UI vs. Design Thinking</li>
-      <li>4 Levels of Service Design in an Organization</li>
-      <li>Scope of Service Design</li>
-      <li>Develop an Entirely New Service - U Drink I Drive</li>
-      <li>Improving Existing Services - Credit Cards</li>
-      <li>Improving Existing Services - MK</li>
-      <li>Levels of Impact</li>
-    </ul>
-    },{ topicNumber: '02' , topic: 'Service Design Theories and Principles', description: <ul>
-      <li>Welcome to the Course</li>
-      <li>Course Overview</li>
-      <li>Getting to Know You</li>
-      <li>What is Service Design ?</li>
-      <li>Service Design vs. UX vs. UI vs. Design Thinking</li>
-      <li>4 Levels of Service Design in an Organization</li>
-      <li>Scope of Service Design</li>
-      <li>Develop an Entirely New Service - U Drink I Drive</li>
-      <li>Improving Existing Services - Credit Cards</li>
-      <li>Improving Existing Services - MK</li>
-      <li>Levels of Impact</li>
-    </ul>
-    },{ topicNumber: '03' , topic: 'Understanding Users and Finding Opportunities', description: <ul>
-      <li>Welcome to the Course</li>
-      <li>Course Overview</li>
-      <li>Getting to Know You</li>
-      <li>What is Service Design ?</li>
-      <li>Service Design vs. UX vs. UI vs. Design Thinking</li>
-      <li>4 Levels of Service Design in an Organization</li>
-      <li>Scope of Service Design</li>
-      <li>Develop an Entirely New Service - U Drink I Drive</li>
-      <li>Improving Existing Services - Credit Cards</li>
-      <li>Improving Existing Services - MK</li>
-      <li>Levels of Impact</li>
-    </ul>
-    },{ topicNumber: '04' , topic: 'Identifying and Validating Opportunities for Design', description: <ul>
-      <li>Welcome to the Course</li>
-      <li>Course Overview</li>
-      <li>Getting to Know You</li>
-      <li>What is Service Design ?</li>
-      <li>Service Design vs. UX vs. UI vs. Design Thinking</li>
-      <li>4 Levels of Service Design in an Organization</li>
-      <li>Scope of Service Design</li>
-      <li>Develop an Entirely New Service - U Drink I Drive</li>
-      <li>Improving Existing Services - Credit Cards</li>
-      <li>Improving Existing Services - MK</li>
-      <li>Levels of Impact</li>
-    </ul>
-    },{ topicNumber: '05' , topic: 'Prototyping', description: <ul>
-      <li>Welcome to the Course</li>
-      <li>Course Overview</li>
-      <li>Getting to Know You</li>
-      <li>What is Service Design ?</li>
-      <li>Service Design vs. UX vs. UI vs. Design Thinking</li>
-      <li>4 Levels of Service Design in an Organization</li>
-      <li>Scope of Service Design</li>
-      <li>Develop an Entirely New Service - U Drink I Drive</li>
-      <li>Improving Existing Services - Credit Cards</li>
-      <li>Improving Existing Services - MK</li>
-      <li>Levels of Impact</li>
-    </ul>
-    },{ topicNumber: '06' , topic: 'Course Summary', description: <ul>
-      <li>Welcome to the Course</li>
-      <li>Course Overview</li>
-      <li>Getting to Know You</li>
-      <li>What is Service Design ?</li>
-      <li>Service Design vs. UX vs. UI vs. Design Thinking</li>
-      <li>4 Levels of Service Design in an Organization</li>
-      <li>Scope of Service Design</li>
-      <li>Develop an Entirely New Service - U Drink I Drive</li>
-      <li>Improving Existing Services - Credit Cards</li>
-      <li>Improving Existing Services - MK</li>
-      <li>Levels of Impact</li>
-    </ul>
-    }
-  ];
 
-  const accordion = MockModuleAccordion.map((item) => {
+  const accordion = course.lessons?.map((lesson, idx) => {
+    const unorderedSublessonList = lesson.sublessons.map((sublesson) => {
+      return (
+        <li key={sublesson.id}>{sublesson.title}</li>
+      );
+    });
     return (  
-      <Accordion.Item key={item.topicNumber} value={item.topicNumber}>
-        <Accordion.Control icon={<h3 style={{ color: 'var(--gray-700, #646D89)' }}>{item.topicNumber}</h3>}>
-          <h3>{item.topic}</h3>
+      <Accordion.Item key={idx} value={`lesson-${idx+1}`}>
+        <Accordion.Control icon={<h3 style={{ color: 'var(--gray-700, #646D89)' }}>{idx+1}</h3>}>
+          <h3>{lesson.title}</h3>
         </Accordion.Control>
         <Accordion.Panel>
-          <p className='cf-body-2' style={{ color: 'var(--gray-700, #646D89)' }}>{item.description}</p>
+          <ul>
+            {unorderedSublessonList}
+          </ul>
         </Accordion.Panel>
       </Accordion.Item>
     );
@@ -159,8 +85,6 @@ function CourseDetail (){
   const randomDataElements = randomCourse.map((item) => (
     <div key={item.id} onClick={() => {
       navigate(`/course-detail/${item.id}`);
-      window.location.reload();
-      window.scrollTo(0, 0);
     }}>
       <CourseCard detailCourse={item} />
     </div>
@@ -197,7 +121,7 @@ function CourseDetail (){
               </div>
               <div className={classes.accordion}>
                 <h2>Module Samples</h2>
-                <Accordion defaultValue="Apples" order={2} >
+                <Accordion defaultValue="lesson-1" >
                   {accordion}
                 </Accordion>
               </div> 
