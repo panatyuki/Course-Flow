@@ -2,38 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import classes from '../style/OurCourse.module.css';
-import { useDebounceCallback } from '@mantine/hooks';
+import { useDebouncedValue } from '@mantine/hooks';
 import CourseCard from './CourseCard';
 import Background from './Background';
 
 const CourseInfo = () => {
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
+  const [debouncedSearchText] = useDebouncedValue(searchText, 800);
   
   // function สำหรับดึงข้อมูลจาก Server
-  const fetchData = async (url = '/course') => {
+  const fetchData = async () => {
     try {
-      let response = await axios.get(import.meta.env.VITE_API_SERVER + url);
+      const response = await axios.get(import.meta.env.VITE_API_SERVER + '/course', { 
+        params: { keywords: debouncedSearchText }
+      });
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
-  // Callback function useDebounceCallback สำหรับ delay ผลการค้นหาข้อมูลเวลาใส่ข้อมูลลง input
-  // Set delay = 500
-  const debouncedSearch = useDebounceCallback(async () => {
-    fetchData(`/course?keywords=${searchText}`);
-  }, 500);
-
   useEffect(() => {
     fetchData();
-    console.log(data);
-  }, []);
+  }, [debouncedSearchText]);
 
-  useEffect(() => {
-    debouncedSearch();
-  }, [searchText]);
+  
 
   // function navigate สำหรับไว้เปลี่ยนหน้า Webpage
   const navigate = useNavigate();
