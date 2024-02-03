@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }) => {
       email,
       password,
     });
+    setSession(session);
     return { session, error };
   };
 

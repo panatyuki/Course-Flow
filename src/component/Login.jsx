@@ -9,7 +9,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { supabase } = useAuth();
+  const { login } = useAuth();
 
   const handleLogIn = async () => {
     if (!email && !password) {
@@ -23,10 +23,7 @@ function Login() {
       return;
     }
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    const { error } = await login(email, password);
 
     if (error) {
       setError(error.message);
