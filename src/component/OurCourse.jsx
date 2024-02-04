@@ -6,7 +6,7 @@ import { useDebouncedValue } from '@mantine/hooks';
 import CourseCard from './CourseCard';
 import Background from './Background';
 
-const CourseInfo = () => {
+function OurCourse() {
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
   const [debouncedSearchText] = useDebouncedValue(searchText, 800);
@@ -69,8 +69,8 @@ const CourseInfo = () => {
       </div>
     </div> 
   );
-};
+}
 
 
 
-export default CourseInfo;
+export default OurCourse;

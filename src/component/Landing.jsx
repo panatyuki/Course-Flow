@@ -18,7 +18,7 @@ function GraduateCard({ graduate }) {
   );
 }
 
-function Main() {
+function Landing() {
   const navigate = useNavigate();
 
   const graduatesCarouselSlides = graduatesData.map((grad, index) => {
@@ -164,4 +164,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Landing;
