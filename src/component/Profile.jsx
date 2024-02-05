@@ -7,7 +7,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import getProfileFormValidator from '../utils/profileFormValidator';
 
-function UpdateProfile() {
+function Profile() {
   const { session, supabase } = useAuth();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -94,4 +94,4 @@ function UpdateProfile() {
   );
 }
 
-export default UpdateProfile;
+export default Profile;
