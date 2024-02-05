@@ -9,6 +9,8 @@ lerna-debug.log*
 
 .env
 
+.local.env
+
 .eslintrc.cjs
 
 node_modules
