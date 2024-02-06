@@ -13,14 +13,35 @@ function CourseDetail () {
 
   const [desireButton, setDesireButton] = useState(false);
   const [subscribeButton, setSubscribeButton] = useState(false);
-  const [desireButtonWord, setDesireButtonWord] = useState('Get in Desire Course');
-  const [isDesiredCourse, setIsDesiredCourse] = useState(false);
+  const [desireButtonWord, setDesireButtonWord] = useState('');
+  const [isDesiredCourse, setIsDesiredCourse] = useState(null);
   const [isSubscribe, setIsSubscribe] = useState(false);
+
+  const [desiredCourseId, setDesiredCourseId] = useState([]);
+
+  const [userId, setUserId] = useState('56325519-5580-48f4-bd17-f2f49fd6bad5');
+
+
+
+  // console.log(desiredCourseId);
+  // console.log(course.id);
+  
+  
+  const isCousreIdInDesiredCourse = () => {
+    if (desiredCourseId.length === 0) {
+      setDesireButtonWord('Get in Desire Course');
+      setIsDesiredCourse(false);
+    } else {
+      setDesireButtonWord('Remove from Desire Course');
+      setIsDesiredCourse(true);
+    }
+  };
 
   const openDesireModal = () => {
     if (isDesiredCourse) {
       setIsDesiredCourse(false);
       setDesireButtonWord('Get in Desire Course');
+      deleteDesiredCourse(userId, course.id);
     } else {
       setDesireButton(true);
       document.body.style.overflow = 'hidden';
@@ -31,6 +52,22 @@ function CourseDetail () {
     setDesireButton(false);
     document.body.style.overflow = 'auto';
   };
+
+
+  const handleYesDesired = () => {
+    try {
+      createDesiredCourse(userId, course.id);
+      setDesireButtonWord('Remove from Desire Course');
+      setIsDesiredCourse(true);
+      closeDesireModal();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
+
 
   const openSubscribeModal = () => {
     setSubscribeButton(true);
@@ -43,32 +80,19 @@ function CourseDetail () {
   };
 
 
-  const handleYesDesired = () => {
-    //เพิ่มเงื่อนไขในการเพิ่ม-ลด desiredCourse
-    setDesireButtonWord('Remove from Desire Course');
-    setIsDesiredCourse(true);
-    closeDesireModal();
-  };
 
   const handleYesSubscribe = () => {
     setIsSubscribe(true);
     closeSubscribeModal();
   };
 
-  // useEffect(() => {
-  //   setIsSubscribe(true);
-  // }, [handleYesSubscribe]);
 
-  
-  
-  const [courseId, setCourseId] = useState(null);
-  const [desiredCourseId, setDesiredCourseId] = useState([]);
-  const [userId, setUserId] = useState('56325519-5580-48f4-bd17-f2f49fd6bad5');
 
-  
-  // console.log(desireButton);
-  // console.log(courseId);
-  // console.log(desiredCourseId);
+
+
+
+
+
 
 
   const navigate = useNavigate();
@@ -89,10 +113,28 @@ function CourseDetail () {
 
 
 
-  const getDesiredCourseByUserId = async (userId) => {
+
+
+
+
+  // const getDesiredCourseByUserId = async (userId) => {
+  //   // console.log(userId);
+  //   try {
+  //     const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}`);
+  //     setDesiredCourseId(response.data.data);
+  //     console.log(response.data.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  
+
+  const getDesiredCourseUserIdByCourse = async (userId, courseId) => {
     // console.log(userId);
+    // console.log(courseId);
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}/${courseId}`);
       setDesiredCourseId(response.data);
       // console.log(response.data);
     } catch (error) {
@@ -102,7 +144,9 @@ function CourseDetail () {
 
 
 
+
   const createDesiredCourse = async (userId, courseId) => {
+    
     try {
       // console.log(userId);
       // console.log(courseId);
@@ -128,37 +172,12 @@ function CourseDetail () {
     }
   };
 
-  // useEffect (() => {
-  //   if (desireButton) {
-  //     createDesiredCourse(userId, courseId);
-  //   } else if (!desireButton) {
-  //     deleteDesiredCourse(userId, courseId);
-  //   }
-  // }, [desireButton]);
-
-  // const desireButtonChange = () => {
-  //   console.log(desiredCourseId);
-  //   // console.log(course);
-  //   const desiredCourses = desiredCourseId.data.filter(item => item.courseId === course.id);
-  //   console.log(desiredCourses);
-  //   if (desiredCourses.length === 0) {
-  //     setDesireButton(true);
-  //     setDesireButtonWord('Remove from Desire Course');
-  //     setCourseId(course.id);
-  //   } else if (desiredCourses.length >= 1) {
-  //     setDesireButton(false);
-  //     setDesireButtonWord('Get in Desire Course');
-  //     setCourseId(course.id);
-  //   }
-  // };
-
-
   useEffect (() => {
     getCourseData();
     getCourseDataById();
-    // getDesiredCourseByUserId(userId);
-  }, []);
-
+    getDesiredCourseUserIdByCourse(userId, course.id);
+    isCousreIdInDesiredCourse();
+  }, [course.id]);
 
 
 
