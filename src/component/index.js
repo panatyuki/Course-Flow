@@ -7,5 +7,6 @@ import Header from './Header';
 import Footer from './Footer';
 import CourseDetail from './CourseDetail';
 import MyCourses from './MyCourses';
+import DesiredCourses from './DisiredCourses';
 
-export { Login, Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses };
+export { Login, Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses, DesiredCourses };

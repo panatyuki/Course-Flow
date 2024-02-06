@@ -40,7 +40,7 @@ function OurCourse() {
         window.location.reload();
         window.scrollTo(0, 0);}} >
         <CourseCard  detailCourse={course} />
-      </div>   
+      </div>
     );
   });
 
