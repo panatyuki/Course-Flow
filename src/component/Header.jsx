@@ -8,18 +8,7 @@ function Header() {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const navigate = useNavigate();
-  const { session, supabase } = useAuth();
-
-  const handleLogout = async() => {
-    const { error } = await supabase.auth.signOut();
-
-    if (session) {
-      navigate('/');
-    }
-    else {
-      console.error(error);
-    }
-  };
+  const { session, logout } = useAuth();
     
   return (
     <div className={classes.header}>
@@ -64,7 +53,7 @@ function Header() {
                       <span className='cf-body-3' style={{ color: '#646D89' }}>My Desire Courses</span>
                     </div>
                   </div>
-                  <div className={classes.dropdownTextSectionDownContainer} onClick={() => (handleLogout())}>
+                  <div className={classes.dropdownTextSectionDownContainer} onClick={logout}>
                     <img src={imageHeader.logoutIcon} alt='logoutIcon' />
                     <span className='cf-body-3' style={{ color: '#646D89' }}>Log out</span>
                   </div>

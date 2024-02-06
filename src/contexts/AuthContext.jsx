@@ -8,16 +8,19 @@ const AuthContext = createContext();
 // Create a Provider Component
 export const AuthProvider = ({ children }) => {
   const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
+      setLoading(false);
     });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      setLoading(false);
     });
 
     return () => subscription.unsubscribe();
@@ -32,9 +35,19 @@ export const AuthProvider = ({ children }) => {
     return { session, error };
   };
 
+  const logout = async() => {
+    const { error } = await supabase.auth.signOut();
+    if (session) {
+      navigate('/');
+    }
+    else {
+      console.error(error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ session, supabase, login }}>
-      {children}
+    <AuthContext.Provider value={{ session, supabase, login, logout }}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 };
