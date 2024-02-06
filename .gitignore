@@ -9,7 +9,7 @@ lerna-debug.log*
 
 .env
 
-.local.env
+.env.local
 
 .eslintrc.cjs
 
