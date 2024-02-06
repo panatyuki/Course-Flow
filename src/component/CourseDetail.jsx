@@ -6,10 +6,70 @@ import CourseCard from './CourseCard';
 import { imageCourseDetail } from '../data/imageBackground';
 import { useNavigate,useParams } from 'react-router-dom';
 
-function CourseDetail (){
+function CourseDetail () {
   const [courseData, setCourseData] = useState([]);
   const [randomCourse, setRandomCourse] = useState([]);
   const [course, setCourse] = useState({});
+
+  const [desireButton, setDesireButton] = useState(false);
+  const [subscribeButton, setSubscribeButton] = useState(false);
+  const [desireButtonWord, setDesireButtonWord] = useState('Get in Desire Course');
+  const [isDesiredCourse, setIsDesiredCourse] = useState(false);
+  const [isSubscribe, setIsSubscribe] = useState(false);
+
+  const openDesireModal = () => {
+    if (isDesiredCourse) {
+      setIsDesiredCourse(false);
+      setDesireButtonWord('Get in Desire Course');
+    } else {
+      setDesireButton(true);
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const closeDesireModal = () => {
+    setDesireButton(false);
+    document.body.style.overflow = 'auto';
+  };
+
+  const openSubscribeModal = () => {
+    setSubscribeButton(true);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeSubscribeModal = () => {
+    setSubscribeButton(false);
+    document.body.style.overflow = 'auto';
+  };
+
+
+  const handleYesDesired = () => {
+    //เพิ่มเงื่อนไขในการเพิ่ม-ลด desiredCourse
+    setDesireButtonWord('Remove from Desire Course');
+    setIsDesiredCourse(true);
+    closeDesireModal();
+  };
+
+  const handleYesSubscribe = () => {
+    setIsSubscribe(true);
+    closeSubscribeModal();
+  };
+
+  // useEffect(() => {
+  //   setIsSubscribe(true);
+  // }, [handleYesSubscribe]);
+
+  
+  
+  const [courseId, setCourseId] = useState(null);
+  const [desiredCourseId, setDesiredCourseId] = useState([]);
+  const [userId, setUserId] = useState('56325519-5580-48f4-bd17-f2f49fd6bad5');
+
+  
+  // console.log(desireButton);
+  // console.log(courseId);
+  // console.log(desiredCourseId);
+
 
   const navigate = useNavigate();
   const params = useParams();
@@ -17,17 +77,94 @@ function CourseDetail (){
   const getCourseData = async() => {
     const response = await axios.get(import.meta.env.VITE_API_SERVER+'/course');
     setCourseData(response.data);
+    // console.log(response.data);
   };
 
   const getCourseDataById = async()=>{
     const response = await axios.get(import.meta.env.VITE_API_SERVER+`/course/${params.courseId}`);
     setCourse(response.data);
+    // console.log(response.data);
   };
+
+
+
+
+  const getDesiredCourseByUserId = async (userId) => {
+    // console.log(userId);
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}`);
+      setDesiredCourseId(response.data);
+      // console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
+  const createDesiredCourse = async (userId, courseId) => {
+    try {
+      // console.log(userId);
+      // console.log(courseId);
+      const response = await axios.post(import.meta.env.VITE_API_SERVER+'/user/desired-course',
+        { userId, courseId }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteDesiredCourse = async (userId, courseId) => {
+    try {
+      const response = await axios.delete(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}`,
+        { data: {
+          courseId
+        }
+        });
+      return console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // useEffect (() => {
+  //   if (desireButton) {
+  //     createDesiredCourse(userId, courseId);
+  //   } else if (!desireButton) {
+  //     deleteDesiredCourse(userId, courseId);
+  //   }
+  // }, [desireButton]);
+
+  // const desireButtonChange = () => {
+  //   console.log(desiredCourseId);
+  //   // console.log(course);
+  //   const desiredCourses = desiredCourseId.data.filter(item => item.courseId === course.id);
+  //   console.log(desiredCourses);
+  //   if (desiredCourses.length === 0) {
+  //     setDesireButton(true);
+  //     setDesireButtonWord('Remove from Desire Course');
+  //     setCourseId(course.id);
+  //   } else if (desiredCourses.length >= 1) {
+  //     setDesireButton(false);
+  //     setDesireButtonWord('Get in Desire Course');
+  //     setCourseId(course.id);
+  //   }
+  // };
+
 
   useEffect (() => {
     getCourseData();
     getCourseDataById();
+    // getDesiredCourseByUserId(userId);
   }, []);
+
+
+
+
+
+  
+
 
   useEffect (() => {
     const randomCourseShow = getRandomCourse(courseData, 3); 
@@ -121,11 +258,70 @@ function CourseDetail (){
               </div>
               <div className={classes.accordion}>
                 <h2>Module Samples</h2>
+
+
+
+                {desireButton && (
+                  <div className={classes.modalOverlay}>
+                    <div open className={classes.modalContainer}>
+                      <div className={classes.headModal}>
+                        <h1 className='cf-body-1'>Confirmation</h1>
+                        <img src={imageCourseDetail.exit} alt='exit' onClick={closeDesireModal} style={{ cursor: 'pointer' }} />
+                      </div>
+      
+                      <div className={classes.confirmDetail}>
+                        <p className='cf-body-2' style={{ color: 'var(--gray-700, #646D89)' }}>Do you sure to Add to desired course?</p>
+
+                        <div className={classes.confirmButton}>
+                          <div className={classes.noButton} onClick={closeDesireModal}>
+                            <p className='cf-body-2' style={{ fontWeight: '700' }}>No, I don't</p>
+                          </div>
+                          <div className={classes.yesButton} onClick={handleYesDesired}>
+                            <p className='cf-body-2' style={{ fontWeight: '700' }}>Yes, Add to Desired Course</p>
+                          </div>
+                        </div>
+ 
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {subscribeButton && (
+                  <div className={classes.modalOverlay}>
+                    <div open className={classes.modalContainer}>
+                      <div className={classes.headModal}>
+                        <h1 className='cf-body-1'>Confirmation</h1>
+                        <img src={imageCourseDetail.exit} alt='exit' onClick={closeSubscribeModal} style={{ cursor: 'pointer' }} />
+                      </div>
+      
+                      <div className={classes.confirmDetail}>
+                        <p className='cf-body-2' style={{ color: 'var(--gray-700, #646D89)' }}>Do you sure to subscribe Service Design Essentials Course?</p>
+
+                        <div className={classes.confirmButton}>
+                          <div className={classes.noButton} onClick={closeSubscribeModal}>
+                            <p className='cf-body-2' style={{ fontWeight: '700' }}>No, I don't</p>
+                          </div>
+                          <div className={classes.yesButton} onClick={handleYesSubscribe}>
+                            <p className='cf-body-2' style={{ fontWeight: '700' }}>Yes, I want to subscribe</p>
+                          </div>
+                        </div>
+ 
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+
+
+
+                
                 <Accordion defaultValue="lesson-1" >
                   {accordion}
                 </Accordion>
               </div> 
             </div>
+
+
             <div className={classes.stickyBoxContainer}>
               <div className={classes.stickyBox}>
                 <div className={classes.containerTextStickyBox}>
@@ -137,15 +333,26 @@ function CourseDetail (){
                   <h3 style={{ color: '#646D89' }}>THB {priceFormattedNumber}</h3>
                 </div>  
                 <div className={classes.containerButtonStickyBox}>
-                  <button className={classes.buttonGetInDesireCourse}>
-                    <p className='cf-body-2'>Get in Desire Course</p>
-                  </button>
-                  <button className={classes.buttonSubscribeThisCourse}>
+
+                  {!isSubscribe && (<button className={classes.buttonGetInDesireCourse} onClick={openDesireModal}>
+                    <p className='cf-body-2' >{desireButtonWord}</p>
+                  </button>)}
+
+                  {!isSubscribe && (<button className={classes.buttonSubscribeThisCourse} onClick={openSubscribeModal}>
                     <p className='cf-body-2'>Subscribe This Course</p>
-                  </button>
+                  </button>)}
+
+                  {isSubscribe && (<button className={classes.buttonSubscribeThisCourse} onClick={() => navigate('/')}>
+                    <p className='cf-body-2'>Start Learning</p>
+                  </button>)} 
+
                 </div>    
               </div>
             </div>
+
+
+
+            
           </div>  
         </div>
       </div>
@@ -156,6 +363,9 @@ function CourseDetail (){
           {randomDataElements}
         </div>
       </div>
+      
+
+
     </>
   );
 }
