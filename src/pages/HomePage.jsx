@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Login, Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail } from '../component';
+import { Login, Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses } from '../component';
 
 function HomePage() {
   return (
@@ -12,6 +12,7 @@ function HomePage() {
         <Route path='/register' element={<Register />} />
         <Route path="/course-detail/:courseId" element={<CourseDetail/>} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/my-courses' element={<MyCourses />} />
       </Routes>
       <Footer />
     </>
