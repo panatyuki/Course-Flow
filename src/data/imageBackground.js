@@ -50,6 +50,7 @@ import dateOfBirth from '../images/imagesBackground/dateOfBirth.svg';
 
 //background course detail
 import arrowBack from '../images/imagesBackground/arrow_back.svg';
+import exit from '../images/imagesBackground/exit.svg';
 
 //background page
 import blueCircle from '../images/imagesBackground/blueCircle.svg';
@@ -83,7 +84,7 @@ const imageOurCourse = {
 };
 
 const imageCourseDetail = {
-  arrowBack,
+  arrowBack, exit,
 };
 
 const imageBackgrounds = {
