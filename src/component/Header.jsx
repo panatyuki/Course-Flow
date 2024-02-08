@@ -38,7 +38,7 @@ function Header() {
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Log in</p>
         </button> : (
           <div className={classes.profile}>
-            <img src={imageHeader.profile} alt='profile' width='40' height='40' />
+            <img src={imageHeader.profile} alt='profile' className={classes.setProfileImage} width='40' height='40' onClick={() => navigate('/my-courses')} />
             <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {session.user.user_metadata.name}</p>
             <img src={imageHeader.arrowDropdown} alt='arrowDropdown' className={classes.arrowDropdown} onClick={() => 
               setOpenDropdown((prev) => !(prev))
@@ -51,7 +51,7 @@ function Header() {
                       <img src={imageHeader.profileIcon} alt='profileIcon' />
                       <span className='cf-body-3' style={{ color: '#646D89' }}>Profile</span>
                     </div>
-                    <div className={classes.dropdownTextSectionUpContainer}>
+                    <div className={classes.dropdownTextSectionUpContainer} onClick={() => navigate('/my-courses') }>
                       <img src={imageHeader.myCourseIcon} alt='myCourseIcon' />
                       <span className='cf-body-3' style={{ color: '#646D89' }}>My Course</span>
                     </div>

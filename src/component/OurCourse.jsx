@@ -11,7 +11,7 @@ function OurCourse() {
   const [data, setData] = useState([]);
   const [debouncedSearchText] = useDebouncedValue(searchText, 800);
   
-  // function สำหรับดึงข้อมูลจาก Server
+  // function get data from Server
   const fetchData = async () => {
     try {
       const response = await axios.get(import.meta.env.VITE_API_SERVER + '/course', { 
@@ -27,12 +27,10 @@ function OurCourse() {
     fetchData();
   }, [debouncedSearchText]);
 
-  
-
-  // function navigate สำหรับไว้เปลี่ยนหน้า Webpage
+  // function navigate
   const navigate = useNavigate();
 
-  // map Data การ์ดคอร์สเรียนออกมา
+  // map Data course cards
   const courseCard = data.map(( course, index ) => {
     return (
       <div key={index} onClick={() => {
@@ -70,7 +68,5 @@ function OurCourse() {
     </div> 
   );
 }
-
-
 
 export default OurCourse;
