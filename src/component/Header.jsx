@@ -8,8 +8,9 @@ function Header() {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const navigate = useNavigate();
-  const { session, logout } = useAuth();
-    
+  const { logout, user } = useAuth();
+
+  console.log(user);
   return (
     <div className={classes.header}>
       <div className={classes.courseFlowLogo}>
@@ -21,14 +22,14 @@ function Header() {
         <div className={classes.ourCourses} onClick={() => navigate('/our-course')}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>
         </div>
-        {!session ? <button onClick={() => {
+        {!user ? <button onClick={() => {
           navigate('/login');
         }} className={classes.logInButton}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Log in</p>
         </button> : (
           <div className={classes.profile}>
             <img src={imageHeader.profile} alt='profile' width='40' height='40' />
-            <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {session.user.user_metadata.name}</p>
+            <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {user.user_metadata.name}</p>
             <img src={imageHeader.arrowDropdown} alt='arrowDropdown' className={classes.arrowDropdown} onClick={() => 
               setOpenDropdown((prev) => !(prev))
             } />
