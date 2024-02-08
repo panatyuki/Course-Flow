@@ -2,7 +2,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Anchor, Group } from '@mantine/core';
 import classes from '../style/Footer.module.css';
 import { imageFooter } from '../data/imageBackground';
-import { useEffect, useState } from 'react';
 
 const links = [
   { link: '/our-course', label: 'ALL Courses' },
