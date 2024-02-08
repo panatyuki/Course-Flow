@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Background from './Background';
 import classes from '../style/MyCourses.module.css';
@@ -11,30 +11,36 @@ import nishikawaTakanori from '../images/nishikawaTakanori.jpg';
 
 function MyCourses () {
   const [data, setData] = useState([]);
+  const params = useParams();
+
+  const userId = 'panat1';
   
-  const fetchData = async (url = '/course') => {
+  const fetchData = async () => {
     try {
-      let response = await axios.get(import.meta.env.VITE_API_SERVER + url);
-      setData(response.data);
+      let response = await axios.get(import.meta.env.VITE_API_SERVER + '/user/subscribed-course-detail/' +params.userId +'/course');
+      console.log(response.data.data[0].subscribedCourse);
+      setData(response.data.data[0].subscribedCourse);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
-
+  
   useEffect(() => {
     fetchData();
   }, []);
 
   const navigate = useNavigate();
 
-  const courseCard = data.map(( course, index ) => {
+  const courseCard = data.map(( courses, index ) => {
     return (
       <div key={index} onClick={() => {
         navigate(`/course-detail/${data[index].id}`);
         window.location.reload();
         window.scrollTo(0, 0);}} >
-        <CourseCard  detailCourse={course} />
-      </div>   
+        <CourseCard 
+          detailCourse={courses.course}
+        />
+      </div>
     );
   });
 
@@ -74,33 +80,32 @@ function MyCourses () {
             </div>
           </div>
 
-          <div className={classes.tab}>
-            <Tabs color="dark">
+          <Tabs color="dark" defaultValue="first" >
+  
+            <div className={classes.tabPosition} >
+              <Tabs.List> 
+                <Tabs.Tab value="first">All Courses</Tabs.Tab>
+                <Tabs.Tab value="second">Inprogress</Tabs.Tab>
+                <Tabs.Tab value="third">Complete</Tabs.Tab>
+              </Tabs.List>
+            </div>
               
-              <div className={classes.tabPosition}>
-                <Tabs.List>
-                  <Tabs.Tab value="first">All Courses</Tabs.Tab>
-                  <Tabs.Tab value="second">Inprogress</Tabs.Tab>
-                  <Tabs.Tab value="third">Complete</Tabs.Tab>
-                </Tabs.List>
-              </div>
-              
-              <div className={classes.containerCoursesCards}>
+            <div className={classes.containerCoursesCards}>
 
-                <Tabs.Panel value="first">
-                  <div className={classes.courseCard}>   
-                    {courseCard}       
-                  </div>
-                </Tabs.Panel>
+              <Tabs.Panel value="first" pl='45'>
+                <div className={classes.courseCard}>   
+                  {courseCard}       
+                </div>
+              </Tabs.Panel>
 
-                <Tabs.Panel value="second"></Tabs.Panel>
-                <Tabs.Panel value="third"></Tabs.Panel>
+              <Tabs.Panel value="second" pl='45'></Tabs.Panel>
+              <Tabs.Panel value="third" pl='45'></Tabs.Panel>
 
-              </div>
+            </div>
 
-            </Tabs>
+          </Tabs>
 
-          </div>
+ 
           
         </div>
       </div>

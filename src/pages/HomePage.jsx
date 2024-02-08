@@ -12,7 +12,7 @@ function HomePage() {
         <Route path='/register' element={<Register />} />
         <Route path="/course-detail/:courseId" element={<CourseDetail/>} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/my-courses' element={<MyCourses />} />
+        <Route path='/my-courses/:userId' element={<MyCourses />} />
         <Route path='/desired-courses' element={<DesiredCourses />} />
       </Routes>
       <Footer />

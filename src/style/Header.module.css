@@ -56,6 +56,10 @@
     align-items: center;
 }
 
+.set-profile-image {
+    cursor: pointer;
+}
+
 .arrow-dropdown {
     cursor: pointer;
 }
