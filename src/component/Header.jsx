@@ -41,7 +41,7 @@ function Header() {
                       <img src={imageHeader.profileIcon} alt='profileIcon' />
                       <span className='cf-body-3' style={{ color: '#646D89' }}>Profile</span>
                     </div>
-                    <div className={classes.dropdownTextSectionUpContainer}>
+                    <div className={classes.dropdownTextSectionUpContainer} onClick={() => navigate('/my-courses') }>
                       <img src={imageHeader.myCourseIcon} alt='myCourseIcon' />
                       <span className='cf-body-3' style={{ color: '#646D89' }}>My Course</span>
                     </div>
