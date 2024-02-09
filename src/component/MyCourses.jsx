@@ -5,21 +5,26 @@ import Background from './Background';
 import classes from '../style/MyCourses.module.css';
 import CourseCard from './CourseCard';
 import { Tabs } from '@mantine/core';
+import { useAuth } from '../contexts/AuthContext';
 
-// Mock profile pic data
+// Mock profile pic data for show UI image frame
+// Delete this section, after database about user image is done
 import nishikawaTakanori from '../images/nishikawaTakanori.jpg';
 
 function MyCourses () {
   const [data, setData] = useState([]);
   const params = useParams();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
-  const userId = 'panat1';
-  
+  // Function get all courses for each users
   const fetchData = async () => {
     try {
       let response = await axios.get(import.meta.env.VITE_API_SERVER + '/user/subscribed-course-detail/' +params.userId +'/course');
-      console.log(response.data.data[0].subscribedCourse);
-      setData(response.data.data[0].subscribedCourse);
+      // after all feats is done, dont't forget to delete "console.log"
+      // it's just check for subscribedCourse data */
+      console.log(response.data.data);
+      setData(response.data.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -27,23 +32,22 @@ function MyCourses () {
   
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [params.userId]);
 
-  const navigate = useNavigate();
-
-  const courseCard = data.map(( courses, index ) => {
-    return (
-      <div key={index} onClick={() => {
-        navigate(`/course-detail/${data[index].id}`);
-        window.location.reload();
-        window.scrollTo(0, 0);}} >
-        <CourseCard 
-          detailCourse={courses.course}
-        />
-      </div>
-    );
-  });
-
+  // Course card
+  // map subscribedCourse for each users to CourseCard
+  const courseCard = data.map((item, index) => (
+    <div key={index} onClick={() => {
+      navigate(`/course-detail/${item.course.id}`);
+      window.location.reload();
+      window.scrollTo(0, 0);
+    }}>
+      <CourseCard 
+        detailCourse={item.course}
+      />
+    </div>
+  ));
+  
   return (
     <>
       <div className={classes.myCourses}>
@@ -55,6 +59,7 @@ function MyCourses () {
 
         <div className={classes.containerMyCourses}>
 
+          {/* User profile & courses progression */}
           <div className={classes.containerStickyBox}>
             <div className={classes.stickyBox}>
 
@@ -63,7 +68,7 @@ function MyCourses () {
               </div>
 
               <div className={classes.userName}>
-                <p className={classes.setUserName}>Nishikawa Takanori</p>
+                <p className={classes.setUserName}>{user.user_metadata.name}</p>
               </div>
 
               <div className={classes.status}>
@@ -80,6 +85,7 @@ function MyCourses () {
             </div>
           </div>
 
+          {/* Tab section */}
           <Tabs color="dark" defaultValue="first" >
   
             <div className={classes.tabPosition} >
@@ -90,23 +96,34 @@ function MyCourses () {
               </Tabs.List>
             </div>
               
+              
             <div className={classes.containerCoursesCards}>
 
+              {/* All courses tab */}
               <Tabs.Panel value="first" pl='45'>
-                <div className={classes.courseCard}>   
+                <div className={classes.courseCard}>
                   {courseCard}       
                 </div>
               </Tabs.Panel>
 
-              <Tabs.Panel value="second" pl='45'></Tabs.Panel>
-              <Tabs.Panel value="third" pl='45'></Tabs.Panel>
+              {/* (mock) inprogress courses tab */}
+              <Tabs.Panel value="second" pl='45'>
+                <div className={classes.courseCard}>
+                  {courseCard}       
+                </div>
+              </Tabs.Panel>
+
+              {/* (mock) complete courses tab */}
+              <Tabs.Panel value="third" pl='45'>
+                <div className={classes.courseCard}> 
+                  {courseCard}       
+                </div>
+              </Tabs.Panel>
 
             </div>
 
           </Tabs>
 
- 
-          
         </div>
       </div>
     </>
