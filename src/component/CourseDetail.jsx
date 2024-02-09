@@ -6,6 +6,11 @@ import CourseCard from './CourseCard';
 import { imageCourseDetail } from '../data/imageBackground';
 import { useNavigate,useParams } from 'react-router-dom';
 
+// import { useAuth } from '../contexts/AuthContext';
+
+// const { user } = useAuth();
+// user.
+
 function CourseDetail () {
   const [courseData, setCourseData] = useState([]);
   const [randomCourse, setRandomCourse] = useState([]);
@@ -16,24 +21,32 @@ function CourseDetail () {
   const [desireButtonWord, setDesireButtonWord] = useState('');
   const [isDesiredCourse, setIsDesiredCourse] = useState(null);
   const [isSubscribe, setIsSubscribe] = useState(false);
-
   const [desiredCourseId, setDesiredCourseId] = useState([]);
+  const [subscribeCourseId, setSubscribedCourseId] = useState([]);
+  const [courseId, setCourseId] = useState('');
 
-  const [userId, setUserId] = useState('56325519-5580-48f4-bd17-f2f49fd6bad5');
+  const [userId, setUserId] = useState('boss1');
 
+  //isUserLogin
 
-
-  // console.log(desiredCourseId);
   // console.log(course.id);
-  
+  // console.log(desiredCourseId);
   
   const isCousreIdInDesiredCourse = () => {
     if (desiredCourseId.length === 0) {
       setDesireButtonWord('Get in Desire Course');
       setIsDesiredCourse(false);
-    } else {
+    } else if (desiredCourseId.length !== 0) {
       setDesireButtonWord('Remove from Desire Course');
       setIsDesiredCourse(true);
+    }
+  };
+
+  const isCourseIdInSubscribedCourse = () => {
+    if (subscribeCourseId.length === 0) {
+      setIsSubscribe(false);
+    } else if (subscribeCourseId.length !== 0){
+      setIsSubscribe(true);
     }
   };
 
@@ -53,7 +66,6 @@ function CourseDetail () {
     document.body.style.overflow = 'auto';
   };
 
-
   const handleYesDesired = () => {
     try {
       createDesiredCourse(userId, course.id);
@@ -65,10 +77,6 @@ function CourseDetail () {
     }
   };
 
-
-
-
-
   const openSubscribeModal = () => {
     setSubscribeButton(true);
     document.body.style.overflow = 'hidden';
@@ -79,21 +87,11 @@ function CourseDetail () {
     document.body.style.overflow = 'auto';
   };
 
-
-
   const handleYesSubscribe = () => {
+    createSubscribedCourse(userId, course.id);
     setIsSubscribe(true);
     closeSubscribeModal();
   };
-
-
-
-
-
-
-
-
-
 
   const navigate = useNavigate();
   const params = useParams();
@@ -110,46 +108,49 @@ function CourseDetail () {
     // console.log(response.data);
   };
 
-
-
-
-
-
-
-
-  // const getDesiredCourseByUserId = async (userId) => {
-  //   // console.log(userId);
-  //   try {
-  //     const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}`);
-  //     setDesiredCourseId(response.data.data);
-  //     console.log(response.data.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  
-
   const getDesiredCourseUserIdByCourse = async (userId, courseId) => {
     // console.log(userId);
     // console.log(courseId);
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}/${courseId}`);
       setDesiredCourseId(response.data);
-      // console.log(response.data);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+      setDesiredCourseId([]);
+    }
+  };
+  // console.log(subscribeCourseId);
+  const getSubscribedCourseUserIdByCourse = async (userId, courseId) => {
+    // console.log(userId);
+    // console.log(courseId);
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/subscribed-course/${userId}/${courseId}`);
+      setSubscribedCourseId(response);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+      setSubscribedCourseId([]);
+    }
+  };
+
+  const createSubscribedCourse = async (userId, courseId) => {
+    try {
+      console.log(userId);
+      console.log(courseId);
+      const response = await axios.post(import.meta.env.VITE_API_SERVER+'/user/subscribed-course',
+        { userId, courseId }
+      );
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
-
-
-
   const createDesiredCourse = async (userId, courseId) => {
-    
     try {
-      // console.log(userId);
-      // console.log(courseId);
+      console.log(userId);
+      console.log(courseId);
       const response = await axios.post(import.meta.env.VITE_API_SERVER+'/user/desired-course',
         { userId, courseId }
       );
@@ -171,19 +172,22 @@ function CourseDetail () {
       console.error(error);
     }
   };
+  // --------------
+  // --------------
+  // --------------
 
   useEffect (() => {
     getCourseData();
     getCourseDataById();
-    getDesiredCourseUserIdByCourse(userId, course.id);
+  }, []);
+
+  useEffect(() => {
     isCousreIdInDesiredCourse();
-  }, [course.id]);
+    isCourseIdInSubscribedCourse();
+  }, [desiredCourseId, subscribeCourseId, params.courseId]);
 
-
-
-
-  
-
+  // console.log(desiredCourseId);
+  // console.log(course);
 
   useEffect (() => {
     const randomCourseShow = getRandomCourse(courseData, 3); 
@@ -197,16 +201,19 @@ function CourseDetail () {
           axios.get(import.meta.env.VITE_API_SERVER + '/course'),
           axios.get(import.meta.env.VITE_API_SERVER + `/course/${params.courseId}`)
         ]);
-  
+
         setCourseData(courseDataResponse.data);
         setCourse(courseResponse.data);
+        console.log(courseResponse.data.id);
+        setCourseId(courseResponse.data.id);
+        getDesiredCourseUserIdByCourse(userId, courseResponse.data.id);
+        getSubscribedCourseUserIdByCourse(userId, courseResponse.data.id);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
   }, [params.courseId]);
-
 
   const accordion = course.lessons?.map((lesson, idx) => {
     const unorderedSublessonList = lesson.sublessons.map((sublesson) => {
@@ -228,7 +235,6 @@ function CourseDetail () {
     );
   });
 
-
   const getRandomCourse = (data, count) => {
     const courseData = [...data];
     const filteredCourseData = courseData.filter((item) => item.id !== course.id);
@@ -236,7 +242,6 @@ function CourseDetail () {
     const shuffledCourseData = filteredCourseData.sort(() => Math.random() - 0.5);
     return shuffledCourseData.slice(0, count);
   };
-
 
   const randomDataElements = randomCourse.map((item) => (
     <div key={item.id} onClick={() => {
@@ -278,8 +283,6 @@ function CourseDetail () {
               <div className={classes.accordion}>
                 <h2>Module Samples</h2>
 
-
-
                 {desireButton && (
                   <div className={classes.modalOverlay}>
                     <div open className={classes.modalContainer}>
@@ -287,10 +290,8 @@ function CourseDetail () {
                         <h1 className='cf-body-1'>Confirmation</h1>
                         <img src={imageCourseDetail.exit} alt='exit' onClick={closeDesireModal} style={{ cursor: 'pointer' }} />
                       </div>
-      
                       <div className={classes.confirmDetail}>
                         <p className='cf-body-2' style={{ color: 'var(--gray-700, #646D89)' }}>Do you sure to Add to desired course?</p>
-
                         <div className={classes.confirmButton}>
                           <div className={classes.noButton} onClick={closeDesireModal}>
                             <p className='cf-body-2' style={{ fontWeight: '700' }}>No, I don't</p>
@@ -299,7 +300,6 @@ function CourseDetail () {
                             <p className='cf-body-2' style={{ fontWeight: '700' }}>Yes, Add to Desired Course</p>
                           </div>
                         </div>
- 
                       </div>
                     </div>
                   </div>
@@ -312,10 +312,8 @@ function CourseDetail () {
                         <h1 className='cf-body-1'>Confirmation</h1>
                         <img src={imageCourseDetail.exit} alt='exit' onClick={closeSubscribeModal} style={{ cursor: 'pointer' }} />
                       </div>
-      
                       <div className={classes.confirmDetail}>
                         <p className='cf-body-2' style={{ color: 'var(--gray-700, #646D89)' }}>Do you sure to subscribe Service Design Essentials Course?</p>
-
                         <div className={classes.confirmButton}>
                           <div className={classes.noButton} onClick={closeSubscribeModal}>
                             <p className='cf-body-2' style={{ fontWeight: '700' }}>No, I don't</p>
@@ -324,22 +322,16 @@ function CourseDetail () {
                             <p className='cf-body-2' style={{ fontWeight: '700' }}>Yes, I want to subscribe</p>
                           </div>
                         </div>
- 
                       </div>
                     </div>
                   </div>
                 )}
-
-
-
-
                 
                 <Accordion defaultValue="lesson-1" >
                   {accordion}
                 </Accordion>
               </div> 
             </div>
-
 
             <div className={classes.stickyBoxContainer}>
               <div className={classes.stickyBox}>
@@ -368,10 +360,6 @@ function CourseDetail () {
                 </div>    
               </div>
             </div>
-
-
-
-            
           </div>  
         </div>
       </div>
@@ -382,9 +370,6 @@ function CourseDetail () {
           {randomDataElements}
         </div>
       </div>
-      
-
-
     </>
   );
 }
