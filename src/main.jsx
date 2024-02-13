@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 import App from './App.jsx';
-import { AuthProvider } from './contexts/AuthContext.jsx';
+import Auth0ProviderWithNavigate from './utils/auth0-provider-with-navigate.jsx';
+import courseflowTheme from './utils/courseflowDesignSystem.js';
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/dates/styles.css';
@@ -11,11 +12,11 @@ import '@mantine/dates/styles.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <MantineProvider>
+      <Auth0ProviderWithNavigate>
+        <MantineProvider theme={courseflowTheme}>
           <App/>
         </MantineProvider>
-      </AuthProvider>
+      </Auth0ProviderWithNavigate>
     </BrowserRouter>
   </React.StrictMode>,
 );

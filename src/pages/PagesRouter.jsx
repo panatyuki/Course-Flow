@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Login, Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses, DesiredCourses } from '../component';
 
-function HomePage() {
+function PagesRouter() {
   return (
     <>
       <Header />
@@ -20,4 +20,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default PagesRouter;

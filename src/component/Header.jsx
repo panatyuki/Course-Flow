@@ -1,16 +1,15 @@
 import classes from '../style/Header.module.css';
 import { useNavigate } from 'react-router-dom';
 import { imageHeader } from '../data/imageBackground';
-import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
+import LoginButton from './buttons/LoginButton';
 
 function Header() {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const navigate = useNavigate();
-  const { logout, user } = useAuth();
 
-  console.log(user);
+
   return (
     <div className={classes.header}>
       <div className={classes.courseFlowLogo}>
@@ -22,11 +21,8 @@ function Header() {
         <div className={classes.ourCourses} onClick={() => navigate('/our-course')}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>
         </div>
-        {!user ? <button onClick={() => {
-          navigate('/login');
-        }} className={classes.logInButton}>
-          <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Log in</p>
-        </button> : (
+        <LoginButton />
+        {/* {(
           <div className={classes.profile}>
             <img src={imageHeader.profile} alt='profile' width='40' height='40' />
             <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {user.user_metadata.name}</p>
@@ -62,7 +58,7 @@ function Header() {
               )
             }   
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

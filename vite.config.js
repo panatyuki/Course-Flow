@@ -8,5 +8,8 @@ export default defineConfig({
     modules: {
       localsConvention: 'camelCaseOnly'
     }
+  },
+  server: {
+    port: 4040
   }
 });
