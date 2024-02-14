@@ -13,7 +13,7 @@ function LoginButton() {
   };
 
   return (
-    <button className='button-secondary'>Login</button>
+    <Button onClick={handleLogin} variant='secondary'>Log In</Button>
   );
 }
 export default LoginButton;
