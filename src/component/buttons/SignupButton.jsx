@@ -1,5 +1,6 @@
+import { Link } from 'react-router-dom';
 export default function SignupButton() {
   return (
-    <button className='button'>Sign up</button>
+    <Link to="/register"><button className='button'>Register</button></Link>
   );
 }

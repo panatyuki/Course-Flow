@@ -27,14 +27,13 @@ export default function Register() {
 
   const register = async (value) => {
 
-  //   try {
-  //     const result = await axios.post(import.meta.env.VITE_API_SERVER+'/user/create', value);
-  //     await login(value.email, value.password);
-  //     navigate('/loading');
-  //   }
-  //   catch (error) {
-  //     console.error(error);
-  //   }
+    try {
+      const result = await axios.post(import.meta.env.VITE_API_SERVER+'/user/create', value);
+      console.log(result);
+    }
+    catch (error) {
+      console.error(error);
+    }
 
   };
 
