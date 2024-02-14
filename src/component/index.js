@@ -1,4 +1,3 @@
-import Login from './Login';
 import Register from './Register';
 import Profile from './Profile';
 import OurCourse from './OurCourse';
@@ -9,4 +8,4 @@ import CourseDetail from './CourseDetail';
 import MyCourses from './MyCourses';
 import DesiredCourses from './DisiredCourses';
 
-export { Login, Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses, DesiredCourses };
+export { Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses, DesiredCourses };
