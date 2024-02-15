@@ -1,16 +1,23 @@
 import classes from '../style/Header.module.css';
 import { useNavigate } from 'react-router-dom';
 import { imageHeader } from '../data/imageBackground';
-import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
+import LoginButton from './buttons/LoginButton';
+import SignupButton from './buttons/SignupButton';
+import { Group } from '@mantine/core';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function Header() {
   const [openDropdown, setOpenDropdown] = useState(false);
+  const { user, logout } = useAuth0();
 
   const navigate = useNavigate();
-  const { logout, user } = useAuth();
-
   console.log(user);
+
+  const handleLogout = () => {
+    logout({ returnTo: window.location.origin });
+  };
+
   return (
     <div className={classes.header}>
       <div className={classes.courseFlowLogo}>
@@ -22,14 +29,15 @@ function Header() {
         <div className={classes.ourCourses} onClick={() => navigate('/our-course')}>
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>
         </div>
-        {!user ? <button onClick={() => {
-          navigate('/login');
-        }} className={classes.logInButton}>
-          <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Log in</p>
-        </button> : (
+        
+        {!user ? 
+        <Group>
+          <LoginButton/>
+          <SignupButton/>
+        </Group> : (
           <div className={classes.profile}>
-            <img src={imageHeader.profile} alt='profile' width='40' height='40' />
-            <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {user.user_metadata.name}</p>
+            <img src={user.picture} alt='profile' width='40' height='40' />
+            <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {user.name}</p>
             <img src={imageHeader.arrowDropdown} alt='arrowDropdown' className={classes.arrowDropdown} onClick={() => 
               setOpenDropdown((prev) => !(prev))
             } />
@@ -38,7 +46,7 @@ function Header() {
                 <div className={classes.dropdownContainer}>
                   <div className={classes.sectionUp}>
                     <div className={classes.dropdownTextSectionUpContainer}>
-                      <img src={imageHeader.profileIcon} alt='profileIcon' />
+                      <img src={user.picture} alt='profileIcon' />
                       <span className='cf-body-3' style={{ color: '#646D89' }}>Profile</span>
                     </div>
                     <div className={classes.dropdownTextSectionUpContainer} onClick={() => navigate('/my-courses') }>
@@ -54,7 +62,7 @@ function Header() {
                       <span className='cf-body-3' style={{ color: '#646D89' }}>My Desire Courses</span>
                     </div>
                   </div>
-                  <div className={classes.dropdownTextSectionDownContainer} onClick={logout}>
+                  <div className={classes.dropdownTextSectionDownContainer} onClick={handleLogout}>
                     <img src={imageHeader.logoutIcon} alt='logoutIcon' />
                     <span className='cf-body-3' style={{ color: '#646D89' }}>Log out</span>
                   </div>

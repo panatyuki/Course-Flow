@@ -1,21 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { MantineProvider } from '@mantine/core';
+
 import App from './App.jsx';
-import { AuthProvider } from './contexts/AuthContext.jsx';
-import '@mantine/core/styles.css';
-import '@mantine/carousel/styles.css';
-import '@mantine/dates/styles.css';
+import Auth0ProviderWithNavigate from './utils/auth0-provider-with-navigate.jsx';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider>
-        <MantineProvider>
-          <App/>
-        </MantineProvider>
-      </AuthProvider>
+      <Auth0ProviderWithNavigate>
+        <App/>
+      </Auth0ProviderWithNavigate>
     </BrowserRouter>
   </React.StrictMode>,
 );

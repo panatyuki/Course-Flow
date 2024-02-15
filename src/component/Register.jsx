@@ -5,13 +5,13 @@ import { PasswordInput, TextInput, } from '@mantine/core';
 import classes from '../style/Register.module.css';
 import axios from 'axios';
 import { DateInput } from '@mantine/dates';
-import { useAuth } from '../contexts/AuthContext';
+
 import BackgroundLoginAndRegister from './BackgroundLogiAndRegister';
 import getProfileFormValidator from '../utils/profileFormValidator';
 
-function Register() {
+export default function Register() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+
 
 
   const form = useForm({
@@ -29,8 +29,7 @@ function Register() {
 
     try {
       const result = await axios.post(import.meta.env.VITE_API_SERVER+'/user/create', value);
-      await login(value.email, value.password);
-      navigate('/loading');
+      console.log(result);
     }
     catch (error) {
       console.error(error);
@@ -77,4 +76,3 @@ function Register() {
   );
 }
 
-export default Register;
