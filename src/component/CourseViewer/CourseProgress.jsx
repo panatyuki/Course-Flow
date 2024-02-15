@@ -1,4 +1,4 @@
-import { Progress, Text, Box } from '@mantine/core';
+import { Text, Box } from '@mantine/core';
 import classes from '../../style/CourseViewer/CourseProgress.module.css';
 function CourseProgress({ totalSublessons, totalCompleted }) {
   const progress = (totalCompleted / totalSublessons) * 100;

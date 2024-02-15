@@ -1,0 +1,10 @@
+.course-viewer {
+  margin: 0 auto;
+  max-width: 1120px;
+  margin-top: 70px;
+  margin-bottom: 30px;
+}
+
+.course-viewer-sidebar {
+  padding: 24px;
+}

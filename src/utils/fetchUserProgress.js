@@ -1,3 +1,6 @@
+import userProgres from './mock_data/progress.json';
+
 export default function fetchUserProgress() {
-  // Your code here
+  const progress = userProgres;
+  return progress;
 }
