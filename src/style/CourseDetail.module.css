@@ -128,73 +128,63 @@
   gap: 50px;
 }
 
+.mantine-Modal-title {
+  font-size: larger;
+}
 
 
-.modal-container {
-  /* border: 2px solid red; */
-  width: 528px;
-  height: 210px;
+.modal-design {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 30px;
-  background-color: white;
-  padding: 0px 20px 20px 20px;
 }
 
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+.modal-layout {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  flex-direction: row;
 }
 
-.head-modal {
-  /* border: 2px solid blue; */
-  width: 528px;
-  height: 56px;
+.modal-detail {
   display: flex;
-  justify-content: space-between;
-  border-bottom: .5px solid #cecece;
-  padding: 0px 35px;
-
-}
-
-.confirm-detail {
-  /* border: 2px solid green; */
-  width: 95%;
-}
-
-.confirm-button {
-  /* border: 2px solid yellow; */
-  display: flex;
-  gap: 16px;
+  padding-top: 24px;
+  margin-bottom: 24px;
+  border-top: .5px solid #cecece;
+  color: var(--gray-700, #646D89);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
 }
 
 .no-button {
   cursor: pointer;
-  width: 150px;
+  width: 160px;
   height: 60px;
   display: flex;
   align-items: center;
+  justify-content: center;
   border: 1px solid var(--orange-500, #F47E20);
   color: var(--orange-500, #F47E20);
   padding: 32px;
   border-radius: 12px;
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
+  margin-right: 16px;
+  background-color: white;
+
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 24px */
+
 }
 
 .yes-button {
   cursor: pointer;
-  width: 280px;
+  width: 300px;
   height: 60px;
   display: flex;
   align-items: center;
@@ -205,4 +195,11 @@
   border-radius: 12px;
   background: var(--blue-500, #2F5FAC);
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
+  color: #FFF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
 }

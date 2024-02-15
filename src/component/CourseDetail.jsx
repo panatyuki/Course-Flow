@@ -6,145 +6,90 @@ import CourseCard from './CourseCard';
 import { imageCourseDetail } from '../data/imageBackground';
 import { useNavigate,useParams } from 'react-router-dom';
 
-// import { useAuth } from '../contexts/AuthContext';
-
-// const { user } = useAuth();
-// user.
+import { Modal } from '@mantine/core';
 
 function CourseDetail () {
   const [courseData, setCourseData] = useState([]);
   const [randomCourse, setRandomCourse] = useState([]);
   const [course, setCourse] = useState({});
 
-  const [desireButton, setDesireButton] = useState(false);
-  const [subscribeButton, setSubscribeButton] = useState(false);
-  const [desireButtonWord, setDesireButtonWord] = useState('');
+  const [desiredModal, setDesiredModal] = useState(false);
+  const [subscribeModal, setSubscribedModal] = useState(false);
+
+  const [desireCourse, setDesiredCourse] = useState([]);
   const [isDesiredCourse, setIsDesiredCourse] = useState(null);
-  const [isSubscribe, setIsSubscribe] = useState(false);
-  const [desiredCourseId, setDesiredCourseId] = useState([]);
-  const [subscribeCourseId, setSubscribedCourseId] = useState([]);
-  const [courseId, setCourseId] = useState('');
+  const [desiredbuttonWord, setDesiredButtonWord] = useState('');
 
-  const [userId, setUserId] = useState('boss1');
+  const [subscribedCourse, setSubscribedCourse] = useState([]);
+  const [isSubscribeCourse, setIsSubscribedCourse] = useState(null);
+  const [subscribedButtonWord, setSubscribedButtonWord] = useState('');
 
-  //isUserLogin
 
-  // console.log(course.id);
-  // console.log(desiredCourseId);
+
+  const [userId, setUserId] = useState('bossla');
+
+
+  // console.log(desireCourse);
   
-  const isCousreIdInDesiredCourse = () => {
-    if (desiredCourseId.length === 0) {
-      setDesireButtonWord('Get in Desire Course');
-      setIsDesiredCourse(false);
-    } else if (desiredCourseId.length !== 0) {
-      setDesireButtonWord('Remove from Desire Course');
-      setIsDesiredCourse(true);
-    }
-  };
+  // const checkDesiredCourse = () => {
+  //   if (desireCourse.length === 0) {
+  //     setDesiredButtonWord('get in desired course');
+  //     setIsDesiredCourse(false);
+  //   } else {
+  //     setDesiredButtonWord('Remove from Desire Course');
+  //     setIsDesiredCourse(true);
+  //   }
+  // };
 
-  const isCourseIdInSubscribedCourse = () => {
-    if (subscribeCourseId.length === 0) {
-      setIsSubscribe(false);
-    } else if (subscribeCourseId.length !== 0){
-      setIsSubscribe(true);
-    }
-  };
-
-  const openDesireModal = () => {
+  const handleDesiredButton = () => {
     if (isDesiredCourse) {
+      deleteDesiredCourse(userId, params.courseId);
       setIsDesiredCourse(false);
-      setDesireButtonWord('Get in Desire Course');
-      deleteDesiredCourse(userId, course.id);
+      setDesiredButtonWord('get in desired course');
     } else {
-      setDesireButton(true);
-      document.body.style.overflow = 'hidden';
+      setDesiredModal(true);
     }
   };
 
-  const closeDesireModal = () => {
-    setDesireButton(false);
-    document.body.style.overflow = 'auto';
+  const handleSubscribedButton = () => {
+    if (isSubscribeCourse) {
+      navigate('/');
+    } else {
+      setSubscribedModal(true);
+    }
   };
+      
+
 
   const handleYesDesired = () => {
-    try {
-      createDesiredCourse(userId, course.id);
-      setDesireButtonWord('Remove from Desire Course');
-      setIsDesiredCourse(true);
-      closeDesireModal();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const openSubscribeModal = () => {
-    setSubscribeButton(true);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeSubscribeModal = () => {
-    setSubscribeButton(false);
-    document.body.style.overflow = 'auto';
+    createDesiredCourse(userId, params.courseId);
+    setDesiredModal(false);
+    setIsDesiredCourse(true);
+    setDesiredButtonWord('Remove from Desire Course');
   };
 
   const handleYesSubscribe = () => {
-    createSubscribedCourse(userId, course.id);
-    setIsSubscribe(true);
-    closeSubscribeModal();
+    createSubscribedCourse(userId, params.courseId);
+    setIsSubscribedCourse(true);
+    setSubscribedButtonWord('Start Learning');
+    setSubscribedModal(false);
+    
   };
+  
 
-  const navigate = useNavigate();
-  const params = useParams();
 
-  const getCourseData = async() => {
-    const response = await axios.get(import.meta.env.VITE_API_SERVER+'/course');
-    setCourseData(response.data);
-    // console.log(response.data);
-  };
-
-  const getCourseDataById = async()=>{
-    const response = await axios.get(import.meta.env.VITE_API_SERVER+`/course/${params.courseId}`);
-    setCourse(response.data);
-    // console.log(response.data);
-  };
-
-  const getDesiredCourseUserIdByCourse = async (userId, courseId) => {
-    // console.log(userId);
-    // console.log(courseId);
+  // console.log(subscribedCourse);
+  const getDesiredCourseUserIdByCourse = async(userId) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}/${courseId}`);
-      setDesiredCourseId(response.data);
-      console.log(response);
+      // console.log(userId);
+      const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}/${params.courseId}`);
+      setDesiredCourse(response.data);
+      // console.log(response);
     } catch (error) {
       console.error(error);
-      setDesiredCourseId([]);
+      setDesiredCourse([]);
     }
-  };
-  // console.log(subscribeCourseId);
-  const getSubscribedCourseUserIdByCourse = async (userId, courseId) => {
-    // console.log(userId);
-    // console.log(courseId);
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/subscribed-course/${userId}/${courseId}`);
-      setSubscribedCourseId(response);
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-      setSubscribedCourseId([]);
-    }
-  };
-
-  const createSubscribedCourse = async (userId, courseId) => {
-    try {
-      console.log(userId);
-      console.log(courseId);
-      const response = await axios.post(import.meta.env.VITE_API_SERVER+'/user/subscribed-course',
-        { userId, courseId }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+    
   };
 
   const createDesiredCourse = async (userId, courseId) => {
@@ -172,22 +117,108 @@ function CourseDetail () {
       console.error(error);
     }
   };
-  // --------------
-  // --------------
-  // --------------
+
+
+  const getSubscribedCourseUserIdByCourse = async (userId) => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/subscribed-course/${userId}/${params.courseId}`);
+      setSubscribedCourse(response);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+      setSubscribedCourse([]);
+    }
+  };
+
+  const createSubscribedCourse = async (userId, courseId) => {
+    try {
+      console.log(userId);
+      console.log(courseId);
+      const response = await axios.post(import.meta.env.VITE_API_SERVER+'/user/subscribed-course',
+        { userId, courseId }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
+
+
+
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const getCourseData = async() => {
+    const response = await axios.get(import.meta.env.VITE_API_SERVER+'/course');
+    setCourseData(response.data);
+  };
+
+  const getCourseDataById = async()=>{
+    const response = await axios.get(import.meta.env.VITE_API_SERVER+`/course/${params.courseId}`);
+    setCourse(response.data);
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   useEffect (() => {
     getCourseData();
     getCourseDataById();
-  }, []);
+    getDesiredCourseUserIdByCourse(userId);
+    getSubscribedCourseUserIdByCourse(userId);
+  }, [params.courseId]);
 
-  useEffect(() => {
-    isCousreIdInDesiredCourse();
-    isCourseIdInSubscribedCourse();
-  }, [desiredCourseId, subscribeCourseId, params.courseId]);
+  useEffect (() => {
+    if (subscribedCourse.length === 0) {
+      setIsSubscribedCourse(false);
+      setSubscribedButtonWord('Subscribe This Course');
+    } else {
+      setIsSubscribedCourse(true);
+      setSubscribedButtonWord('Start Learning');
+    }
+  },[subscribedCourse]);
+  
 
-  // console.log(desiredCourseId);
-  // console.log(course);
+  useEffect (() => {
+    // console.log(desireCourse);
+    if (desireCourse.length === 0) {
+      setDesiredButtonWord('get in desired course');
+      setIsDesiredCourse(false);
+    } else {
+      setDesiredButtonWord('Remove from Desire Course');
+      setIsDesiredCourse(true);
+    }
+  }, [desireCourse]);
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
 
   useEffect (() => {
     const randomCourseShow = getRandomCourse(courseData, 3); 
@@ -201,19 +232,16 @@ function CourseDetail () {
           axios.get(import.meta.env.VITE_API_SERVER + '/course'),
           axios.get(import.meta.env.VITE_API_SERVER + `/course/${params.courseId}`)
         ]);
-
+  
         setCourseData(courseDataResponse.data);
         setCourse(courseResponse.data);
-        console.log(courseResponse.data.id);
-        setCourseId(courseResponse.data.id);
-        getDesiredCourseUserIdByCourse(userId, courseResponse.data.id);
-        getSubscribedCourseUserIdByCourse(userId, courseResponse.data.id);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
   }, [params.courseId]);
+
 
   const accordion = course.lessons?.map((lesson, idx) => {
     const unorderedSublessonList = lesson.sublessons.map((sublesson) => {
@@ -235,6 +263,7 @@ function CourseDetail () {
     );
   });
 
+
   const getRandomCourse = (data, count) => {
     const courseData = [...data];
     const filteredCourseData = courseData.filter((item) => item.id !== course.id);
@@ -242,6 +271,7 @@ function CourseDetail () {
     const shuffledCourseData = filteredCourseData.sort(() => Math.random() - 0.5);
     return shuffledCourseData.slice(0, count);
   };
+
 
   const randomDataElements = randomCourse.map((item) => (
     <div key={item.id} onClick={() => {
@@ -283,55 +313,13 @@ function CourseDetail () {
               <div className={classes.accordion}>
                 <h2>Module Samples</h2>
 
-                {desireButton && (
-                  <div className={classes.modalOverlay}>
-                    <div open className={classes.modalContainer}>
-                      <div className={classes.headModal}>
-                        <h1 className='cf-body-1'>Confirmation</h1>
-                        <img src={imageCourseDetail.exit} alt='exit' onClick={closeDesireModal} style={{ cursor: 'pointer' }} />
-                      </div>
-                      <div className={classes.confirmDetail}>
-                        <p className='cf-body-2' style={{ color: 'var(--gray-700, #646D89)' }}>Do you sure to Add to desired course?</p>
-                        <div className={classes.confirmButton}>
-                          <div className={classes.noButton} onClick={closeDesireModal}>
-                            <p className='cf-body-2' style={{ fontWeight: '700' }}>No, I don't</p>
-                          </div>
-                          <div className={classes.yesButton} onClick={handleYesDesired}>
-                            <p className='cf-body-2' style={{ fontWeight: '700' }}>Yes, Add to Desired Course</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
 
-                {subscribeButton && (
-                  <div className={classes.modalOverlay}>
-                    <div open className={classes.modalContainer}>
-                      <div className={classes.headModal}>
-                        <h1 className='cf-body-1'>Confirmation</h1>
-                        <img src={imageCourseDetail.exit} alt='exit' onClick={closeSubscribeModal} style={{ cursor: 'pointer' }} />
-                      </div>
-                      <div className={classes.confirmDetail}>
-                        <p className='cf-body-2' style={{ color: 'var(--gray-700, #646D89)' }}>Do you sure to subscribe Service Design Essentials Course?</p>
-                        <div className={classes.confirmButton}>
-                          <div className={classes.noButton} onClick={closeSubscribeModal}>
-                            <p className='cf-body-2' style={{ fontWeight: '700' }}>No, I don't</p>
-                          </div>
-                          <div className={classes.yesButton} onClick={handleYesSubscribe}>
-                            <p className='cf-body-2' style={{ fontWeight: '700' }}>Yes, I want to subscribe</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
                 <Accordion defaultValue="lesson-1" >
                   {accordion}
                 </Accordion>
               </div> 
             </div>
+
 
             <div className={classes.stickyBoxContainer}>
               <div className={classes.stickyBox}>
@@ -344,22 +332,58 @@ function CourseDetail () {
                   <h3 style={{ color: '#646D89' }}>THB {priceFormattedNumber}</h3>
                 </div>  
                 <div className={classes.containerButtonStickyBox}>
-
-                  {!isSubscribe && (<button className={classes.buttonGetInDesireCourse} onClick={openDesireModal}>
-                    <p className='cf-body-2' >{desireButtonWord}</p>
+                  
+                  {!isSubscribeCourse && (<button className={classes.buttonGetInDesireCourse} onClick={handleDesiredButton}>
+                    <p className='cf-body-2'>{desiredbuttonWord}</p>
                   </button>)}
 
-                  {!isSubscribe && (<button className={classes.buttonSubscribeThisCourse} onClick={openSubscribeModal}>
-                    <p className='cf-body-2'>Subscribe This Course</p>
-                  </button>)}
+                  <button className={classes.buttonSubscribeThisCourse} onClick={handleSubscribedButton}>
+                    <p className='cf-body-2'>{subscribedButtonWord}</p>
+                  </button>
 
-                  {isSubscribe && (<button className={classes.buttonSubscribeThisCourse} onClick={() => navigate('/')}>
+                  {/* <button className={classes.buttonSubscribeThisCourse} onClick={() => navigate('/')}>
                     <p className='cf-body-2'>Start Learning</p>
-                  </button>)} 
+                  </button> */}
 
-                </div>    
+                  <Modal
+                    opened={desiredModal}
+                    onClose={() => setDesiredModal(false)}
+                    title="Confirmation" 
+                    transitionProps={{ transition: 'fade', duration: 600, timingFunction: 'linear' }}
+                    size='430'
+                    radius={20}
+                    className={classes.modalDesign}
+                  >
+                    <span className={classes.modalDetail}>Do you sure to Add to desired course?</span>
+                    <div className={classes.modalLayout}>  
+                      <button className={classes.noButton} onClick={() => setDesiredModal(false)}>No, I don't</button>
+                      <button className={classes.yesButton} onClick={handleYesDesired}>Yes, Add to desired course</button>
+                    </div>
+                  </Modal>
+
+                  <Modal
+                    opened={subscribeModal}
+                    onClose={() => setSubscribedModal(false)}
+                    title="Confirmation"
+                    transitionProps={{ transition: 'fade', duration: 600, timingFunction: 'linear' }}
+                    size='500'
+                    radius={20}
+                    className={classes.modalDesign}
+                  >
+                    <span className={classes.modalDetail}>Do you sure to subscribe Service Design Essentials Course?</span>
+                    <div className={classes.modalLayout}>  
+                      <button className={classes.noButton} onClick={() => setSubscribedModal(false)}>No, I don't</button>
+                      <button className={classes.yesButton} onClick={handleYesSubscribe}>Yes, I want to subscribe</button>
+                    </div>
+                  </Modal>
+
+                </div>
               </div>
             </div>
+
+
+
+            
           </div>  
         </div>
       </div>
@@ -370,6 +394,9 @@ function CourseDetail () {
           {randomDataElements}
         </div>
       </div>
+      
+
+
     </>
   );
 }
