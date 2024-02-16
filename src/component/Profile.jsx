@@ -3,12 +3,10 @@ import { useForm } from '@mantine/form';
 import { Box, TextInput, Button } from '@mantine/core';
 import { useToggle } from '@mantine/hooks';
 import { DateInput } from '@mantine/dates';
-import { useAuth } from '../contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import getProfileFormValidator from '../utils/profileFormValidator';
 
 function Profile() {
-  const { session, supabase } = useAuth();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [submitButtonLock, toggleSubmitButtonLock] = useToggle();
@@ -30,42 +28,42 @@ function Profile() {
     validate: getProfileFormValidator()
   }); 
 
-  useEffect(() => {
-    if (session) {
-      form.initialize({
-        name: session.user.user_metadata.name,
-        dateOfBirth: new Date(session.user.user_metadata.dateOfBirth),
-        educationalBackGround: session.user.user_metadata.educationalBackground,
-        email: session.user.email
-      });
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (session) {
+  //     form.initialize({
+  //       name: session.user.user_metadata.name,
+  //       dateOfBirth: new Date(session.user.user_metadata.dateOfBirth),
+  //       educationalBackGround: session.user.user_metadata.educationalBackground,
+  //       email: session.user.email
+  //     });
+  //   }
+  // }, [session]);
 
 
   const handleProfleUpdate = async (values) => {
-    toggleSubmitButtonLock();
-    try {
-      const { name, dateOfBirth, educationalBackGround, email } = values;
-      let res = null;
-      if (email !== session.user.email) {
-        res = await supabase.auth.updateUser({ email, data: { name, dateOfBirth, educationalBackGround } });
-      }
-      else {
-        res = await supabase.auth.updateUser({
-          data: { name, dateOfBirth, educationalBackGround }
-        });
-      }
-      const { error, data } = res;
-      if (error) {
-        setError(error.message);
-      }
-      else {
-        setSuccess('Profile updated successfully');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    toggleSubmitButtonLock(); 
+    // toggleSubmitButtonLock();
+    // try {
+    //   const { name, dateOfBirth, educationalBackGround, email } = values;
+    //   let res = null;
+    //   if (email !== session.user.email) {
+    //     res = await supabase.auth.updateUser({ email, data: { name, dateOfBirth, educationalBackGround } });
+    //   }
+    //   else {
+    //     res = await supabase.auth.updateUser({
+    //       data: { name, dateOfBirth, educationalBackGround }
+    //     });
+    //   }
+    //   const { error, data } = res;
+    //   if (error) {
+    //     setError(error.message);
+    //   }
+    //   else {
+    //     setSuccess('Profile updated successfully');
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    // }
+    // toggleSubmitButtonLock(); 
   };
 
 

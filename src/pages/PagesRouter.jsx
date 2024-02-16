@@ -1,14 +1,13 @@
 import { Routes, Route } from 'react-router-dom';
-import { Login, Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses, DesiredCourses } from '../component';
+import { Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses, DesiredCourses } from '../component';
 
-function HomePage() {
+function PagesRouter() {
   return (
     <>
       <Header />
       <Routes>
         <Route path="/" element={<Landing/>} />
         <Route path='/our-course' element={<OurCourse/>} />
-        <Route path="/login" element={<Login/>} />
         <Route path='/register' element={<Register />} />
         <Route path="/course-detail/:courseId" element={<CourseDetail/>} />
         <Route path='/profile' element={<Profile />} />
@@ -20,4 +19,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default PagesRouter;
