@@ -9,7 +9,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 // Mock profile pic data for show UI image frame
 // Delete this section, after database about user image is done
-import nishikawaTakanori from '../images/nishikawaTakanori.jpg';
+import newNishikawa from '../images/newNishikawa.jpg';
 
 function MyCourses () {
   const [data, setData] = useState([]);
@@ -18,12 +18,9 @@ function MyCourses () {
   const navigate = useNavigate();
 
   // Function get all courses for each users
-  const fetchData = async () => {
+  const getDataAllCoursesById = async () => {
     try {
       let response = await axios.get(import.meta.env.VITE_API_SERVER + '/user/subscribed-course-detail/' +params.userId +'/course');
-      // after all feats is done, dont't forget to delete "console.log"
-      // it's just check for subscribedCourse data */
-      console.log(response.data.data);
       setData(response.data.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -31,23 +28,39 @@ function MyCourses () {
   };
   
   useEffect(() => {
-    fetchData();
+    getDataAllCoursesById();
   }, [params.userId]);
 
   // Course card
-  // map subscribedCourse for each users to CourseCard
-  const courseCard = data.map((item, index) => (
+  // Map all subscribedCourse for each users to CourseCard
+  const courseCardAllcourses = data.map((item, index) => (
     <div key={index} onClick={() => {
       navigate(`/course-detail/${item.course.id}`);
-      window.location.reload();
-      window.scrollTo(0, 0);
     }}>
       <CourseCard 
         detailCourse={item.course}
       />
     </div>
   ));
-  
+
+  // Map inprogress courses
+  const courseCardInprogress = data
+    .filter(item => item.courseCompletion === 'IN_PROGRESS')
+    .map((item, index) => (
+      <div key={index} onClick={() => navigate(`/course-detail/${item.course.id}`)}>
+        <CourseCard detailCourse={item.course} />
+      </div>
+    ));
+
+  // Map completed courses
+  const courseCardCompleted = data
+    .filter(item => item.courseCompletion === 'COMPLETED')
+    .map((item, index) => (
+      <div key={index} onClick={() => navigate(`/course-detail/${item.course.id}`)}>
+        <CourseCard detailCourse={item.course} />
+      </div>
+    ));
+
   return (
     <>
       <div className={classes.myCourses}>
@@ -64,7 +77,7 @@ function MyCourses () {
             <div className={classes.stickyBox}>
 
               <div className={classes.profilePicture}>
-                <img src={nishikawaTakanori} className={classes.setProfilePicture} />
+                <img src={newNishikawa} className={classes.setProfilePicture} />
               </div>
 
               <div className={classes.userName}>
@@ -74,11 +87,11 @@ function MyCourses () {
               <div className={classes.status}>
                 <div className={classes.smallBox}>
                   <span style={{ color:'#646D89' }}>Course Inprogress</span>
-                  <span>12</span>
+                  <span>{courseCardInprogress.length}</span>
                 </div>
                 <div className={classes.smallBox}>
                   <span style={{ color:'#646D89' }}>Course Complete</span>
-                  <span>12</span>
+                  <span>{courseCardCompleted.length}</span>
                 </div>
               </div>
 
@@ -96,27 +109,26 @@ function MyCourses () {
               </Tabs.List>
             </div>
               
-              
             <div className={classes.containerCoursesCards}>
 
               {/* All courses tab */}
               <Tabs.Panel value="first" pl='45'>
                 <div className={classes.courseCard}>
-                  {courseCard}       
+                  {courseCardAllcourses}     
                 </div>
               </Tabs.Panel>
 
-              {/* (mock) inprogress courses tab */}
+              {/* inprogress courses tab */}
               <Tabs.Panel value="second" pl='45'>
                 <div className={classes.courseCard}>
-                  {courseCard}       
+                  {courseCardInprogress}
                 </div>
               </Tabs.Panel>
 
-              {/* (mock) complete courses tab */}
+              {/* complete courses tab */}
               <Tabs.Panel value="third" pl='45'>
                 <div className={classes.courseCard}> 
-                  {courseCard}       
+                  {courseCardCompleted}   
                 </div>
               </Tabs.Panel>
 
