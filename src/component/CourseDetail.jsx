@@ -6,6 +6,7 @@ import CourseCard from './CourseCard';
 import { imageCourseDetail } from '../data/imageBackground';
 import { useNavigate,useParams } from 'react-router-dom';
 
+
 function CourseDetail () {
   const [courseData, setCourseData] = useState([]);
   const [randomCourse, setRandomCourse] = useState([]);
@@ -19,7 +20,7 @@ function CourseDetail () {
 
   const [desiredCourseId, setDesiredCourseId] = useState([]);
 
-  const [userId, setUserId] = useState('56325519-5580-48f4-bd17-f2f49fd6bad5');
+  const { userId } = '56325519-5580-48f4-bd17-f2f49fd6bad5';
 
 
 

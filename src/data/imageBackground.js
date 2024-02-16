@@ -58,6 +58,9 @@ import leftBlueCircle from '../images/imagesBackground/leftBlueCircle.svg';
 import triangle from '../images/imagesBackground/triangle.svg';
 import rightBlueCircle from '../images/imagesBackground/rightBlueCircle.svg';
 
+//background profile
+import noProfileAvatar from '../images/imagesBackground/noProfilePicture.svg';
+
 const imageHeader = {
   courseFlow, arrowDropdown, profile, profileIcon, myCourseIcon,
   myHomeworkIcon, myDesireCourseIcon, logoutIcon
@@ -91,4 +94,8 @@ const imageBackgrounds = {
   blueCircle, leftBlueCircle, triangle, rightBlueCircle, plus,
 };
 
-export { imageHeader, imageMain, imageFooter, imageRegisterAndLogin, imageOurCourse, imageCourseDetail, imageBackgrounds };
+const imageProfile = {
+  noProfileAvatar
+};
+
+export { imageHeader, imageMain, imageFooter, imageRegisterAndLogin, imageOurCourse, imageCourseDetail, imageBackgrounds, imageProfile };
