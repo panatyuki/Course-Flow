@@ -5,7 +5,7 @@ import Background from './Background';
 import classes from '../style/MyCourses.module.css';
 import CourseCard from './CourseCard';
 import { Tabs } from '@mantine/core';
-import { useAuth } from '../contexts/AuthContext';
+// import { useAuth } from '../contexts/AuthContext';
 
 // Mock profile pic data for show UI image frame
 // Delete this section, after database about user image is done
