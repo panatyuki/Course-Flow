@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses, DesiredCourses } from '../component';
+import {  Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses, DesiredCourses, Assignments } from '../component';
 
 function PagesRouter() {
   return (
@@ -13,6 +13,7 @@ function PagesRouter() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/my-courses/:userId' element={<MyCourses />} />
         <Route path='/desired-courses' element={<DesiredCourses />} />
+        <Route path='/assignments' element={<Assignments />} />
       </Routes>
       <Footer />
     </>
