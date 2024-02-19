@@ -65,6 +65,7 @@
     width: 120px;
     height: 120px;
     border-radius: 999px;
+    object-fit: cover;
 }
 
 .set-user-name {
@@ -83,6 +84,8 @@
     justify-content: center;
     gap: 24px;
     padding-top: 30px;
+    max-width: 850px;
+    min-width: 850px;
 }
 
 .course-card {

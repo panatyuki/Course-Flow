@@ -5,12 +5,16 @@ import { useToggle } from '@mantine/hooks';
 import { DateInput } from '@mantine/dates';
 import { useEffect, useState } from 'react';
 import getProfileFormValidator from '../utils/profileFormValidator';
+import axios from 'axios';
+import classes from '../style/Profile.module.css';
+import { imageProfile } from '../data/imageBackground';
 
 function Profile() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [submitButtonLock, toggleSubmitButtonLock] = useToggle();
-
+  const [profileImage, setProfileImage] = useState();
+  
   const form = useForm({
     initialValues: {
       name: '',
@@ -39,6 +43,14 @@ function Profile() {
   //   }
   // }, [session]);
 
+  const handleFileChange = (event) => {
+    const newProfileImage = event.target.files[0];
+    setProfileImage(newProfileImage);
+  };
+
+  const handleRemoveImage = () => {
+    setProfileImage();
+  };
 
   const handleProfleUpdate = async (values) => {
     // toggleSubmitButtonLock();
@@ -67,27 +79,63 @@ function Profile() {
   };
 
 
-  return (
-    <div>
-      <Background />
-      <Box mx='auto' py="150px" maw='300px'>
+  return (  
+    <div className={classes.profilePage}>
+      
+      <h2 className={classes.headingText}>Profile</h2>
+      <div >
+        <Background />
         <form
-          onSubmit={form.onSubmit((values) => handleProfleUpdate(values))}
+          onSubmit={form.onSubmit((values) => handleProfleUpdate(values))} className={classes.profileContainer}
         >
-          <TextInput label="Name" {...form.getInputProps('name')} />
-          <DateInput
-            size='lg' radius="md"
-            label="Date Of Birth"
-            placeholder="DD/MM/YY"
-            {...form.getInputProps('dateOfBirth')}  
-          />  
-          <TextInput label="Educational Background" {...form.getInputProps('educationalBackGround')} />
-          <TextInput label="Email" {...form.getInputProps('email')} />
-          <Button fullWidth type='submit' disabled={submitButtonLock}>Update Profile</Button>
-          {success && <div style={{ color: 'green' }}>{success}</div>}   
-          {error && <div style={{ color: 'red' }}>{error}</div>}
+          <div>
+            <div>
+              <label htmlFor="upload" className={classes.customFileInputLabel && profileImage ? classes.visibleInput : classes.hiddenInput}>
+                <img src={imageProfile.noProfileAvatar} alt='noProfile' />
+              </label>
+              <input
+                type="file"
+                id="upload"
+                className={classes.hiddenFileInput}
+                onChange={handleFileChange}
+              />
+              
+            </div>
+            
+            <div className={classes.profileImage && profileImage ? classes.visibleImage : classes.hiddenImage}>
+            
+              <img
+                
+                src={profileImage ? URL.createObjectURL(profileImage) : ''}
+                alt={profileImage ? profileImage.name : ''}
+                width='400'
+                height='400'
+              />
+              <button
+                className={classes.deleteImage}
+                onClick={(e) => handleRemoveImage(e)}
+              >
+                    X
+              </button>
+            </div>
+    
+          </div>
+          <div className={classes.updateBox}>
+            <TextInput size='lg' radius="md" label="Name" {...form.getInputProps('name')} />
+            <DateInput
+              size='lg' radius="md"
+              label="Date Of Birth"
+              placeholder="DD/MM/YY"
+              {...form.getInputProps('dateOfBirth')}  
+            />  
+            <TextInput size='lg' radius="md" label="Educational Background" {...form.getInputProps('educationalBackGround')} />
+            <TextInput size='lg' radius="md" label="Email" {...form.getInputProps('email')} />
+            <Button size='lg' fullWidth type='submit' disabled={submitButtonLock}>Update Profile</Button>
+            {success && <div style={{ color: 'green' }}>{success}</div>}   
+            {error && <div style={{ color: 'red' }}>{error}</div>}
+          </div>       
         </form>
-      </Box>
+      </div>
     </div>
   );
 }

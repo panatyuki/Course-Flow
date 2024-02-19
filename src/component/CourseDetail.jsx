@@ -5,7 +5,6 @@ import { Accordion } from '@mantine/core';
 import CourseCard from './CourseCard';
 import { imageCourseDetail } from '../data/imageBackground';
 import { useNavigate,useParams } from 'react-router-dom';
-
 import { Modal } from '@mantine/core';
 
 function CourseDetail () {
@@ -20,13 +19,15 @@ function CourseDetail () {
   const [isDesiredCourse, setIsDesiredCourse] = useState(null);
   const [desiredbuttonWord, setDesiredButtonWord] = useState('');
 
+  const [desiredCourseId, setDesiredCourseId] = useState([]);
+  
   const [subscribedCourse, setSubscribedCourse] = useState([]);
   const [isSubscribeCourse, setIsSubscribedCourse] = useState(null);
   const [subscribedButtonWord, setSubscribedButtonWord] = useState('');
 
 
+  const { userId } = '56325519-5580-48f4-bd17-f2f49fd6bad5';
 
-  const [userId, setUserId] = useState('bossla');
 
 
   // console.log(desireCourse);
@@ -160,19 +161,6 @@ function CourseDetail () {
     const response = await axios.get(import.meta.env.VITE_API_SERVER+`/course/${params.courseId}`);
     setCourse(response.data);
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   useEffect (() => {
     getCourseData();
@@ -380,9 +368,6 @@ function CourseDetail () {
                 </div>
               </div>
             </div>
-
-
-
             
           </div>  
         </div>
