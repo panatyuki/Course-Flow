@@ -25,6 +25,10 @@ function AssignmentItem ({ item }){
     } 
   };
 
+  const assignmentDate = new Date(item.completeByDate);
+  const currentDate = new Date();
+  const daysUntilAssignment = Math.ceil((assignmentDate - currentDate) / (1000 * 60 * 60 * 24));
+
   function CheckStatus (){
     const date = new Date();
     if(new Date(date).getTime() >  new Date(item.completeByDate).getTime()){
@@ -45,24 +49,31 @@ function AssignmentItem ({ item }){
       <div className={classes.assignmentsContainer} >
         <div className={classes.titleContainer}>
           <div>
-            <h3>Course: </h3>
-            <p className='cf-body-2' style={{ color:'#646D89' }} >Introduction: ........</p>
+            <h3>Course: {item.course.name} </h3>
+            <p className='cf-body-2' style={{ color:'#646D89' }} >Introduction: {item.course.summary}</p>
           </div>
           <div className={classes.statusContainer}>
             <CheckStatus />
-            <p>Assign within 2 days</p>
+            {daysUntilAssignment <= 0 || item.isSubmitted ? null :  <p>Assign within {daysUntilAssignment} days</p>} 
           </div>
                   
         </div>
         <div className={classes.inputContainer}>
           <div>
             <p>{item.assignment.title}</p>
-            <Textarea style={{ width:'700px' }} autosize minRows={4} maxRows={4} placeholder='Answer...' 
-              value={answer} onChange={(e)=>{setAnswer(e.target.value);}}/>
+            <Textarea style={{ width:'700px' }} autosize minRows={4} maxRows={4}  
+              value={answer} onChange={(e)=>{setAnswer(e.target.value);}}
+              placeholder={item.answer === null ? 'Answer...' : item.answer}/>
           </div>
           <div>
-            <button type='submit' className={classes.buttonSubmit} >Submit</button>
-            <p className={classes.openInCourse} onClick={()=>{navigate('/');}}>Open in Course</p>
+            {!item.isSubmitted && (
+              <button type='submit' className={classes.buttonSubmit} >
+              Submit
+              </button>
+            )}
+            <p className={classes.openInCourse} onClick={()=>{navigate('/learn/:courseId?lesson=<lessonId>&sublesson=<sublessonId>');}}>
+              Open in Course
+            </p>
           </div>
         </div>
       </div>

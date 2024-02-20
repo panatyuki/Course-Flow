@@ -106,7 +106,12 @@ padding: 4px 8px;
     gap: 10px;
     border-radius: 12px;
     background: var(--blue-500, #2F5FAC);
-    
+    color: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 24px */
     /* shadow1 */
     box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
 }
