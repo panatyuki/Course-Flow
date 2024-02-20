@@ -6,6 +6,7 @@ import { imageCourseDetail } from '../data/imageBackground';
 import { useNavigate,useParams } from 'react-router-dom';
 import { Modal } from '@mantine/core';
 import useAxiosWithAuth0 from '../utils/intercepter';
+import axios from 'axios';
 
 function CourseDetail () {
   const [courseData, setCourseData] = useState([]);
@@ -280,8 +281,6 @@ function CourseDetail () {
         <div className={classes.containerCourseDetail}>
           <button className={classes.buttonBack} onClick={() => {
             navigate('/our-course');
-            window.location.reload();
-            window.scrollTo(0, 0);
           }}>
             <img src={imageCourseDetail.arrowBack} /> <p className='cf-body-2' style={{ fontWeight: '700' }}>Back</p>
           </button>

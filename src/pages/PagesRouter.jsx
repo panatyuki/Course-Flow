@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses, DesiredCourses } from '../component';
 import CourseViewer from '../component/CourseViewer/CourseViewer';
+import TestZone from '../utils/TestZone';
 
 function PagesRouter() {
   return (
@@ -15,6 +16,7 @@ function PagesRouter() {
         <Route path='/my-courses/:userId' element={<MyCourses />} />
         <Route path='/desired-courses' element={<DesiredCourses />} />
         <Route path='/learn' element={<CourseViewer />} />
+        <Route path='/test-zone' element={<TestZone />} />
       </Routes>
       <Footer />
     </>
