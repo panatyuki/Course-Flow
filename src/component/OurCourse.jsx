@@ -5,16 +5,18 @@ import classes from '../style/OurCourse.module.css';
 import { useDebouncedValue } from '@mantine/hooks';
 import CourseCard from './CourseCard';
 import Background from './Background';
+import useAxiosWithAuth0 from '../utils/intercepter';
 
 function OurCourse() {
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
   const [debouncedSearchText] = useDebouncedValue(searchText, 800);
+  const axiosWithAuth = useAxiosWithAuth0();
   
   // function get data from Server
   const fetchData = async () => {
     try {
-      const response = await axios.get(import.meta.env.VITE_API_SERVER + '/course', { 
+      const response = await axiosWithAuth.get(import.meta.env.VITE_API_SERVER + '/course', { 
         params: { keywords: debouncedSearchText }
       });
       setData(response.data);
