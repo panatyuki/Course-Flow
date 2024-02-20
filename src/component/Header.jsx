@@ -31,46 +31,46 @@ function Header() {
         </div>
         
         {!user ? 
-        <Group>
-          <LoginButton/>
-          <SignupButton/>
-        </Group> : (
-          <div className={classes.profile}>
-            <img src={user.picture} alt='profile' width='40' height='40' />
-            <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {user.name}</p>
-            <img src={imageHeader.arrowDropdown} alt='arrowDropdown' className={classes.arrowDropdown} onClick={() => 
-              setOpenDropdown((prev) => !(prev))
-            } />
-            {
-              openDropdown && (
-                <div className={classes.dropdownContainer}>
-                  <div className={classes.sectionUp}>
-                    <div className={classes.dropdownTextSectionUpContainer}>
-                      <img src={user.picture} alt='profileIcon' />
-                      <span className='cf-body-3' style={{ color: '#646D89' }}>Profile</span>
+          <Group>
+            <LoginButton/>
+            <SignupButton/>
+          </Group> : (
+            <div className={classes.profile}>
+              <img src={user.picture} alt='profile' width='40' height='40' />
+              <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {user.name}</p>
+              <img src={imageHeader.arrowDropdown} alt='arrowDropdown' className={classes.arrowDropdown} onClick={() => 
+                setOpenDropdown((prev) => !(prev))
+              } />
+              {
+                openDropdown && (
+                  <div className={classes.dropdownContainer}>
+                    <div className={classes.sectionUp}>
+                      <div className={classes.dropdownTextSectionUpContainer}>
+                        <img src={user.picture} alt='profileIcon' />
+                        <span className='cf-body-3' style={{ color: '#646D89' }}>Profile</span>
+                      </div>
+                      <div className={classes.dropdownTextSectionUpContainer} onClick={() => navigate('/my-courses') }>
+                        <img src={imageHeader.myCourseIcon} alt='myCourseIcon' />
+                        <span className='cf-body-3' style={{ color: '#646D89' }}>My Course</span>
+                      </div>
+                      <div className={classes.dropdownTextSectionUpContainer}>
+                        <img src={imageHeader.myHomeworkIcon} alt='myHomeworkIcon' />
+                        <span className='cf-body-3' style={{ color: '#646D89' }}>My Homework</span>
+                      </div>
+                      <div className={classes.dropdownTextSectionUpContainer} onClick={(()=>{navigate('/desired-courses');})}>
+                        <img src={imageHeader.myDesireCourseIcon} alt='myDesireCourseIcon' />
+                        <span className='cf-body-3' style={{ color: '#646D89' }}>My Desire Courses</span>
+                      </div>
                     </div>
-                    <div className={classes.dropdownTextSectionUpContainer} onClick={() => navigate('/my-courses') }>
-                      <img src={imageHeader.myCourseIcon} alt='myCourseIcon' />
-                      <span className='cf-body-3' style={{ color: '#646D89' }}>My Course</span>
+                    <div className={classes.dropdownTextSectionDownContainer} onClick={handleLogout}>
+                      <img src={imageHeader.logoutIcon} alt='logoutIcon' />
+                      <span className='cf-body-3' style={{ color: '#646D89' }}>Log out</span>
                     </div>
-                    <div className={classes.dropdownTextSectionUpContainer}>
-                      <img src={imageHeader.myHomeworkIcon} alt='myHomeworkIcon' />
-                      <span className='cf-body-3' style={{ color: '#646D89' }}>My Homework</span>
-                    </div>
-                    <div className={classes.dropdownTextSectionUpContainer} onClick={(()=>{navigate('/desired-courses');})}>
-                      <img src={imageHeader.myDesireCourseIcon} alt='myDesireCourseIcon' />
-                      <span className='cf-body-3' style={{ color: '#646D89' }}>My Desire Courses</span>
-                    </div>
-                  </div>
-                  <div className={classes.dropdownTextSectionDownContainer} onClick={handleLogout}>
-                    <img src={imageHeader.logoutIcon} alt='logoutIcon' />
-                    <span className='cf-body-3' style={{ color: '#646D89' }}>Log out</span>
-                  </div>
-                </div> 
-              )
-            }   
-          </div>
-        )}
+                  </div> 
+                )
+              }   
+            </div>
+          )}
       </div>
     </div>
   );
