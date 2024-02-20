@@ -10,44 +10,52 @@ function DesiredCourses (){
   const [data,setData] = useState([]);
   const axiosWithAuth = useAxiosWithAuth0();
 
-  const fetchData = async ()=> {
+  const fetchData = async (userId)=> {
     try{
       const response = await axiosWithAuth.get(import.meta.env.VITE_API_SERVER + '/course');
       setData(response.data);
+
     } catch(error) {
       console.error('Error fetching data:', error);
     }
   };
+
   useEffect(()=>{
-    fetchData();
+    fetchData(userId);
   },[]);
   
   const navigate = useNavigate();
 
+
   const courseCard = data.map((course,index)=>{
+    console.log(course);
     return(
       <div key={index} onClick={()=>{
         navigate(`/course-detail/${data[index].id}`);
       }} >
-        <CourseCard detailCourse={course} />
+        <CourseCard detailCourse={course.course} />
       </div>
     );
   });
 
   return(
-    <div>
-      <Background />
-      <div className={classes.searchTitle}>
-        <h2>Desired Courses</h2>
-      </div>
-      <div className={classes.containerCourseCards}>
-        <div className={classes.courseCard}>
-          {courseCard}
+    <>
+      <div className={classes.disiredCourses}>
+        <Background />
+
+        <div className={classes.searchTitle}>
+          <h2>Desired Courses</h2>
         </div>
+
+        <div className={classes.containerCourseCards}>
+          <div className={classes.courseCard}>
+            {courseCard}
+          </div>
+        </div>
+      
+      
       </div>
-      
-      
-    </div>
+    </>
   );
   
 }

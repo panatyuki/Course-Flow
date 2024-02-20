@@ -338,7 +338,7 @@ function CourseDetail () {
                     radius={20}
                     className={classes.modalDesign}
                   >
-                    <span className={classes.modalDetail}>Do you sure to Add to desired course?</span>
+                    <span className={classes.modalDetail}>Do you sure to add {course.name} course to desired course?</span>
                     <div className={classes.modalLayout}>  
                       <button className={classes.noButton} onClick={() => setDesiredModal(false)}>No, I don't</button>
                       <button className={classes.yesButton} onClick={handleYesDesired}>Yes, Add to desired course</button>
@@ -354,7 +354,7 @@ function CourseDetail () {
                     radius={20}
                     className={classes.modalDesign}
                   >
-                    <span className={classes.modalDetail}>Do you sure to subscribe Service Design Essentials Course?</span>
+                    <span className={classes.modalDetail}>Do you sure to subscribe {course.name} course?</span>
                     <div className={classes.modalLayout}>  
                       <button className={classes.noButton} onClick={() => setSubscribedModal(false)}>No, I don't</button>
                       <button className={classes.yesButton} onClick={handleYesSubscribe}>Yes, I want to subscribe</button>
