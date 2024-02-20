@@ -4,14 +4,15 @@ import Background from './Background';
 import CourseCard from './CourseCard';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import useAxiosWithAuth0 from '../utils/intercepter';
 
 function DesiredCourses (){
   const [data,setData] = useState([]);
+  const axiosWithAuth = useAxiosWithAuth0();
 
   const fetchData = async ()=> {
     try{
-      const response = await axios(import.meta.env.VITE_API_SERVER + '/course');
+      const response = await axiosWithAuth.get(import.meta.env.VITE_API_SERVER + '/course');
       setData(response.data);
     } catch(error) {
       console.error('Error fetching data:', error);

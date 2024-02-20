@@ -3,16 +3,14 @@ import { useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { PasswordInput, TextInput, } from '@mantine/core';
 import classes from '../style/Register.module.css';
-import axios from 'axios';
 import { DateInput } from '@mantine/dates';
+import useAxiosWithAuth0 from '../utils/intercepter';
 
 import BackgroundLoginAndRegister from './BackgroundLogiAndRegister';
 import getProfileFormValidator from '../utils/profileFormValidator';
 
 export default function Register() {
   const navigate = useNavigate();
-
-
 
   const form = useForm({
     initialValues: {
@@ -28,7 +26,7 @@ export default function Register() {
   const register = async (value) => {
 
     try {
-      const result = await axios.post(import.meta.env.VITE_API_SERVER+'/user/create', value);
+      const result = await useAxiosWithAuth0.post(import.meta.env.VITE_API_SERVER+'/user/create', value);
       console.log(result);
     }
     catch (error) {
