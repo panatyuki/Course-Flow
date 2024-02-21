@@ -3,9 +3,6 @@ import { Carousel } from '@mantine/carousel';
 import classes from '../style/Main.module.css';
 import { instructorData, graduatesData } from '../data/data';
 import { imageMain } from '../data/imageBackground';
-import axios from 'axios';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useEffect } from 'react';
 
 function GraduateCard({ graduate }) {
   return (

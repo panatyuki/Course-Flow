@@ -2,17 +2,17 @@ import React,{ useState, useEffect } from 'react';
 import classes from '../style/OurCourse.module.css';
 import Background from './Background';
 import CourseCard from './CourseCard';
-import axios from 'axios';
+
 import { useNavigate } from 'react-router-dom';
-import useAxiosWithAuth0 from '../utils/intercepter';
+import useAxiosWithAuth0 from '../utils/interceptor';
 
 function DesiredCourses (){
   const [data,setData] = useState([]);
-  const axiosWithAuth = useAxiosWithAuth0();
+  const { axiosInstance } = useAxiosWithAuth0();
 
-  const fetchData = async (userId)=> {
-    try{
-      const response = await axiosWithAuth.get(import.meta.env.VITE_API_SERVER + '/course');
+  const fetchData = async () => {
+    try {
+      const response = await axiosInstance.get(import.meta.env.VITE_API_SERVER + '/user/');
       setData(response.data);
 
     } catch(error) {
@@ -21,7 +21,7 @@ function DesiredCourses (){
   };
 
   useEffect(()=>{
-    fetchData(userId);
+    fetchData();
   },[]);
   
   const navigate = useNavigate();

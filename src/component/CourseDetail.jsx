@@ -5,8 +5,8 @@ import CourseCard from './CourseCard';
 import { imageCourseDetail } from '../data/imageBackground';
 import { useNavigate,useParams } from 'react-router-dom';
 import { Modal } from '@mantine/core';
-import useAxiosWithAuth0 from '../utils/intercepter';
-import axios from 'axios';
+import useAxiosWithAuth0 from '../utils/interceptor';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function CourseDetail () {
   const [courseData, setCourseData] = useState([]);
@@ -25,10 +25,14 @@ function CourseDetail () {
   const [subscribedCourse, setSubscribedCourse] = useState([]);
   const [isSubscribeCourse, setIsSubscribedCourse] = useState(null);
   const [subscribedButtonWord, setSubscribedButtonWord] = useState('');
-  const axiosWithAuth = useAxiosWithAuth0();
+  const axiosWithAuth = () => {};
 
 
-  const { userId } = '56325519-5580-48f4-bd17-f2f49fd6bad5';
+  const { axiosInstance } = useAxiosWithAuth0();
+
+  const { isAuthenticated } = useAuth0();
+
+ 
 
   // console.log(desireCourse);
   
@@ -44,9 +48,9 @@ function CourseDetail () {
 
   const handleDesiredButton = () => {
     if (isDesiredCourse) {
-      deleteDesiredCourse(userId, params.courseId);
+      deleteDesiredCourse(params.courseId);
       setIsDesiredCourse(false);
-      setDesiredButtonWord('get in desired course');
+      setDesiredButtonWord('Get in desired course');
     } else {
       setDesiredModal(true);
     }
@@ -63,14 +67,14 @@ function CourseDetail () {
 
 
   const handleYesDesired = () => {
-    createDesiredCourse(userId, params.courseId);
+    createDesiredCourse(params.courseId);
     setDesiredModal(false);
     setIsDesiredCourse(true);
     setDesiredButtonWord('Remove from Desire Course');
   };
 
   const handleYesSubscribe = () => {
-    createSubscribedCourse(userId, params.courseId);
+    createSubscribedCourse(params.courseId);
     setIsSubscribedCourse(true);
     setSubscribedButtonWord('Start Learning');
     setSubscribedModal(false);
@@ -78,10 +82,14 @@ function CourseDetail () {
   };
   
   // console.log(subscribedCourse);
-  const getDesiredCourseUserIdByCourse = async(userId) => {
+  const getDesiredCourseUserIdByCourse = async () => {
     try {
       // console.log(userId);
-      const response = await axiosWithAuth.get(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}/${params.courseId}`);
+      const response = await axiosInstance.get('/user/desired-course/', {
+        params: {
+          courseId: params.courseId
+        }
+      });
       setDesiredCourse(response.data);
       // console.log(response);
     } catch (error) {
@@ -94,8 +102,11 @@ function CourseDetail () {
     try {
       console.log(userId);
       console.log(courseId);
-      const response = await axiosWithAuth.post(import.meta.env.VITE_API_SERVER+'/user/desired-course',
-        { userId, courseId }
+      const response = await axiosInstance.post('/user/desired-course', {
+        params: {
+          courseId: params.courseId
+        }
+      }
       );
       console.log(response.data);
     } catch (error) {
@@ -103,13 +114,13 @@ function CourseDetail () {
     }
   };
 
-  const deleteDesiredCourse = async (userId, courseId) => {
+  const deleteDesiredCourse = async (courseId) => {
     try {
-      const response = await axiosWithAuth.delete(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}`,
-        { data: {
+      const response = await axiosInstance.delete('/user/desired-course', {
+        params: {
           courseId
         }
-        });
+      });
       return console.log(response.data);
     } catch (error) {
       console.error(error);
@@ -162,8 +173,8 @@ function CourseDetail () {
   useEffect (() => {
     getCourseData();
     getCourseDataById();
-    getDesiredCourseUserIdByCourse(userId);
-    getSubscribedCourseUserIdByCourse(userId);
+    getDesiredCourseUserIdByCourse();
+    getSubscribedCourseUserIdByCourse();
   }, [params.courseId]);
 
   useEffect (() => {
