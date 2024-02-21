@@ -71,7 +71,7 @@ function AssignmentItem ({ item }){
               Submit
               </button>
             )}
-            <p className={classes.openInCourse} onClick={()=>{navigate('/learn/:courseId?lesson=<lessonId>&sublesson=<sublessonId>');}}>
+            <p className={classes.openInCourse} onClick={()=>{navigate(`/learn/${item.courseId}?sublesson=${item.sublessonId}`);}}>
               Open in Course
             </p>
           </div>
