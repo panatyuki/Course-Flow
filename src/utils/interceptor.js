@@ -13,6 +13,7 @@ const useAxiosWithAuth0 = () => {
       if (isAuthenticated) {
         const token = await getAccessTokenSilently();
         config.headers.Authorization = `Bearer ${token}`;
+        console.log(config.headers.Authorization);
       }
     } catch (error) {
       console.error('Error attaching auth token', error);

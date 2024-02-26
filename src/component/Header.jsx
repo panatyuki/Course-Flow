@@ -1,20 +1,22 @@
 import classes from '../style/Header.module.css';
 import { useNavigate } from 'react-router-dom';
 import { imageHeader } from '../data/imageBackground';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import LoginButton from './buttons/LoginButton';
 import SignupButton from './buttons/SignupButton';
 import { Group } from '@mantine/core';
 import { useAuth0 } from '@auth0/auth0-react';
+import { ProfileContext } from '../context/ProfileContext';
 
 function Header() {
   const [openDropdown, setOpenDropdown] = useState(false);
-  const { user, logout } = useAuth0();
+  const { logout } = useAuth0();
+  const { updateProfile, profile } = useContext(ProfileContext);
 
   const navigate = useNavigate();
-  console.log(user);
 
   const handleLogout = () => {
+    updateProfile(null);
     logout({ returnTo: window.location.origin });
   };
 
@@ -30,14 +32,14 @@ function Header() {
           <p className='cf-body-2' style={{ lineHeight: '0', fontWeight: '700' }}>Our Courses</p>
         </div>
         
-        {!user ? 
+        {!profile ? 
           <Group>
             <LoginButton/>
             <SignupButton/>
           </Group> : (
             <div className={classes.profile}>
-              <img src={user.picture} alt='profile' width='40' height='40' />
-              <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {user.name}</p>
+              <img src={profile.avatarUrl} alt='profile' width='40' height='40' />
+              <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {profile.name}</p>
               <img src={imageHeader.arrowDropdown} alt='arrowDropdown' className={classes.arrowDropdown} onClick={() => 
                 setOpenDropdown((prev) => !(prev))
               } />
@@ -45,8 +47,8 @@ function Header() {
                 openDropdown && (
                   <div className={classes.dropdownContainer}>
                     <div className={classes.sectionUp}>
-                      <div className={classes.dropdownTextSectionUpContainer}>
-                        <img src={user.picture} alt='profileIcon' />
+                      <div className={classes.dropdownTextSectionUpContainer} onClick={() => navigate('/profile')}>
+                        <img src={profile.avatarUrl} alt='profileIcon' />
                         <span className='cf-body-3' style={{ color: '#646D89' }}>Profile</span>
                       </div>
                       <div className={classes.dropdownTextSectionUpContainer} onClick={() => navigate('/my-courses') }>

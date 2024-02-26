@@ -36,9 +36,7 @@ function OurCourse() {
   const courseCard = data.map(( course, index ) => {
     return (
       <div key={index} onClick={() => {
-        navigate(`/course-detail/${data[index].id}`);
-        window.location.reload();
-        window.scrollTo(0, 0);}} >
+        navigate(`/course-detail/${data[index].id}`);}} >
         <CourseCard  detailCourse={course} />
       </div>
     );

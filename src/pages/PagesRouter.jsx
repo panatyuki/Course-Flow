@@ -1,11 +1,23 @@
 import { Routes, Route } from 'react-router-dom';
-import { Register, Profile, OurCourse, Landing, Header, Footer, CourseDetail, MyCourses, DesiredCourses } from '../component';
+import {
+  Register,
+  Profile,
+  OurCourse,
+  Landing,
+  Header,
+  Footer,
+  CourseDetail,
+  MyCourses,
+  DesiredCourses,
+} from '../component';
 import CourseViewer from '../component/CourseViewer/CourseViewer';
+import { ProfileProvider } from '../context/ProfileContext';
 import TestZone from '../utils/TestZone';
+
 
 function PagesRouter() {
   return (
-    <>
+    <ProfileProvider>
       <Header />
       <Routes>
         <Route path="/" element={<Landing/>} />
@@ -19,7 +31,7 @@ function PagesRouter() {
         <Route path='/test-zone' element={<TestZone />} />
       </Routes>
       <Footer />
-    </>
+    </ProfileProvider>
   );
 }
 

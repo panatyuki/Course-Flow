@@ -3,23 +3,21 @@ import { useForm } from '@mantine/form';
 import { TextInput, Button } from '@mantine/core';
 import { useToggle } from '@mantine/hooks';
 import { DateInput } from '@mantine/dates';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import getProfileFormValidator from '../utils/profileFormValidator';
-import axios from 'axios';
 import classes from '../style/Profile.module.css';
 import useAxiosWithAuth0 from '../utils/interceptor';
 import { useAuth0 } from '@auth0/auth0-react';
-import { imageProfile } from '../data/imageBackground';
 import ProfilePhotoUploader from './buttons/ProfilePhotoUploader';
+import { ProfileContext } from '../context/ProfileContext';
 
 function Profile() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [submitButtonLock, toggleSubmitButtonLock] = useToggle();
-  const [profileImage, setProfileImage] = useState();
   const { isAuthenticated } = useAuth0();
-  const [avatarUrl, setAvatarUrl] = useState(null);
   const { axiosInstance } = useAxiosWithAuth0();
+  const { profile, updateProfile } = useContext(ProfileContext);
   
   const form = useForm({
     initialValues: {
@@ -38,26 +36,31 @@ function Profile() {
     validate: getProfileFormValidator()
   }); 
 
+  const handleAvatarDeletion = async () => {
+    try {
+      await axiosInstance.delete('/user/avatar');
+      updateProfile({ ...profile, avatarUrl: null });
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
-      if (isAuthenticated) {
-        const { data: user } = await axiosInstance.get('/user/profile');
+      if (profile && isAuthenticated) {
         form.initialize({
-          name: user.name,
-          dateOfBirth: new Date(user.dateOfBirth),
-          educationalBackGround: user.educationalBackground,
-          email: user.email
+          name: profile.name,
+          dateOfBirth: new Date(profile.dateOfBirth),
+          educationalBackGround: profile.educationalBackground,
+          email: profile.email
         });
-        // avatarUrl is null if the user hasn't uploaded a profile picture.
-        setAvatarUrl(user.avatarUrl || null); 
       }
     };
     fetchData();
-  }, [isAuthenticated]);
+  }, [profile]);
 
-
-
-
+  
   const handleProfleUpdate = async (values) => {
     toggleSubmitButtonLock();
     try {
@@ -70,6 +73,7 @@ function Profile() {
       });
 
       console.log(response);
+      updateProfile({ ...profile, name });
       setSuccess('Profile updated successfully');
 
     } catch (error) {
@@ -84,28 +88,57 @@ function Profile() {
   };
 
 
-  return (  
+  return (
     <div className={classes.profilePage}>
-      
       <h2 className={classes.headingText}>Profile</h2>
-      <div >
+      <div>
         <Background />
         <main className={classes.profileContainer}>
-          <ProfilePhotoUploader />
+          {profile?.avatarUrl ? (
+            <div className={classes.profileImage}>
+              <img src={profile?.avatarUrl} alt={`Profile picture of ${profile.name}`}/>
+              <button onClick={handleAvatarDeletion} className={classes.deleteImage}>x</button>
+            </div>
+          ) : (
+            <ProfilePhotoUploader />
+          )}
           <form
-            onSubmit={form.onSubmit((values) => handleProfleUpdate(values))} 
+            onSubmit={form.onSubmit((values) => handleProfleUpdate(values))}
           >
             <div className={classes.updateBox}>
-              <TextInput size='lg' radius="md" label="Name" {...form.getInputProps('name')} />
+              <TextInput
+                size="lg"
+                radius="md"
+                label="Name"
+                {...form.getInputProps('name')}
+              />
               <DateInput
-                size='lg' radius="md"
+                size="lg"
+                radius="md"
                 label="Date Of Birth"
                 placeholder="DD/MM/YY"
                 {...form.getInputProps('dateOfBirth')}
               />
-              <TextInput size='lg' radius="md" label="Educational Background" {...form.getInputProps('educationalBackGround')} />
-              <TextInput size='lg' radius="md" label="Email" {...form.getInputProps('email')} />
-              <Button size='lg' fullWidth type='submit' disabled={submitButtonLock}>Update Profile</Button>
+              <TextInput
+                size="lg"
+                radius="md"
+                label="Educational Background"
+                {...form.getInputProps('educationalBackGround')}
+              />
+              <TextInput
+                size="lg"
+                radius="md"
+                label="Email"
+                {...form.getInputProps('email')}
+              />
+              <Button
+                size="lg"
+                fullWidth
+                type="submit"
+                disabled={submitButtonLock}
+              >
+                Update Profile
+              </Button>
               {success && <div style={{ color: 'green' }}>{success}</div>}
               {error && <div style={{ color: 'red' }}>{error}</div>}
             </div>
