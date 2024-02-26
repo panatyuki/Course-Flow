@@ -1,11 +1,11 @@
 import classes from '../style/CourseDetail.module.css';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Accordion } from '@mantine/core';
 import CourseCard from './CourseCard';
 import { imageCourseDetail } from '../data/imageBackground';
 import { useNavigate,useParams } from 'react-router-dom';
 import { Modal } from '@mantine/core';
+import useAxiosWithAuth0 from '../utils/intercepter';
 
 function CourseDetail () {
   const [courseData, setCourseData] = useState([]);
@@ -24,11 +24,10 @@ function CourseDetail () {
   const [subscribedCourse, setSubscribedCourse] = useState([]);
   const [isSubscribeCourse, setIsSubscribedCourse] = useState(null);
   const [subscribedButtonWord, setSubscribedButtonWord] = useState('');
+  const axiosWithAuth = useAxiosWithAuth0();
 
 
   const { userId } = '56325519-5580-48f4-bd17-f2f49fd6bad5';
-
-
 
   // console.log(desireCourse);
   
@@ -77,27 +76,24 @@ function CourseDetail () {
     
   };
   
-
-
   // console.log(subscribedCourse);
   const getDesiredCourseUserIdByCourse = async(userId) => {
     try {
       // console.log(userId);
-      const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}/${params.courseId}`);
+      const response = await axiosWithAuth.get(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}/${params.courseId}`);
       setDesiredCourse(response.data);
       // console.log(response);
     } catch (error) {
       console.error(error);
       setDesiredCourse([]);
     }
-    
   };
 
   const createDesiredCourse = async (userId, courseId) => {
     try {
       console.log(userId);
       console.log(courseId);
-      const response = await axios.post(import.meta.env.VITE_API_SERVER+'/user/desired-course',
+      const response = await axiosWithAuth.post(import.meta.env.VITE_API_SERVER+'/user/desired-course',
         { userId, courseId }
       );
       console.log(response.data);
@@ -108,7 +104,7 @@ function CourseDetail () {
 
   const deleteDesiredCourse = async (userId, courseId) => {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}`,
+      const response = await axiosWithAuth.delete(`${import.meta.env.VITE_API_SERVER}/user/desired-course/${userId}`,
         { data: {
           courseId
         }
@@ -122,7 +118,7 @@ function CourseDetail () {
 
   const getSubscribedCourseUserIdByCourse = async (userId) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_SERVER}/user/subscribed-course/${userId}/${params.courseId}`);
+      const response = await axiosWithAuth.get(`${import.meta.env.VITE_API_SERVER}/user/subscribed-course/${userId}/${params.courseId}`);
       setSubscribedCourse(response);
       console.log(response);
     } catch (error) {
@@ -135,7 +131,7 @@ function CourseDetail () {
     try {
       console.log(userId);
       console.log(courseId);
-      const response = await axios.post(import.meta.env.VITE_API_SERVER+'/user/subscribed-course',
+      const response = await axiosWithAuth.post(import.meta.env.VITE_API_SERVER+'/user/subscribed-course',
         { userId, courseId }
       );
       console.log(response.data);
@@ -153,12 +149,12 @@ function CourseDetail () {
   const params = useParams();
 
   const getCourseData = async() => {
-    const response = await axios.get(import.meta.env.VITE_API_SERVER+'/course');
+    const response = await axiosWithAuth.get(import.meta.env.VITE_API_SERVER+'/course');
     setCourseData(response.data);
   };
 
   const getCourseDataById = async()=>{
-    const response = await axios.get(import.meta.env.VITE_API_SERVER+`/course/${params.courseId}`);
+    const response = await axiosWithAuth.get(import.meta.env.VITE_API_SERVER+`/course/${params.courseId}`);
     setCourse(response.data);
   };
 
@@ -217,8 +213,8 @@ function CourseDetail () {
     const fetchData = async () => {
       try {
         const [courseDataResponse, courseResponse] = await Promise.all([
-          axios.get(import.meta.env.VITE_API_SERVER + '/course'),
-          axios.get(import.meta.env.VITE_API_SERVER + `/course/${params.courseId}`)
+          axiosWithAuth.get(import.meta.env.VITE_API_SERVER + '/course'),
+          axiosWithAuth.get(import.meta.env.VITE_API_SERVER + `/course/${params.courseId}`)
         ]);
   
         setCourseData(courseDataResponse.data);
@@ -342,7 +338,7 @@ function CourseDetail () {
                     radius={20}
                     className={classes.modalDesign}
                   >
-                    <span className={classes.modalDetail}>Do you sure to Add to desired course?</span>
+                    <span className={classes.modalDetail}>Do you sure to add {course.name} course to desired course?</span>
                     <div className={classes.modalLayout}>  
                       <button className={classes.noButton} onClick={() => setDesiredModal(false)}>No, I don't</button>
                       <button className={classes.yesButton} onClick={handleYesDesired}>Yes, Add to desired course</button>
@@ -358,7 +354,7 @@ function CourseDetail () {
                     radius={20}
                     className={classes.modalDesign}
                   >
-                    <span className={classes.modalDetail}>Do you sure to subscribe Service Design Essentials Course?</span>
+                    <span className={classes.modalDetail}>Do you sure to subscribe {course.name} course?</span>
                     <div className={classes.modalLayout}>  
                       <button className={classes.noButton} onClick={() => setSubscribedModal(false)}>No, I don't</button>
                       <button className={classes.yesButton} onClick={handleYesSubscribe}>Yes, I want to subscribe</button>

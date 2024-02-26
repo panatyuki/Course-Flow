@@ -6,6 +6,10 @@ const courseflowTheme = createTheme({
         root: 'button-primary'
       }
     })
+  },
+  fontFamily: 'Inter, sans-serif',
+  headings: {
+    fontFamily: 'Inter, sans-serif'
   }
 });
 
