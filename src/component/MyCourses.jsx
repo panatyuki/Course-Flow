@@ -14,7 +14,6 @@ import newNishikawa from '../images/newNishikawa.jpg';
 function MyCourses () {
   const [data, setData] = useState([]);
   const params = useParams();
-
   const navigate = useNavigate();
 
   // Function get all courses for each users

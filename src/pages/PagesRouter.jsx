@@ -9,10 +9,12 @@ import {
   CourseDetail,
   MyCourses,
   DesiredCourses,
+  Assignments
 } from '../component';
 import CourseViewer from '../component/CourseViewer/CourseViewer';
 import { ProfileProvider } from '../context/ProfileContext';
 import TestZone from '../utils/TestZone';
+
 
 
 function PagesRouter() {
@@ -27,6 +29,7 @@ function PagesRouter() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/my-courses/:userId' element={<MyCourses />} />
         <Route path='/desired-courses' element={<DesiredCourses />} />
+        <Route path='/assignments' element={<Assignments />} />
         <Route path='/learn' element={<CourseViewer />} />
         <Route path='/test-zone' element={<TestZone />} />
       </Routes>

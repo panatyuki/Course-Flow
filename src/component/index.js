@@ -8,6 +8,7 @@ import CourseDetail from './CourseDetail';
 import MyCourses from './MyCourses';
 import DesiredCourses from './DisiredCourses';
 import Callback from './Callback';
+import Assignments from './Assignments';
 
 
 export {
@@ -21,4 +22,5 @@ export {
   MyCourses,
   DesiredCourses,
   Callback,
+  Assignments
 };

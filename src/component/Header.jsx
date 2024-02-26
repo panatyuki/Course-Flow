@@ -55,9 +55,9 @@ function Header() {
                         <img src={imageHeader.myCourseIcon} alt='myCourseIcon' />
                         <span className='cf-body-3' style={{ color: '#646D89' }}>My Course</span>
                       </div>
-                      <div className={classes.dropdownTextSectionUpContainer}>
+                      <div className={classes.dropdownTextSectionUpContainer} onClick={(()=>{navigate('/assignments');})}>
                         <img src={imageHeader.myHomeworkIcon} alt='myHomeworkIcon' />
-                        <span className='cf-body-3' style={{ color: '#646D89' }}>My Homework</span>
+                        <span className='cf-body-3' style={{ color: '#646D89' }}>My Assignments</span>
                       </div>
                       <div className={classes.dropdownTextSectionUpContainer} onClick={(()=>{navigate('/desired-courses');})}>
                         <img src={imageHeader.myDesireCourseIcon} alt='myDesireCourseIcon' />
