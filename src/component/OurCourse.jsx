@@ -5,18 +5,18 @@ import classes from '../style/OurCourse.module.css';
 import { useDebouncedValue } from '@mantine/hooks';
 import CourseCard from './CourseCard';
 import Background from './Background';
-import useAxiosWithAuth0 from '../utils/intercepter';
+import useAxiosWithAuth0 from '../utils/interceptor';
 
 function OurCourse() {
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
   const [debouncedSearchText] = useDebouncedValue(searchText, 800);
-  const axiosWithAuth = useAxiosWithAuth0();
+  const { axiosInstance } = useAxiosWithAuth0();
   
   // function get data from Server
   const fetchData = async () => {
     try {
-      const response = await axiosWithAuth.get(import.meta.env.VITE_API_SERVER + '/course', { 
+      const response = await axiosInstance.get('/course', { 
         params: { keywords: debouncedSearchText }
       });
       setData(response.data);
@@ -36,9 +36,7 @@ function OurCourse() {
   const courseCard = data.map(( course, index ) => {
     return (
       <div key={index} onClick={() => {
-        navigate(`/course-detail/${data[index].id}`);
-        window.location.reload();
-        window.scrollTo(0, 0);}} >
+        navigate(`/course-detail/${data[index].id}`);}} >
         <CourseCard  detailCourse={course} />
       </div>
     );

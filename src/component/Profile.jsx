@@ -1,19 +1,23 @@
 import Background from './Background';
 import { useForm } from '@mantine/form';
-import { Box, TextInput, Button } from '@mantine/core';
+import { TextInput, Button } from '@mantine/core';
 import { useToggle } from '@mantine/hooks';
 import { DateInput } from '@mantine/dates';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import getProfileFormValidator from '../utils/profileFormValidator';
-import axios from 'axios';
 import classes from '../style/Profile.module.css';
-import { imageProfile } from '../data/imageBackground';
+import useAxiosWithAuth0 from '../utils/interceptor';
+import { useAuth0 } from '@auth0/auth0-react';
+import ProfilePhotoUploader from './buttons/ProfilePhotoUploader';
+import { ProfileContext } from '../context/ProfileContext';
 
 function Profile() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [submitButtonLock, toggleSubmitButtonLock] = useToggle();
-  const [profileImage, setProfileImage] = useState();
+  const { isAuthenticated } = useAuth0();
+  const { axiosInstance } = useAxiosWithAuth0();
+  const { profile, updateProfile } = useContext(ProfileContext);
   
   const form = useForm({
     initialValues: {
@@ -32,109 +36,114 @@ function Profile() {
     validate: getProfileFormValidator()
   }); 
 
-  // useEffect(() => {
-  //   if (session) {
-  //     form.initialize({
-  //       name: session.user.user_metadata.name,
-  //       dateOfBirth: new Date(session.user.user_metadata.dateOfBirth),
-  //       educationalBackGround: session.user.user_metadata.educationalBackground,
-  //       email: session.user.email
-  //     });
-  //   }
-  // }, [session]);
-
-  const handleFileChange = (event) => {
-    const newProfileImage = event.target.files[0];
-    setProfileImage(newProfileImage);
+  const handleAvatarDeletion = async () => {
+    try {
+      await axiosInstance.delete('/user/avatar');
+      updateProfile({ ...profile, avatarUrl: null });
+    }
+    catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleRemoveImage = () => {
-    setProfileImage();
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      if (profile && isAuthenticated) {
+        form.initialize({
+          name: profile.name,
+          dateOfBirth: new Date(profile.dateOfBirth),
+          educationalBackGround: profile.educationalBackground,
+          email: profile.email
+        });
+      }
+    };
+    fetchData();
+  }, [profile]);
 
+  
   const handleProfleUpdate = async (values) => {
-    // toggleSubmitButtonLock();
-    // try {
-    //   const { name, dateOfBirth, educationalBackGround, email } = values;
-    //   let res = null;
-    //   if (email !== session.user.email) {
-    //     res = await supabase.auth.updateUser({ email, data: { name, dateOfBirth, educationalBackGround } });
-    //   }
-    //   else {
-    //     res = await supabase.auth.updateUser({
-    //       data: { name, dateOfBirth, educationalBackGround }
-    //     });
-    //   }
-    //   const { error, data } = res;
-    //   if (error) {
-    //     setError(error.message);
-    //   }
-    //   else {
-    //     setSuccess('Profile updated successfully');
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    // toggleSubmitButtonLock(); 
+    toggleSubmitButtonLock();
+    try {
+      const { name, dateOfBirth, educationalBackGround: educationalBackground, email } = values;
+      const response = await axiosInstance.put('/user/profile', {
+        name,
+        dateOfBirth,
+        educationalBackground,
+        email
+      });
+
+      console.log(response);
+      updateProfile({ ...profile, name });
+      setSuccess('Profile updated successfully');
+
+    } catch (error) {
+      // Don't forget to handle duplicated email error.
+      setError(error.message);
+      console.error(error);
+    }
+    finally {
+      toggleSubmitButtonLock();
+    }
+     
   };
 
 
-  return (  
+  return (
     <div className={classes.profilePage}>
-      
       <h2 className={classes.headingText}>Profile</h2>
-      <div >
+      <div>
         <Background />
-        <form
-          onSubmit={form.onSubmit((values) => handleProfleUpdate(values))} className={classes.profileContainer}
-        >
-          <div>
-            <div>
-              <label htmlFor="upload" className={classes.customFileInputLabel && profileImage ? classes.visibleInput : classes.hiddenInput}>
-                <img src={imageProfile.noProfileAvatar} alt='noProfile' />
-              </label>
-              <input
-                type="file"
-                id="upload"
-                className={classes.hiddenFileInput}
-                onChange={handleFileChange}
-              />
-              
+        <main className={classes.profileContainer}>
+          {profile?.avatarUrl ? (
+            <div className={classes.profileImage}>
+              <img src={profile?.avatarUrl} alt={`Profile picture of ${profile.name}`}/>
+              <button onClick={handleAvatarDeletion} className={classes.deleteImage}>x</button>
             </div>
-            
-            <div className={classes.profileImage && profileImage ? classes.visibleImage : classes.hiddenImage}>
-            
-              <img
-                
-                src={profileImage ? URL.createObjectURL(profileImage) : ''}
-                alt={profileImage ? profileImage.name : ''}
-                width='400'
-                height='400'
+          ) : (
+            <ProfilePhotoUploader />
+          )}
+          <form
+            onSubmit={form.onSubmit((values) => handleProfleUpdate(values))}
+          >
+            <div className={classes.updateBox}>
+              <TextInput
+                size="lg"
+                radius="md"
+                label="Name"
+                {...form.getInputProps('name')}
               />
-              <button
-                className={classes.deleteImage}
-                onClick={(e) => handleRemoveImage(e)}
+              <DateInput
+                size="lg"
+                radius="md"
+                label="Date Of Birth"
+                placeholder="DD/MM/YY"
+                {...form.getInputProps('dateOfBirth')}
+              />
+              <TextInput
+                size="lg"
+                radius="md"
+                label="Educational Background"
+                {...form.getInputProps('educationalBackGround')}
+              />
+              <TextInput
+                size="lg"
+                radius="md"
+                label="Email"
+                {...form.getInputProps('email')}
+              />
+              <Button
+                size="lg"
+                fullWidth
+                type="submit"
+                disabled={submitButtonLock}
               >
-                    X
-              </button>
+                Update Profile
+              </Button>
+              {success && <div style={{ color: 'green' }}>{success}</div>}
+              {error && <div style={{ color: 'red' }}>{error}</div>}
             </div>
-    
-          </div>
-          <div className={classes.updateBox}>
-            <TextInput size='lg' radius="md" label="Name" {...form.getInputProps('name')} />
-            <DateInput
-              size='lg' radius="md"
-              label="Date Of Birth"
-              placeholder="DD/MM/YY"
-              {...form.getInputProps('dateOfBirth')}  
-            />  
-            <TextInput size='lg' radius="md" label="Educational Background" {...form.getInputProps('educationalBackGround')} />
-            <TextInput size='lg' radius="md" label="Email" {...form.getInputProps('email')} />
-            <Button size='lg' fullWidth type='submit' disabled={submitButtonLock}>Update Profile</Button>
-            {success && <div style={{ color: 'green' }}>{success}</div>}   
-            {error && <div style={{ color: 'red' }}>{error}</div>}
-          </div>       
-        </form>
+          </form>
+        </main>
       </div>
     </div>
   );
