@@ -9,22 +9,21 @@ import useAxiosWithAuth0 from '../utils/interceptor';
 function OurCourse() {
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
-  const [debouncedSearchText] = useDebouncedValue(searchText, 800);
+  const [debouncedSearchText] = useDebouncedValue(searchText, 5000);
   const { axiosInstance } = useAxiosWithAuth0();
   
   // function get data from Server
-  const fetchData = async () => {
-    try {
-      const response = await axiosInstance.get('/course', { 
-        params: { keywords: debouncedSearchText }
-      });
-      setData(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get('/course', { 
+          params: { keywords: debouncedSearchText }
+        });
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
     fetchData();
   }, [debouncedSearchText]);
 
