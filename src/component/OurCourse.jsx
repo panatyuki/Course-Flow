@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import classes from '../style/OurCourse.module.css';
 import { useDebouncedValue } from '@mantine/hooks';
 import CourseCard from './CourseCard';
