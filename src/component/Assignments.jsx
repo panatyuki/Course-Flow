@@ -16,7 +16,7 @@ function AssignmentItem ({ item }){
 
       const submissionData = { userId,assignmentId:item.assignmentId,answer,userAssignmentId:item.id };
       console.log(submissionData);
-      const response = await axios.put(import.meta.env.VITE_API_SERVER + '/user/assignment-submitted',submissionData);
+      const response = await axios.put(import.meta.env.VITE_API_SERVER + '/user/assignment',submissionData);
       response.data.success;
       
     } catch (error){
