@@ -60,8 +60,6 @@ export default function ProfilePhotoUploader() {
     }
   }, [user, file]);
 
-  
-
   return (
     <div className={classes.imageUploader}>
       {isUploading ? (

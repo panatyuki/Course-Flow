@@ -32,13 +32,13 @@ function CourseDetail () {
   };
 
   useEffect (() => {
-    getCourseData().then(res => {
-      const randomCourseShow = getRandomCourse(courseData, 3); 
-      setRandomCourse(randomCourseShow);
-    });
+    getCourseData();
     getCourseDataById();
   }, []);
 
+  useEffect(() => {
+    getRandomCourse(courseData,3);
+  }, [course]);
 
   const accordion = course.lessons?.map((lesson, idx) => {
     const unorderedSublessonList = lesson.sublessons.map((sublesson) => {
@@ -62,11 +62,13 @@ function CourseDetail () {
 
 
   const getRandomCourse = (data, count) => {
-    const courseData = [...data];
-    const filteredCourseData = courseData.filter((item) => item.id !== course.id);
-    
+    console.log(data);
+    console.log(course.id);
+    const filteredCourseData = data.filter(item => item.id !== course.id);
+    console.log(filteredCourseData);
     const shuffledCourseData = filteredCourseData.sort(() => Math.random() - 0.5);
-    return shuffledCourseData.slice(0, count);
+    const selectedCourses = shuffledCourseData.slice(0, count);
+    setRandomCourse(selectedCourses);
   };
 
 
@@ -127,7 +129,7 @@ function CourseDetail () {
                   <h3 style={{ color: '#646D89' }}>THB {priceFormattedNumber}</h3>
                 </div>  
                 <div className={classes.containerButtonStickyBox}>
-                  <CourseDetailButtonsStack courseId={params.courseId} />
+                  <CourseDetailButtonsStack courseId={params.courseId} courseName={course.name} />
                 </div>
               </div>
             </div>
