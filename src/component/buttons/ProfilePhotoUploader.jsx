@@ -55,7 +55,7 @@ export default function ProfilePhotoUploader() {
   useEffect(() => {
     console.log('hello from useEffect');
     if (user && file) {
-      console.log('hello from if');
+      console.log(file);
       handleFleUpload();
     }
   }, [user, file]);

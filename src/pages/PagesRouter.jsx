@@ -26,10 +26,10 @@ function PagesRouter() {
         <Route path='/register' element={<Register />} />
         <Route path="/course-detail/:courseId" element={<CourseDetail/>} />
         <Route path='/profile'  element={<AuthenticationGuard component={Profile} />} />
-        <Route path='/my-courses/:userId' element={<AuthenticationGuard component={MyCourses} />} />
+        <Route path='/my-courses' element={<AuthenticationGuard component={MyCourses} />} />
         <Route path='/desired-courses' element={<AuthenticationGuard component={DesiredCourses} />} />
         <Route path='/assignments' element={<AuthenticationGuard component={Assignments} />} />
-        <Route path='/learn' element={<AuthenticationGuard component={CourseViewer} />} />
+        <Route path='/learn/:courseId' element={<AuthenticationGuard component={CourseViewer} />} />
         <Route path='/test-zone' element={<TestZone />} />
       </Routes>
       <Footer />
