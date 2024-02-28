@@ -30,7 +30,7 @@ function PagesRouter() {
         <Route path='/my-courses/:userId' element={<MyCourses />} />
         <Route path='/desired-courses' element={<DesiredCourses />} />
         <Route path='/assignments' element={<Assignments />} />
-        <Route path='/learn' element={<CourseViewer />} />
+        <Route path='/learn/:courseId' element={<CourseViewer />} />
         <Route path='/test-zone' element={<TestZone />} />
       </Routes>
       <Footer />

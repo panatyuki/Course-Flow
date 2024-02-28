@@ -1,6 +1,10 @@
-import userProgres from './mock_data/progress.json';
+export default async function fetchUserProgress(courseId, axiosInstance) {
+  // fetch the lesson/sublessons data from the server
+  try {
+    const progress = await axiosInstance(`/learning/progress/${courseId}`);
+    return progress;
+  } catch (error) {
+    console.error(error);
+  }
 
-export default function fetchUserProgress() {
-  const progress = userProgres;
-  return progress;
 }

@@ -1,9 +1,11 @@
-import lessonsData from './mock_data/lessons.json';
-
-export default function fetchLessonsData() {
+export default async function fetchLessonsData(courseId, axiosInstance) {
   // fetch the lesson/sublessons data from the server
-  const lessons = lessonsData;
-  // continue with the rest of the code
-  return lessons;
+  try {
+    const lessons = await axiosInstance(`/learning/course/${courseId}`);
+    return lessons;
+  } catch (error) {
+    console.error(error);
+  }
+
 }
 

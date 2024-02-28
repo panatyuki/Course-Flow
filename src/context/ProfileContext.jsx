@@ -19,6 +19,7 @@ export const ProfileProvider = ({ children }) => {
       axiosInstance.get('/user/profile')
         .then(response => {
           setProfile(response.data);
+          console.log(response.data);
         })
         .catch(error => {
           console.error('Error fetching user data:', error);

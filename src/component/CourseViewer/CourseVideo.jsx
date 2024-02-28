@@ -1,7 +1,7 @@
-function CourseVideo() {
+function CourseVideo({ url }) {
   return (
     <>
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?modestbranding=1&color=white" width="560" height="315" title="Rick Astley - Never Gonna Give You Up (Official Music Video)" frameBorder="0" allowfullscreen></iframe>
+      <iframe width="800" height="460" src={url} allowFullScreen frameBorder="0"></iframe>
     </>
   );
 }
