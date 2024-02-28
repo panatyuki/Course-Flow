@@ -3,6 +3,9 @@ import lessonIcon from '../images/imagesCourseCard/lessonIcon.svg';
 import hoursIcon from '../images/imagesCourseCard/hoursIcon.svg';
 
 function CourseCard( { detailCourse }) {
+  
+  const totalLesson = detailCourse._count?.lessons ? detailCourse._count.lessons : detailCourse.totalLessons;
+
   return (
     <div key={detailCourse.id} className={classes.courseCard}>
       <img src={detailCourse.coverImageUrl} alt={detailCourse.name} className={classes.imgCourseCard} />
@@ -14,7 +17,7 @@ function CourseCard( { detailCourse }) {
       <div className={classes.footerCourseCard}> 
         <div className={classes.detailFooterCourseCard}>
           <img src={lessonIcon} alt='lessonIcon' />
-          <span className='cf-body-2'>{detailCourse.totalLessons} Lesson</span>
+          <span className='cf-body-2'>{totalLesson} Lesson</span>
         </div>
         <div className={classes.detailFooterCourseCard}>
           <img src={hoursIcon} alt='hoursIcon' />

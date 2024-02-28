@@ -1,34 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Background from './Background';
 import classes from '../style/MyCourses.module.css';
 import CourseCard from './CourseCard';
 import { Tabs } from '@mantine/core';
+import { ProfileContext } from '../context/ProfileContext';
+import useAxiosWithAuth0 from '../utils/interceptor';
+import { useAuth0 } from '@auth0/auth0-react';
 
-
-// Mock profile pic data for show UI image frame
-// Delete this section, after database about user image is done
-import newNishikawa from '../images/newNishikawa.jpg';
 
 function MyCourses () {
+  const { axiosInstance } = useAxiosWithAuth0();
+  const { isAuthenticated } = useAuth0();
   const [data, setData] = useState([]);
-  const params = useParams();
-  const navigate = useNavigate();
-
-  // Function get all courses for each users
-  const getDataAllCoursesById = async () => {
-    try {
-      let response = await axios.get(import.meta.env.VITE_API_SERVER + '/user/subscribed-course-detail/' +params.userId +'/course');
-      setData(response.data.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
   
+  const navigate = useNavigate();
+  const { profile } = useContext(ProfileContext);
+
   useEffect(() => {
+    const getDataAllCoursesById = async () => {
+      if (isAuthenticated) {
+        try {
+          const response = await axiosInstance.get('/user/subscribed-course'); // ตัวดั้งเดิม
+          setData(response.data);
+        } catch (error) {
+          console.error('Error fetching subscription data:', error);
+        }
+      }
+    };
     getDataAllCoursesById();
-  }, [params.userId]);
+  }, [isAuthenticated]);
 
   // Course card
   // Map all subscribedCourse for each users to CourseCard
@@ -76,11 +77,11 @@ function MyCourses () {
             <div className={classes.stickyBox}>
 
               <div className={classes.profilePicture}>
-                <img src={newNishikawa} className={classes.setProfilePicture} />
+                <img src={profile?.avatarUrl} className={classes.setProfilePicture} />
               </div>
 
               <div className={classes.userName}>
-                <p className={classes.setUserName}>{'Insert a valid user here'}</p>
+                <p className={classes.setUserName}>{profile && profile.name}</p>
               </div>
 
               <div className={classes.status}>
