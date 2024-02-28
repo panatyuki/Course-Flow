@@ -48,7 +48,7 @@ function Header() {
                   <div className={classes.dropdownContainer}>
                     <div className={classes.sectionUp}>
                       <div className={classes.dropdownTextSectionUpContainer} onClick={() => navigate('/profile')}>
-                        <img src={profile.avatarUrl} alt='profileIcon' />
+                        <img src={profile.avatarUrl} alt='profileIcon' width='40' height='40' />
                         <span className='cf-body-3' style={{ color: '#646D89' }}>Profile</span>
                       </div>
                       <div className={classes.dropdownTextSectionUpContainer} onClick={() => navigate('/my-courses') }>

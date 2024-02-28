@@ -14,8 +14,7 @@ import {
 import CourseViewer from '../component/CourseViewer/CourseViewer';
 import { ProfileProvider } from '../context/ProfileContext';
 import TestZone from '../utils/TestZone';
-
-
+import { AuthenticationGuard } from '../utils/authentication-guard';
 
 function PagesRouter() {
   return (
@@ -26,11 +25,11 @@ function PagesRouter() {
         <Route path='/our-course' element={<OurCourse/>} />
         <Route path='/register' element={<Register />} />
         <Route path="/course-detail/:courseId" element={<CourseDetail/>} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/my-courses/:userId' element={<MyCourses />} />
-        <Route path='/desired-courses' element={<DesiredCourses />} />
-        <Route path='/assignments' element={<Assignments />} />
-        <Route path='/learn/:courseId' element={<CourseViewer />} />
+        <Route path='/profile'  element={<AuthenticationGuard component={Profile} />} />
+        <Route path='/my-courses' element={<AuthenticationGuard component={MyCourses} />} />
+        <Route path='/desired-courses' element={<AuthenticationGuard component={DesiredCourses} />} />
+        <Route path='/assignments' element={<AuthenticationGuard component={Assignments} />} />
+        <Route path='/learn/:courseId' element={<AuthenticationGuard component={CourseViewer} />} />
         <Route path='/test-zone' element={<TestZone />} />
       </Routes>
       <Footer />
