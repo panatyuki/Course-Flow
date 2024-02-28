@@ -13,6 +13,7 @@ function MyCourses () {
   const { axiosInstance } = useAxiosWithAuth0();
   const { isAuthenticated } = useAuth0();
   const [data, setData] = useState([]);
+  
   const navigate = useNavigate();
   const { profile } = useContext(ProfileContext);
 
@@ -20,7 +21,7 @@ function MyCourses () {
     const getDataAllCoursesById = async () => {
       if (isAuthenticated) {
         try {
-          const response = await axiosInstance.get('/user/subscribed-course');
+          const response = await axiosInstance.get('/user/subscribed-course'); // ตัวดั้งเดิม
           setData(response.data);
         } catch (error) {
           console.error('Error fetching subscription data:', error);
