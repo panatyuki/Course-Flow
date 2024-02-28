@@ -22,7 +22,8 @@ function MyCourses () {
       if (isAuthenticated) {
         try {
           const response = await axiosInstance.get('/user/subscribed-course'); // ตัวดั้งเดิม
-          setData(response.data);
+          setData(response.data.data);
+          console.log(response.data.data);
         } catch (error) {
           console.error('Error fetching subscription data:', error);
         }
@@ -33,12 +34,12 @@ function MyCourses () {
 
   // Course card
   // Map all subscribedCourse for each users to CourseCard
-  const courseCardAllcourses = data.map((item, index) => (
+  const courseCardAllcourses = data?.map((item, index) => (
     <div key={index} onClick={() => {
-      navigate(`/course-detail/${item.course.id}`);
+      navigate(`/learn/${item.id}`);
     }}>
       <CourseCard 
-        detailCourse={item.course}
+        detailCourse={item}
       />
     </div>
   ));
