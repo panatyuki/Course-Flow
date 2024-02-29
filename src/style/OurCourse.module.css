@@ -10,7 +10,6 @@
     flex-direction: column;
     position: relative;
     width: 100vw;
-    z-index: 2;
 }
 
 .container-input {

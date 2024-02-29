@@ -70,11 +70,11 @@ const imageMain = {
   polygonOrange, quotemarksLeft, quotemarksRight, bigEllipseRight, 
   smallEllipseRight, plus, backgroundBlue, computer, ellipseLeft,
   cross, circleBlue, polygon, circleGreen, picRow1, picRow2, ellipseTop,
-  circleGrey, crossPurple, ellipseBot, secure, support, collab,
+  circleGrey, crossPurple, ellipseBot, secure, support, collab, teachLogo, polygon, ellipse, 
 };
 
 const imageFooter = {
-  teachLogo, polygon, ellipse, courseFlowLogo, facebookLogo, instagramLogo,
+  courseFlowLogo, facebookLogo, instagramLogo,
   twitterLogo,
 };
 

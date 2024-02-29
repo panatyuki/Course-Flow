@@ -32,21 +32,6 @@ function Footer() {
   if (location.pathname !== '/register') {
     return (
       <>
-        <div className={classes.subFooter}>
-          <div className={classes.leftSubFooter}>
-            <h2>Want to start learning?</h2>
-            <button className={classes.button} onClick={() => {
-              navigate('/our-course');
-              window.location.reload();
-              window.scrollTo(0, 0);
-            }}>
-              <p>Check out our courses</p>
-            </button>
-          </div>
-          <img src={imageFooter.polygon} alt='polygon' width={42} height={42} className={classes.rightSubFooterPolygon} />
-          <img src={imageFooter.ellipse} alt='ellipse' width={26} height={26} className={classes.rightSubFooterEllipse} />
-          <img src={imageFooter.teachLogo} alt='teachLogo' width={592} height={448} className={classes.rightSubFooterTechLogo} />
-        </div>
         <div className={classes.footer}>
           <img src={imageFooter.courseFlowLogo} alt='courseFlowLogo' className={classes.logoLink} onClick={() => {
             navigate('/');
