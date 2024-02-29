@@ -47,19 +47,19 @@ function Header() {
                 openDropdown && (
                   <div className={classes.dropdownContainer}>
                     <div className={classes.sectionUp}>
-                      <div className={classes.dropdownTextSectionUpContainer} onClick={() => navigate('/profile')}>
+                      <div className={classes.dropdownTextSectionUpContainer} onClick={() => {navigate('/profile'); setOpenDropdown(false);}}>
                         <img src={profile.avatarUrl} alt='profileIcon' width='40' height='40' />
                         <span className='cf-body-3' style={{ color: '#646D89' }}>Profile</span>
                       </div>
-                      <div className={classes.dropdownTextSectionUpContainer} onClick={() => navigate('/my-courses') }>
+                      <div className={classes.dropdownTextSectionUpContainer} onClick={() => {navigate('/my-courses'); setOpenDropdown(false);} }>
                         <img src={imageHeader.myCourseIcon} alt='myCourseIcon' />
                         <span className='cf-body-3' style={{ color: '#646D89' }}>My Course</span>
                       </div>
-                      <div className={classes.dropdownTextSectionUpContainer} onClick={(()=>{navigate('/assignments');})}>
+                      <div className={classes.dropdownTextSectionUpContainer} onClick={(()=>{navigate('/assignments'); setOpenDropdown(false);})}>
                         <img src={imageHeader.myHomeworkIcon} alt='myHomeworkIcon' />
                         <span className='cf-body-3' style={{ color: '#646D89' }}>My Assignments</span>
                       </div>
-                      <div className={classes.dropdownTextSectionUpContainer} onClick={(()=>{navigate('/desired-courses');})}>
+                      <div className={classes.dropdownTextSectionUpContainer} onClick={(()=>{navigate('/desired-courses'); setOpenDropdown(false);})}>
                         <img src={imageHeader.myDesireCourseIcon} alt='myDesireCourseIcon' />
                         <span className='cf-body-3' style={{ color: '#646D89' }}>My Desire Courses</span>
                       </div>
