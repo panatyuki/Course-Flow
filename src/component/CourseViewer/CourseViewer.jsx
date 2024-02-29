@@ -15,9 +15,7 @@ import SublessonAssignment from './SublessonAssignment';
 // Misc
 // Use /learn/:courseId/:sublessonId to navigate to a specific sublesson
 // By default, use the latest sublesson that the user has not completed
-function VideoPlayer({ children }) {
 
-}
 function CourseViewer() {
   const [isFetchingData, setIsFetchingData] = useState(false);
   const [lessonsData, setLessonsData] = useState({});

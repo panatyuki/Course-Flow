@@ -13,6 +13,7 @@ function Header() {
   const { logout } = useAuth0();
   const { updateProfile, profile } = useContext(ProfileContext);
 
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -38,7 +39,7 @@ function Header() {
             <SignupButton/>
           </Group> : (
             <div className={classes.profile}>
-              <img src={profile.avatarUrl} alt='profile' width='40' height='40' />
+              <img src={profile.avatarUrl ?? profile.tempAvatarUrl} alt='profile' width='40' height='40' />
               <p className='cf-body-2' style={{ color: '#424C6B' }}>Hello {profile.name}</p>
               <img src={imageHeader.arrowDropdown} alt='arrowDropdown' className={classes.arrowDropdown} onClick={() => 
                 setOpenDropdown((prev) => !(prev))
@@ -48,7 +49,7 @@ function Header() {
                   <div className={classes.dropdownContainer}>
                     <div className={classes.sectionUp}>
                       <div className={classes.dropdownTextSectionUpContainer} onClick={() => {navigate('/profile'); setOpenDropdown(false);}}>
-                        <img src={profile.avatarUrl} alt='profileIcon' width='40' height='40' />
+                        <img src={profile.avatarUrl ?? profile.tempAvatarUrl} alt='profileIcon' width='40' height='40' />
                         <span className='cf-body-3' style={{ color: '#646D89' }}>Profile</span>
                       </div>
                       <div className={classes.dropdownTextSectionUpContainer} onClick={() => {navigate('/my-courses'); setOpenDropdown(false);} }>

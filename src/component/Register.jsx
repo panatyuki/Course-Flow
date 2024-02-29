@@ -27,14 +27,22 @@ export default function Register() {
     try {
       const result = await axios.post(`${import.meta.env.VITE_API_SERVER}/public/user`, value);
       if (result.status === 200) {
-        // show modal and ask if the user wants to log in
-        console.log('Response status is HTTP 200');
+        loginWithRedirect({
+          appState: {
+            returnTo: '/',
+          },
+        });
       }
       console.log(result);
     }
     catch (error) {
       // handle registration error ... such as duplicated email
-      console.error(error);
+      console.log(error);
+      if (error.response.status === 409) {
+        form.setFieldError('email', 'A user with this email already exists.');
+        return;
+      }
+      window.alert('Unexpected error, please contact us.');
     }
 
   };

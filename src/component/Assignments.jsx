@@ -5,6 +5,7 @@ import { Tabs,  Textarea } from '@mantine/core';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useAxiosWithAuth0 from '../utils/interceptor';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function AssignmentItem ({ item }){
   const [answer,setAnswer] = useState('');
@@ -84,14 +85,15 @@ function AssignmentItem ({ item }){
 
 function Assignments (){
 
-  const [data,setData] = useState([]);
+  const [data, setData] = useState([]);
+  const { isAuthenticated } = useAuth0();
   const { axiosInstance } = useAxiosWithAuth0();
 
   const fetchData = async ()=> {
     try{
       const response = await axiosInstance.get('/user/assignments');
-      console.log(response.data);
-      setData(response.data);
+      console.log(response.data.data);
+      setData(response.data.data);
 
     } catch (error){
       console.error('Error fetching data:', error);
@@ -101,7 +103,7 @@ function Assignments (){
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <div className={classes.assignments}>
