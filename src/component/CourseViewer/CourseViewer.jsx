@@ -1,4 +1,4 @@
-import { Paper, Accordion, NavLink, Grid, Text, Title, Group, Button } from '@mantine/core';
+import { Paper, Accordion, NavLink, Grid, Text, Title, Group, Button, AccordionItem, Center } from '@mantine/core';
 import CourseProgress from './CourseProgress';
 import classes from '../../style/CourseViewer/CourseViewer.module.css';
 import ProgressSymbol from '../../assets/course_progress/ProgressSymbol';
@@ -15,12 +15,16 @@ import SublessonAssignment from './SublessonAssignment';
 // Misc
 // Use /learn/:courseId/:sublessonId to navigate to a specific sublesson
 // By default, use the latest sublesson that the user has not completed
+function VideoPlayer({ children }) {
+
+}
 function CourseViewer() {
   const [isFetchingData, setIsFetchingData] = useState(false);
   const [lessonsData, setLessonsData] = useState({});
 
   const [sublessonsStatus, setSublessonsStatus] = useState({});
   const [activeSublesson, setActiveSublesson] = useState(null);
+  const [allAssignments, setAllAssignments] = useState([]);
   const [sublessonAssignments, setSublessonAssignments] = useState([]);
   
   const [totalSublessons, setTotalSublessons] = useState(0);
@@ -30,12 +34,13 @@ function CourseViewer() {
   const { isAuthenticated } = useAuth0();
   const { axiosInstance } = useAxiosWithAuth0();
 
-
+  // entry point of this page, the first steps
   useEffect(() => {
     setIsFetchingData(true);
     fetchLessonsData(courseId, axiosInstance)
       .then(lessonData => {
         setLessonsData(lessonData.data);
+        // count all sublessons for progress tracking.
         const sublessonsCount = lessonData.data.lessons.reduce((acc, lesson) => acc + lesson.sublessons.length, 0);
         setTotalSublessons(sublessonsCount);
         return fetchUserProgress(courseId, axiosInstance);
@@ -43,21 +48,24 @@ function CourseViewer() {
       .then(progress => {
         // create a map of course progress for populating the sidebar.
         const sublessonStatus = {};
+        const fetchedAssignments = []; 
         progress.data.forEach(progress => {
           const sublessonId = progress.sublesson.id;
           const userAssignments = progress.sublesson.UserAssignment;
           const videoCompletion = progress.videoCompletion;
-
           if (userAssignments.length === 0) {
             // If there are no assignments, check video completion status
             sublessonStatus[sublessonId] = videoCompletion === 'COMPLETED' ? 'COMPLETED' : 'IN_PROGRESS';
           } else {
             // If there are assignments, check if all of them were submitted
             const allAssignmentsSubmitted = userAssignments.every(homework => homework.isSubmitted);
+            fetchedAssignments.push(...userAssignments); // add assignment entries to the array.
+            console.log('pushed', userAssignments, 'to fetchedAssignments');
             sublessonStatus[sublessonId] = allAssignmentsSubmitted ? 'COMPLETED' : 'IN_PROGRESS';
           }
         });
         setSublessonsStatus(sublessonStatus);
+        setAllAssignments(fetchedAssignments);
         // agian, for tracking course progress
         const completedCount = Object.values(sublessonsStatus).reduce((acc, status) => {
           return status === 'COMPLETED' ? acc + 1 : acc;
@@ -81,8 +89,17 @@ function CourseViewer() {
     setCompletedSublessons(completedCount);
   }, [sublessonsStatus]);
 
+  function handleAssignmentRender(sublessonId) {
+    const newAssignments = allAssignments.filter(assignment => assignment.sublessonId === sublessonId);
+    setSublessonAssignments(newAssignments);
+    console.log(sublessonAssignments);
+  }
+
   function handleSublessonClick(sublesson) {
     setActiveSublesson(sublesson);
+    // to do .. handle assignment loading.
+    handleAssignmentRender(sublesson.id);
+    console.log(sublesson);
   }
 
   function handleStartVideo() {
@@ -96,7 +113,7 @@ function CourseViewer() {
       .catch(error => console.error('Failed to start video', error));
   }
   
-  function handleMarkFinished() {
+  function handleFinished() {
     updateVideoStatus(activeSublesson.id, lessonsData.enrollmentId, 'COMPLETED', Number(courseId),  axiosInstance)
       .then((res) => {
         console.log(res);
@@ -111,7 +128,19 @@ function CourseViewer() {
       .catch(error => console.error('Failed to mark video as finished', error));
   }
   
-
+  function AccordionLabel({ lessonTitle, lessonIdx }) {
+    if (lessonIdx < 10) {
+      lessonIdx = `0${lessonIdx}`;
+    }
+    return (
+      <div className={classes.accordionLabel}>
+        <Text c='#646D89'>{lessonIdx}</Text>
+        <Text className={classes.accordionLessonTitle}>
+          {lessonTitle}
+        </Text>
+      </div>
+    );
+  }
 
   const lessonsSidebar = lessonsData.lessons?.map((lesson, index) => {
     // these go inside each Accordion's panel.
@@ -123,48 +152,66 @@ function CourseViewer() {
         label={sublesson.title}
         leftSection={<ProgressSymbol status={status}/>}
         onClick={() => handleSublessonClick({ ...sublesson })}
+        c='#646D89'
       />); 
     });
     return (
       <Accordion.Item key={lesson.id} value={lesson.title}>
-        <Accordion.Control>{lesson.title}</Accordion.Control>
+        <Accordion.Control>
+          <AccordionLabel lessonTitle={lesson.title} lessonIdx={index}/>
+        </Accordion.Control>
         <Accordion.Panel>{sublessonsNavLink}</Accordion.Panel>
       </Accordion.Item>
     );
 
   });
 
-  const assignmentItems = sublessonAssignments.map(sa => <SublessonAssignment key={sa.id} assignment={sa} />);
+  const assignmentItems = sublessonAssignments.map(sa => <SublessonAssignment key={sa.id} userAssignment={sa} />);
 
   return (
     <main className={classes.courseViewer}>
       <Grid gutter="lg">
         <Grid.Col span={4}>
-          <Paper className={classes.courseViewerSidebar} shadow='lg'>
-            <Text>Course</Text>
-            <Title>{lessonsData.name}</Title>
-            <Text>{lessonsData.summary}</Text>
-            <CourseProgress totalSublessons={totalSublessons} totalCompleted={completedSublessons} />
-            <Accordion>
-              {lessonsSidebar}
-            </Accordion>
+          <Paper className={classes.courseViewerSidebar} shadow="lg">
+            <Text c='#F47E20'>Course</Text>
+            <div className={classes.courseIntroContainer}>
+              <Title className={classes.courseTitle}>{lessonsData.name}</Title>
+              <Text className={classes.courseSummary}>{lessonsData.summary}</Text>
+            </div>
+            <CourseProgress
+              totalSublessons={totalSublessons}
+              totalCompleted={completedSublessons}
+            />
+            <Accordion className={classes.accordion}>{lessonsSidebar}</Accordion>
           </Paper>
         </Grid.Col>
         <Grid.Col span={8}>
-          
-          <section>
+          {activeSublesson ? <section>
             <h2 className={classes.sublessonTitle}>{activeSublesson?.title}</h2>
-            <CourseVideo url={'https://example.com'}/>
-            <Group>
+            <div>
+              {activeSublesson && (
+                <CourseVideo
+                  key={activeSublesson.id} 
+                  publicId={activeSublesson.videoResId} // Assuming this is the dynamic part
+                  id="sublesson-video"
+                  width="640"
+                  height="480"
+                  handlePlay={handleStartVideo}
+                  handleEnd={handleFinished}
+                />
+              )}
+            </div>
+            {/* <Group>
               <Button onClick={handleStartVideo}>Start Video</Button>
-              <Button onClick={handleMarkFinished}>Mark Finished</Button>
-            </Group>
+              <Button onClick={handleFinished}>Mark Finished</Button>
+            </Group> */}
             {assignmentItems}
-          </section>
+          </section> : 
+            <Center className={classes.greetingBox}>
+              <Text>Hi there, please select a lesson to start learning.</Text>
+            </Center>}
         </Grid.Col>
-
       </Grid>
-
     </main>
   );
 }

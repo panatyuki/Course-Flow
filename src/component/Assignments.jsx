@@ -4,11 +4,11 @@ import Background from './Background';
 import { Tabs,  Textarea } from '@mantine/core';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import useAxiosWithAuth0 from '../utils/interceptor';
 
 function AssignmentItem ({ item }){
   const [answer,setAnswer] = useState('');
   const navigate = useNavigate();
-
   const handleSubmit = async () => {
     // event.preventDefault();
     try {
@@ -85,10 +85,11 @@ function AssignmentItem ({ item }){
 function Assignments (){
 
   const [data,setData] = useState([]);
+  const { axiosInstance } = useAxiosWithAuth0();
 
   const fetchData = async ()=> {
     try{
-      const response = await axios.get(import.meta.env.VITE_API_SERVER + '/user/user-assignments');
+      const response = await axiosInstance.get('/user/assignments');
       console.log(response.data);
       setData(response.data);
 
