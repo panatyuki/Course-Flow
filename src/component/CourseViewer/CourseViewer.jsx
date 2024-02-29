@@ -188,7 +188,7 @@ function CourseViewer() {
         <Grid.Col span={8}>
           {activeSublesson ? <section>
             <h2 className={classes.sublessonTitle}>{activeSublesson?.title}</h2>
-            <div>
+            <div className={classes.sublessonVideoContainer}>
               {activeSublesson && (
                 <CourseVideo
                   key={activeSublesson.id} 

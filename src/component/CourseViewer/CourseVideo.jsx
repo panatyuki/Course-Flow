@@ -19,7 +19,7 @@ function CourseVideo({ id, publicId, handlePlay, handleEnd, ...props }) {
   }, []);
 
   return (
-    <div style={{ width: '100%', aspectRatio: `${props.width} / ${props.height}` }}>
+    <div style={{ width: '100%', height: `${props.height}` }}>
       <video
         onPlay={handlePlay}
         onEnded={handleEnd}

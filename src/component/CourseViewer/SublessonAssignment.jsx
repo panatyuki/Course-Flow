@@ -62,17 +62,16 @@ function SublessonAssignment({ userAssignment }) {
   return (
     <div className={classes.assignmentContainer}>
       <Group justify="space-between">
-        <Text>Assignment</Text>
+        <Text size='xl'>Assignment</Text>
         <AssignmentStatus>{assignmentStatusText}</AssignmentStatus>
       </Group>
-      <Container>
+      <Container className={classes.assignmentAnswer}>
         <label htmlFor="answer">{assignment.title}</label>
         {submittedAnswer || submitSuccess ? (
           <Text>{submittedAnswer}</Text>
         ) : (
           <Textarea
             id="answer"
-            style={{ width: '700px' }}
             autosize
             minRows={4}
             maxRows={4}
@@ -84,8 +83,9 @@ function SublessonAssignment({ userAssignment }) {
           />
         )}
       </Container>
-      <Group justify="space-between" align="center" hidden={'ha'}>
-        {!(submittedAnswer || submitSuccess) && <Button
+      {!(submittedAnswer || submitSuccess) && 
+      <Group justify="space-between" align="center" className={classes.assignmentSubmission}>
+        <Button
           onClick={() =>
             handleSubmission(answer, userAssignmentId, assignment.id)
           }
@@ -93,9 +93,9 @@ function SublessonAssignment({ userAssignment }) {
           loading={isSubmitting}
         >
           Send Assignment
-        </Button>}
-        <Text className={classes.secondaryText}>{timeRemaining}</Text>
-      </Group>
+        </Button>
+        <Text className={classes.secondaryText} c='#646D89'>{timeRemaining}</Text>
+      </Group>}
     </div>
   );
 }
