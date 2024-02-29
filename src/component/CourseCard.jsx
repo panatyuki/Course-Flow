@@ -8,7 +8,7 @@ function CourseCard( { detailCourse }) {
 
   return (
     <div key={detailCourse.id} className={classes.courseCard}>
-      <img src={detailCourse.coverImageUrl} alt={detailCourse.name} className={classes.imgCourseCard} />
+      <img src={detailCourse.coverImageUrl} alt={detailCourse.name} className={classes.imgCourseCard} width='357' height='240' />
       <div className={classes.textCourseCard}>
         <p className='cf-body-3' style={{ color: '#F47E20' , fontWeight: '400', lineHeight: '0' }}>Course</p>
         <h3 style={{ lineHeight: '1' }}>{detailCourse.name}</h3>

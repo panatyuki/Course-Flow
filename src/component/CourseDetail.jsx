@@ -75,6 +75,7 @@ function CourseDetail () {
   const randomDataElements = randomCourse.map((item) => (
     <div key={item.id} onClick={() => {
       navigate(`/course-detail/${item.id}`);
+      window.location.reload();
     }}>
       <CourseCard detailCourse={item} />
     </div>
