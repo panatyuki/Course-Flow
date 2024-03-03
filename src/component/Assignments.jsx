@@ -8,16 +8,14 @@ import useAxiosWithAuth0 from '../utils/interceptor';
 import { useAuth0 } from '@auth0/auth0-react';
 
 function AssignmentItem ({ item }){
+  const { axiosInstance } = useAxiosWithAuth0();
   const [answer,setAnswer] = useState('');
   const navigate = useNavigate();
-  const handleSubmit = async () => {
-    // event.preventDefault();
+  const handleSubmit = async (event) => {
     try {
-      const userId = 'auth0|65ccaf3c365d79c2fb97a81b';
-
-      const submissionData = { userId,assignmentId:item.assignmentId,answer,userAssignmentId:item.id };
+      const submissionData = { assignmentId:item.assignmentId, answer, userAssignmentId:item.id };
       console.log(submissionData);
-      const response = await axios.put(import.meta.env.VITE_API_SERVER + '/user/assignment',submissionData);
+      const response = await axiosInstance.put('/user/assignment', submissionData);
       response.data.success;
       
     } catch (error){

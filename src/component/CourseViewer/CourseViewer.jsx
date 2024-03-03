@@ -22,7 +22,7 @@ function CourseViewer() {
 
   const [sublessonsStatus, setSublessonsStatus] = useState({});
   const [activeSublesson, setActiveSublesson] = useState(null);
-  const [allAssignments, setAllAssignments] = useState([]);
+  const [allAssignments, setAllAssignments] = useState([]); // all assignments, as fetched from the server
   const [sublessonAssignments, setSublessonAssignments] = useState([]);
   
   const [totalSublessons, setTotalSublessons] = useState(0);
@@ -156,7 +156,7 @@ function CourseViewer() {
     return (
       <Accordion.Item key={lesson.id} value={lesson.title}>
         <Accordion.Control>
-          <AccordionLabel lessonTitle={lesson.title} lessonIdx={index}/>
+          <AccordionLabel lessonTitle={lesson.title} lessonIdx={index+1}/>
         </Accordion.Control>
         <Accordion.Panel>{sublessonsNavLink}</Accordion.Panel>
       </Accordion.Item>
@@ -180,7 +180,7 @@ function CourseViewer() {
               totalSublessons={totalSublessons}
               totalCompleted={completedSublessons}
             />
-            <Accordion className={classes.accordion}>{lessonsSidebar}</Accordion>
+            <Accordion className={classes.accordion} multiple>{lessonsSidebar}</Accordion>
           </Paper>
         </Grid.Col>
         <Grid.Col span={8}>

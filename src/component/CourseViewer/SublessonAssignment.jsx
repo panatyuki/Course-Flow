@@ -37,7 +37,7 @@ function getTimeRemainingMessages(dueDate, submittedAnswer) {
 function SublessonAssignment({ userAssignment }) {
   const { axiosInstance } = useAxiosWithAuth0();
   const { assignment, completeByDate, id: userAssignmentId, answer: submittedAnswer = null } = userAssignment;
-  const [assignmentStatusText, timeRemaining] = getTimeRemainingMessages(completeByDate, submittedAnswer);
+  const [assignmentStatusText, setAssignmentStatusText] = useState(getTimeRemainingMessages(completeByDate, submittedAnswer));
   const [answer, setAnswer] = useState('');
   const [isSubmitting, toggleSubmitting] = useToggle();
   const [submitSuccess, toggleSubmitSuccess] = useToggle();
@@ -47,6 +47,7 @@ function SublessonAssignment({ userAssignment }) {
       toggleSubmitting();
       const result = await axiosInstance.put('/user/assignment', { assignmentId, userAssignmentId, answer });
       if (result.data.success) {
+        setAssignmentStatusText(getTimeRemainingMessages(completeByDate, submittedAnswer));
         toggleSubmitSuccess();
       }
     }
@@ -63,7 +64,7 @@ function SublessonAssignment({ userAssignment }) {
     <div className={classes.assignmentContainer}>
       <Group justify="space-between">
         <Text size='xl'>Assignment</Text>
-        <AssignmentStatus>{assignmentStatusText}</AssignmentStatus>
+        <AssignmentStatus>{assignmentStatusText[0]}</AssignmentStatus>
       </Group>
       <Container className={classes.assignmentAnswer}>
         <label htmlFor="answer">{assignment.title}</label>
@@ -94,7 +95,7 @@ function SublessonAssignment({ userAssignment }) {
         >
           Send Assignment
         </Button>
-        <Text className={classes.secondaryText} c='#646D89'>{timeRemaining}</Text>
+        <Text className={classes.secondaryText} c='#646D89'>{assignmentStatusText[1]}</Text>
       </Group>}
     </div>
   );
