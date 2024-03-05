@@ -34,7 +34,7 @@ function getTimeRemainingMessages(dueDate, submittedAnswer) {
 
 
 
-function SublessonAssignment({ userAssignment }) {
+function SublessonAssignment({ userAssignment, setSublessonsStatus, sublessonId }) {
   const { axiosInstance } = useAxiosWithAuth0();
   const { assignment, completeByDate, id: userAssignmentId, answer: submittedAnswer = null } = userAssignment;
   const [assignmentStatusText, setAssignmentStatusText] = useState(getTimeRemainingMessages(completeByDate, submittedAnswer));
@@ -47,7 +47,8 @@ function SublessonAssignment({ userAssignment }) {
       toggleSubmitting();
       const result = await axiosInstance.put('/user/assignment', { assignmentId, userAssignmentId, answer });
       if (result.data.success) {
-        setAssignmentStatusText(getTimeRemainingMessages(completeByDate, submittedAnswer));
+        setAssignmentStatusText(['Submitted', '']);
+        setSublessonsStatus(prevSublessonsStatus => ({ ...prevSublessonsStatus, [sublessonId]: 'COMPLETED' }));
         toggleSubmitSuccess();
       }
     }

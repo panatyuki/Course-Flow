@@ -44,11 +44,7 @@ function Header() {
           </p>
         </div>
 
-        {isLoading || !profile ? (
-          <Center className={classes.profileLoader}>
-            <Loader />{' '}
-          </Center>
-        ) : !profile ? (
+        {!profile ? (
           <Group>
             <LoginButton />
             <SignupButton />

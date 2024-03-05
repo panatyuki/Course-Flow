@@ -7,10 +7,11 @@ import fetchLessonsData from '../../utils/fetchLessonsData';
 import fetchUserProgress from '../../utils/fetchUserProgress';
 import updateVideoStatus from '../../utils/updateVideoStatus';
 import CourseVideo from './CourseVideo';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import useAxiosWithAuth0 from '../../utils/interceptor';
 import SublessonAssignment from './SublessonAssignment';
+import { useListState } from '@mantine/hooks';
 
 // Misc
 // Use /learn/:courseId/:sublessonId to navigate to a specific sublesson
@@ -23,12 +24,14 @@ function CourseViewer() {
   const [sublessonsStatus, setSublessonsStatus] = useState({});
   const [activeSublesson, setActiveSublesson] = useState(null);
   const [allAssignments, setAllAssignments] = useState([]); // all assignments, as fetched from the server
+  const [sublessonsData, sublessonsDataHandlers] = useListState();
   const [sublessonAssignments, setSublessonAssignments] = useState([]);
   
   const [totalSublessons, setTotalSublessons] = useState(0);
   const [completedSublessons, setCompletedSublessons] = useState(0);
   
   const { courseId } = useParams();
+  const { sublesson: querySublessonId } = useSearchParams();
   const { isAuthenticated } = useAuth0();
   const { axiosInstance } = useAxiosWithAuth0();
 
@@ -38,6 +41,11 @@ function CourseViewer() {
     fetchLessonsData(courseId, axiosInstance)
       .then(lessonData => {
         setLessonsData(lessonData.data);
+        console.log(lessonData.data.lessons);
+        const allSublessons = lessonData.data.lessons.reduce((acc, lesson) => {
+          return acc.concat(lesson.sublessons);
+        },[]);
+        sublessonsDataHandlers.setState(allSublessons);
         // count all sublessons for progress tracking.
         const sublessonsCount = lessonData.data.lessons.reduce((acc, lesson) => acc + lesson.sublessons.length, 0);
         setTotalSublessons(sublessonsCount);
@@ -78,6 +86,8 @@ function CourseViewer() {
       });
   }, [isAuthenticated]);
 
+
+
   // Ideally, we will add a new key value to SublessonsStatus and push the changes automatically
   // TODO: Handle changes locally to improve responsiveness.
   useEffect(() => {
@@ -93,7 +103,9 @@ function CourseViewer() {
     console.log(sublessonAssignments);
   }
 
-  function handleSublessonClick(sublesson) {
+  function handleSublessonClick(sublessonId) {
+    console.log('sublesson id', sublessonId, 'selected');
+    const sublesson = sublessonsData.find(sublesson => sublesson.id === sublessonId);
     setActiveSublesson(sublesson);
     // to do .. handle assignment loading.
     handleAssignmentRender(sublesson.id);
@@ -101,14 +113,19 @@ function CourseViewer() {
   }
 
   function handleStartVideo() {
-    updateVideoStatus(activeSublesson.id, lessonsData.enrollmentId, 'IN_PROGRESS', Number(courseId), axiosInstance)
-      .then((res) => {
-        const { procedure } = res.data;
-        if (procedure === 'mark-inprogress') {
-          setSublessonsStatus(prevSublessonsStatus => ({ ...prevSublessonsStatus, [activeSublesson.id]: 'IN_PROGRESS' }));
-        }
-      })
-      .catch(error => console.error('Failed to start video', error));
+    // prevent duplicate requests from being sent.
+    if (sublessonsStatus[activeSublesson.id] !== 'IN_PROGRESS') {
+      updateVideoStatus(activeSublesson.id, lessonsData.enrollmentId, 'IN_PROGRESS', Number(courseId), axiosInstance)
+        .then((res) => {
+          const { procedure } = res.data;
+          if (procedure === 'mark-inprogress') {
+            setSublessonsStatus(prevSublessonsStatus => ({ ...prevSublessonsStatus, [activeSublesson.id]: 'IN_PROGRESS' }));
+          }
+        })
+        .catch(error => console.error('Failed to start video', error));
+    } else {
+      console.log('courseViewer: lesson is already in progress');
+    }
   }
   
   function handleFinished() {
@@ -117,6 +134,7 @@ function CourseViewer() {
         console.log(res);
         const { procedure, assignments } = res.data;
         if (procedure === 'render-assignments') {
+          // ... so this sets just a single sublesson, not all of them.
           setSublessonAssignments(assignments);
           setSublessonsStatus(prevSublessonsStatus => ({ ...prevSublessonsStatus, [activeSublesson.id]: 'IN_PROGRESS' }));
         } else if (procedure === 'mark-finished') {
@@ -149,7 +167,7 @@ function CourseViewer() {
         active={sublesson.id === activeSublesson?.id}
         label={sublesson.title}
         leftSection={<ProgressSymbol status={status}/>}
-        onClick={() => handleSublessonClick({ ...sublesson })}
+        onClick={() => handleSublessonClick(sublesson.id)}
         c='#646D89'
       />); 
     });
@@ -164,7 +182,14 @@ function CourseViewer() {
 
   });
 
-  const assignmentItems = sublessonAssignments.map(sa => <SublessonAssignment key={sa.id} userAssignment={sa} />);
+  const assignmentItems = sublessonAssignments.map((sa, index) => (
+    <SublessonAssignment
+      key={sa.id}
+      userAssignment={sa}
+      setSublessonsStatus={setSublessonsStatus}
+      sublessonId={activeSublesson.id}
+    />
+  ));
 
   return (
     <main className={classes.courseViewer}>
