@@ -87,9 +87,6 @@ function CourseViewer() {
   }, [isAuthenticated]);
 
 
-
-  // Ideally, we will add a new key value to SublessonsStatus and push the changes automatically
-  // TODO: Handle changes locally to improve responsiveness.
   useEffect(() => {
     const completedCount = Object.values(sublessonsStatus).reduce((acc, status) => {
       return status === 'COMPLETED' ? acc + 1 : acc;

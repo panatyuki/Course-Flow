@@ -5,6 +5,7 @@ function CourseVideo({ id, publicId, handlePlay, handleEnd, ...props }) {
   const cloudinaryRef = useRef();
   const playerRef = useRef();
 
+
   // Store the Cloudinary window instance to a ref when the page renders
 
   useEffect(() => {
