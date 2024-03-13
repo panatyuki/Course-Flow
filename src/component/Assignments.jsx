@@ -4,19 +4,18 @@ import Background from './Background';
 import { Tabs,  Textarea } from '@mantine/core';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import useAxiosWithAuth0 from '../utils/interceptor';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function AssignmentItem ({ item }){
+  const { axiosInstance } = useAxiosWithAuth0();
   const [answer,setAnswer] = useState('');
   const navigate = useNavigate();
-
-  const handleSubmit = async () => {
-    // event.preventDefault();
+  const handleSubmit = async (event) => {
     try {
-      const userId = 'auth0|65ccaf3c365d79c2fb97a81b';
-
-      const submissionData = { userId,assignmentId:item.assignmentId,answer,userAssignmentId:item.id };
+      const submissionData = { assignmentId:item.assignmentId, answer, userAssignmentId:item.id };
       console.log(submissionData);
-      const response = await axios.put(import.meta.env.VITE_API_SERVER + '/user/assignment',submissionData);
+      const response = await axiosInstance.put('/user/assignment', submissionData);
       response.data.success;
       
     } catch (error){
@@ -84,13 +83,15 @@ function AssignmentItem ({ item }){
 
 function Assignments (){
 
-  const [data,setData] = useState([]);
+  const [data, setData] = useState([]);
+  const { isAuthenticated } = useAuth0();
+  const { axiosInstance } = useAxiosWithAuth0();
 
   const fetchData = async ()=> {
     try{
-      const response = await axios.get(import.meta.env.VITE_API_SERVER + '/user/user-assignments');
-      console.log(response.data);
-      setData(response.data);
+      const response = await axiosInstance.get('/user/assignments');
+      console.log(response.data.data);
+      setData(response.data.data);
 
     } catch (error){
       console.error('Error fetching data:', error);
@@ -100,7 +101,7 @@ function Assignments (){
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <div className={classes.assignments}>

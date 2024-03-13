@@ -1,6 +1,6 @@
 .container-register-page {
   width: 100vw;
-  height: 100vh;
+  height: 120vh;
   background:#FCFCFE;
 }
 
@@ -15,7 +15,6 @@
 
 .register-box {
   width: 453px;
-  height: 446px;
   display: flex;
   flex-direction: column;
   gap: 40px
@@ -30,14 +29,20 @@
   border: 1px solid#D6D9E4;
 }
 
-.register-button {
+/* .register-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 12px;
   border: 0px;
+  height: 100px;
   background: #2F5FAC;
   box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.08);
   color: white;
   cursor: pointer;
-}
+} */
+
+
 
 .text-box {
   display: inline-flex;

@@ -18,8 +18,12 @@ export const ProfileProvider = ({ children }) => {
     if (isAuthenticated) {
       axiosInstance.get('/user/profile')
         .then(response => {
+          if (!response.data.avatarUrl) {
+            const nameForPlaceholder = response.data.name.split(' ').join('+');
+            const placeHolderUrl = `https://ui-avatars.com/api/?name=${nameForPlaceholder}`;
+            response.data.tempAvatarUrl = placeHolderUrl;
+          }
           setProfile(response.data);
-          console.log(response.data);
         })
         .catch(error => {
           console.error('Error fetching user data:', error);

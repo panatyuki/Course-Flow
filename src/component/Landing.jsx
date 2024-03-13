@@ -160,6 +160,21 @@ function Landing() {
         <img src={imageMain.smallEllipseRight} alt='smallEllipseRight' className={classes.smallEllipseRightPosition} />
         <img src={imageMain.plus} alt='plus' className={classes.plusPosition} />
       </div>
+      <div className={classes.subFooter}>
+        <div className={classes.leftSubFooter}>
+          <h2>Want to start learning?</h2>
+          <button className={classes.button} onClick={() => {
+            navigate('/our-course');
+            window.location.reload();
+            window.scrollTo(0, 0);
+          }}>
+            <p>Check out our courses</p>
+          </button>
+        </div>
+        <img src={imageMain.polygon} alt='polygon' width={42} height={42} className={classes.rightSubFooterPolygon} />
+        <img src={imageMain.ellipse} alt='ellipse' width={26} height={26} className={classes.rightSubFooterEllipse} />
+        <img src={imageMain.teachLogo} alt='teachLogo' width={592} height={448} className={classes.rightSubFooterTechLogo} />
+      </div>
     </> 
   );
 }

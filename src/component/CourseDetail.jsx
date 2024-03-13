@@ -9,6 +9,7 @@ import useaxios0 from '../utils/interceptor';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import CourseDetailButtonsStack from './CourseDetailButtonsStack';
+import CourseVideo from './CourseViewer/CourseVideo';
 
 function CourseDetail () {
   const [courseData, setCourseData] = useState([]);
@@ -29,6 +30,7 @@ function CourseDetail () {
   const getCourseDataById = async()=>{
     const response = await axios.get(import.meta.env.VITE_API_SERVER+`/course/${params.courseId}`);
     setCourse(response.data);
+    console.log(response.data);
   };
 
   useEffect (() => {
@@ -75,6 +77,7 @@ function CourseDetail () {
   const randomDataElements = randomCourse.map((item) => (
     <div key={item.id} onClick={() => {
       navigate(`/course-detail/${item.id}`);
+      window.location.reload();
     }}>
       <CourseCard detailCourse={item} />
     </div>
@@ -100,7 +103,13 @@ function CourseDetail () {
           </button>
           <div className={classes.container}>
             <div className={classes.dataContainer}>
-              <iframe width="800" height="460" src={course.videoTrailerUrl} allowFullScreen frameBorder="0"></iframe>
+              {course && <CourseVideo
+                key={course.id}
+                publicId={course.videoTrailerResId} 
+                id="trailer-video"
+                width="640"
+                height="480"
+              />}
               <div>
                 <h2>Course Detail</h2>
                 <div className='cf-body-2'>

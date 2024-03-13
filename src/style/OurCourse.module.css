@@ -6,11 +6,11 @@
 }
 
 .disired-courses {
+    padding-top: 100px;
     display: flex;
     flex-direction: column;
     position: relative;
     width: 100vw;
-    z-index: 2;
 }
 
 .container-input {

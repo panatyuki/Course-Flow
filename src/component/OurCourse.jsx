@@ -9,7 +9,7 @@ import useAxiosWithAuth0 from '../utils/interceptor';
 function OurCourse() {
   const [searchText, setSearchText] = useState('');
   const [data, setData] = useState([]);
-  const [debouncedSearchText] = useDebouncedValue(searchText, 5000);
+  const [debouncedSearchText] = useDebouncedValue(searchText, 500);
   const { axiosInstance } = useAxiosWithAuth0();
   
   // function get data from Server
